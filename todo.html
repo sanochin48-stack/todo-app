@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDoリスト</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 32px;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      color: #1a1a2e;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .input-row input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-row input:focus { border-color: #6c63ff; }
+
+    .input-row button {
+      padding: 10px 18px;
+      background: #6c63ff;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .input-row button:hover { background: #574fd6; }
+
+    .filters {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .filters button {
+      flex: 1;
+      padding: 6px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      background: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: #666;
+      transition: all 0.2s;
+    }
+
+    .filters button.active {
+      border-color: #6c63ff;
+      color: #6c63ff;
+      font-weight: 600;
+    }
+
+    ul { list-style: none; }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 8px;
+      border-bottom: 1px solid #f0f0f0;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; } }
+
+    li:last-child { border-bottom: none; }
+
+    li input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #6c63ff;
+      cursor: pointer;
+    }
+
+    li span {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #333;
+      word-break: break-word;
+    }
+
+    li.done span {
+      text-decoration: line-through;
+      color: #aaa;
+    }
+
+    li button {
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 1.1rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 2px 4px;
+      border-radius: 4px;
+      transition: color 0.2s;
+    }
+
+    li button:hover { color: #e74c3c; }
+
+    .footer {
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: #999;
+    }
+
+    .footer button {
+      background: none;
+      border: none;
+      color: #e74c3c;
+      cursor: pointer;
+      font-size: 0.82rem;
+    }
+
+    .footer button:hover { text-decoration: underline; }
+
+    .empty {
+      text-align: center;
+      color: #ccc;
+      padding: 32px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>ToDoリスト</h1>
+
+  <div class="input-row">
+    <input type="text" id="taskInput" placeholder="タスクを入力..." maxlength="100">
+    <button onclick="addTask()">追加</button>
+  </div>
+
+  <div class="filters">
+    <button class="active" onclick="setFilter('all', this)">すべて</button>
+    <button onclick="setFilter('active', this)">未完了</button>
+    <button onclick="setFilter('done', this)">完了</button>
+  </div>
+
+  <ul id="taskList"></ul>
+  <div class="empty" id="emptyMsg" style="display:none">タスクがありません</div>
+
+  <div class="footer">
+    <span id="countMsg"></span>
+    <button onclick="clearDone()">完了済みを削除</button>
+  </div>
+</div>
+
+<script>
+  let tasks = JSON.parse(localStorage.getItem('todos') || '[]');
+  let filter = 'all';
+
+  const input = document.getElementById('taskInput');
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') addTask(); });
+
+  function save() {
+    localStorage.setItem('todos', JSON.stringify(tasks));
+  }
+
+  function addTask() {
+    const text = input.value.trim();
+    if (!text) return;
+    tasks.unshift({ id: Date.now(), text, done: false });
+    input.value = '';
+    save();
+    render();
+  }
+
+  function toggle(id) {
+    const t = tasks.find(t => t.id === id);
+    if (t) t.done = !t.done;
+    save();
+    render();
+  }
+
+  function remove(id) {
+    tasks = tasks.filter(t => t.id !== id);
+    save();
+    render();
+  }
+
+  function clearDone() {
+    tasks = tasks.filter(t => !t.done);
+    save();
+    render();
+  }
+
+  function setFilter(f, btn) {
+    filter = f;
+    document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    render();
+  }
+
+  function render() {
+    const list = document.getElementById('taskList');
+    const empty = document.getElementById('emptyMsg');
+    const count = document.getElementById('countMsg');
+
+    const visible = tasks.filter(t =>
+      filter === 'all' ? true : filter === 'done' ? t.done : !t.done
+    );
+
+    list.innerHTML = '';
+    visible.forEach(t => {
+      const li = document.createElement('li');
+      if (t.done) li.classList.add('done');
+      li.innerHTML = `
+        <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggle(${t.id})">
+        <span>${escHtml(t.text)}</span>
+        <button onclick="remove(${t.id})" title="削除">&#x2715;</button>
+      `;
+      list.appendChild(li);
+    });
+
+    empty.style.display = visible.length === 0 ? 'block' : 'none';
+
+    const remaining = tasks.filter(t => !t.done).length;
+    count.textContent = `残り ${remaining} 件`;
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  render();
+</script>
+</body>
+</html>
