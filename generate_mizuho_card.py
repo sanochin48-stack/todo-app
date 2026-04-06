@@ -29,7 +29,7 @@ fig.add_artist(rect)
 # Inner thin line (Phase = Persister purple)
 pad = 0.038
 rect = patches.Rectangle((pad, pad), 1 - 2*pad, 1 - 2*pad,
-                           linewidth=1.4,
+                           linewidth=5.0,
                            edgecolor=inner_border_color, facecolor='none',
                            transform=fig.transFigure, clip_on=False)
 fig.add_artist(rect)
