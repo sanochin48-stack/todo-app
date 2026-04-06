@@ -157,15 +157,15 @@
     .type-row {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-bottom: 7px;
+      gap: 6px;
+      margin-bottom: 6px;
     }
     .type-swatch {
       width: 13px; height: 13px;
       border-radius: 3px;
       flex-shrink: 0;
     }
-    .type-name { width: 95px; font-size: 12px; color: #444; flex-shrink: 0; }
+    .type-name { width: 88px; font-size: 12px; color: #444; flex-shrink: 0; }
     .type-row input[type="number"] {
       flex: 1;
       padding: 6px 8px;
@@ -178,6 +178,24 @@
     .type-row input[type="number"]:focus {
       outline: none; border-color: #5BA4BE; background: #fff;
     }
+    .order-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .order-btns button {
+      width: 22px; height: 18px;
+      padding: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      background: #f5f5f5;
+      font-size: 9px;
+      cursor: pointer;
+      line-height: 1;
+      color: #555;
+    }
+    .order-btns button:hover { background: #e0e0e0; }
+    .order-btns button:disabled { opacity: 0.3; cursor: default; }
 
     .select-row { display: flex; gap: 10px; }
     .select-row > div { flex: 1; }
@@ -287,7 +305,7 @@
     </div>
   </div>
 
-  <div class="section-label">各タイプのスコア（0〜100）</div>
+  <div class="section-label">各タイプのスコア（0〜100）　　<span style="font-weight:400;font-size:10px;color:#aaa">↑↓で並び順を調整</span></div>
   <div id="typeInputs"></div>
 
   <button class="btn-generate" onclick="generate()">カードを生成</button>
@@ -308,28 +326,47 @@ const TYPES = {
   Promoter:   { color: '#C0181B' },
 };
 
-const DEFAULT_VALUES = {
-  Thinker: 0, Persister: 0, Harmonizer: 0,
-  Imaginer: 0, Rebel: 0, Promoter: 0
-};
+// order: top→bottom in chart (user-adjustable)
+let order = ['Thinker', 'Persister', 'Harmonizer', 'Imaginer', 'Rebel', 'Promoter'];
 
-// Build type inputs
-const container = document.getElementById('typeInputs');
-for (const [key, t] of Object.entries(TYPES)) {
-  const row = document.createElement('div');
-  row.className = 'type-row';
-  row.innerHTML = `
-    <div class="type-swatch" style="background:${t.color}"></div>
-    <span class="type-name">${key}</span>
-    <input type="number" id="val_${key}" min="0" max="100" value="${DEFAULT_VALUES[key]}">
-  `;
-  container.appendChild(row);
+// Store values separately so re-render preserves them
+const vals = { Thinker:0, Persister:0, Harmonizer:0, Imaginer:0, Rebel:0, Promoter:0 };
+
+function renderTypeInputs() {
+  const container = document.getElementById('typeInputs');
+  container.innerHTML = '';
+  order.forEach((key, idx) => {
+    const t = TYPES[key];
+    const row = document.createElement('div');
+    row.className = 'type-row';
+    row.innerHTML = `
+      <div class="type-swatch" style="background:${t.color}"></div>
+      <span class="type-name">${key}</span>
+      <input type="number" id="val_${key}" min="0" max="100" value="${vals[key]}"
+             oninput="vals['${key}']=Math.min(100,Math.max(0,+this.value||0));generate()">
+      <div class="order-btns">
+        <button onclick="moveItem('${key}',-1)" ${idx===0?'disabled':''}>▲</button>
+        <button onclick="moveItem('${key}',+1)" ${idx===order.length-1?'disabled':''}>▼</button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function moveItem(key, dir) {
+  const i = order.indexOf(key);
+  const j = i + dir;
+  if (j < 0 || j >= order.length) return;
+  [order[i], order[j]] = [order[j], order[i]];
+  renderTypeInputs();
+  generate();
 }
 
 // API Key persistence
 window.addEventListener('load', () => {
   const saved = localStorage.getItem('pcm_api_key');
   if (saved) document.getElementById('apiKey').value = saved;
+  renderTypeInputs();
   generate();
 });
 
@@ -443,19 +480,18 @@ async function analyzeImage() {
 
     // Populate fields
     if (parsed.name) document.getElementById('nameInput').value = parsed.name;
-    if (parsed.base && TYPES[parsed.base]) {
+    if (parsed.base && TYPES[parsed.base])
       document.getElementById('baseSelect').value = parsed.base;
-    }
-    if (parsed.phase && TYPES[parsed.phase]) {
+    if (parsed.phase && TYPES[parsed.phase])
       document.getElementById('phaseSelect').value = parsed.phase;
-    }
     if (parsed.scores) {
       for (const [key, val] of Object.entries(parsed.scores)) {
-        const el = document.getElementById('val_' + key);
-        if (el) el.value = Math.round(Math.min(100, Math.max(0, val)));
+        if (key in vals) vals[key] = Math.round(Math.min(100, Math.max(0, val)));
       }
+      // Auto-sort order by score desc (user can adjust afterward)
+      order.sort((a, b) => vals[a] - vals[b]); // ascending = top of chart first
     }
-
+    renderTypeInputs();
     generate();
     showStatus('✓ 読み取り完了！内容を確認してカードを生成してください', 'ok');
 
@@ -486,13 +522,6 @@ function hideStatus() {
 }
 
 // ---- Card generation ----
-function getValues() {
-  const vals = {};
-  for (const key of Object.keys(TYPES)) {
-    vals[key] = Math.min(100, Math.max(0, Number(document.getElementById('val_' + key).value) || 0));
-  }
-  return vals;
-}
 
 function generate() {
   const canvas = document.getElementById('card');
@@ -502,9 +531,13 @@ function generate() {
   const name = document.getElementById('nameInput').value.trim().toUpperCase() || 'YOUR NAME';
   const base = document.getElementById('baseSelect').value;
   const phase = document.getElementById('phaseSelect').value;
-  const vals = getValues();
 
-  const sorted = Object.entries(vals).sort((a, b) => b[1] - a[1]);
+  // Sort by value desc; ties broken by user-defined order (top of list = top of chart)
+  const sorted = [...order].map(key => [key, vals[key]])
+    .sort((a, b) => b[1] !== a[1]
+      ? b[1] - a[1]
+      : order.indexOf(a[0]) - order.indexOf(b[0])  // lower order index → higher in chart
+    );
   const outerColor = TYPES[base].color;
   const innerColor = TYPES[phase].color;
 
@@ -598,7 +631,7 @@ function download() {
   a.click();
 }
 
-document.querySelectorAll('select, input[type="text"], input[type="number"]').forEach(el => {
+document.querySelectorAll('select, input[type="text"]').forEach(el => {
   el.addEventListener('change', generate);
   el.addEventListener('input', generate);
 });
