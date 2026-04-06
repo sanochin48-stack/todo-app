@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCM Card Generator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      gap: 0;
+    }
+
+    /* ---- Left panel ---- */
+    .panel {
+      width: 360px;
+      min-width: 360px;
+      background: #fff;
+      padding: 28px 24px;
+      overflow-y: auto;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+    }
+    .panel h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 12px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin: 20px 0 8px;
+    }
+
+    input[type="text"], select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      background: #fafafa;
+      transition: border 0.2s;
+    }
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: #5BA4BE;
+      background: #fff;
+    }
+
+    .type-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .type-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .type-name {
+      width: 100px;
+      font-size: 13px;
+      color: #444;
+      flex-shrink: 0;
+    }
+    .type-row input[type="number"] {
+      flex: 1;
+      padding: 7px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333;
+      background: #fafafa;
+    }
+    .type-row input[type="number"]:focus {
+      outline: none;
+      border-color: #5BA4BE;
+      background: #fff;
+    }
+
+    .select-row {
+      display: flex;
+      gap: 12px;
+    }
+    .select-row > div {
+      flex: 1;
+    }
+    .select-row label {
+      font-size: 12px;
+      color: #666;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .btn-generate {
+      width: 100%;
+      margin-top: 24px;
+      padding: 12px;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-generate:hover { background: #2d2d50; }
+
+    .btn-download {
+      width: 100%;
+      margin-top: 10px;
+      padding: 11px;
+      background: #fff;
+      color: #1a1a2e;
+      border: 2px solid #1a1a2e;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-download:hover { background: #f0f2f5; }
+
+    /* ---- Right preview ---- */
+    .preview {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    canvas {
+      max-width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel">
+  <h1>PCM Card Generator</h1>
+
+  <div class="section-label">名前</div>
+  <input type="text" id="nameInput" placeholder="例: MIZUHO SANO" value="MIZUHO SANO">
+
+  <div class="section-label">Base / Phase</div>
+  <div class="select-row">
+    <div>
+      <label>Base（外枠色）</label>
+      <select id="baseSelect">
+        <option value="Thinker">Thinker</option>
+        <option value="Persister">Persister</option>
+        <option value="Harmonizer" selected>Harmonizer</option>
+        <option value="Imaginer">Imaginer</option>
+        <option value="Rebel">Rebel</option>
+        <option value="Promoter">Promoter</option>
+      </select>
+    </div>
+    <div>
+      <label>Phase（内枠色）</label>
+      <select id="phaseSelect">
+        <option value="Thinker">Thinker</option>
+        <option value="Persister" selected>Persister</option>
+        <option value="Harmonizer">Harmonizer</option>
+        <option value="Imaginer">Imaginer</option>
+        <option value="Rebel">Rebel</option>
+        <option value="Promoter">Promoter</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-label">各タイプのスコア（0〜100）</div>
+  <div id="typeInputs"></div>
+
+  <button class="btn-generate" onclick="generate()">生成</button>
+  <button class="btn-download" onclick="download()">ダウンロード</button>
+</div>
+
+<div class="preview">
+  <canvas id="card" width="850" height="580"></canvas>
+</div>
+
+<script>
+  const TYPES = {
+    Thinker:    { color: '#5BA4BE', label: 'Thinker' },
+    Persister:  { color: '#7B3FA0', label: 'Persister' },
+    Harmonizer: { color: '#E8760A', label: 'Harmonizer' },
+    Imaginer:   { color: '#A0522D', label: 'Imaginer' },
+    Rebel:      { color: '#F6C317', label: 'Rebel' },
+    Promoter:   { color: '#C0181B', label: 'Promoter' },
+  };
+
+  const DEFAULT_VALUES = {
+    Thinker: 38, Persister: 78, Harmonizer: 100,
+    Imaginer: 13, Rebel: 9, Promoter: 22
+  };
+
+  // Build type input rows
+  const container = document.getElementById('typeInputs');
+  for (const [key, t] of Object.entries(TYPES)) {
+    const row = document.createElement('div');
+    row.className = 'type-row';
+    row.innerHTML = `
+      <div class="type-swatch" style="background:${t.color}"></div>
+      <span class="type-name">${t.label}</span>
+      <input type="number" id="val_${key}" min="0" max="100" value="${DEFAULT_VALUES[key]}">
+    `;
+    container.appendChild(row);
+  }
+
+  function getValues() {
+    const vals = {};
+    for (const key of Object.keys(TYPES)) {
+      vals[key] = Math.min(100, Math.max(0, Number(document.getElementById('val_' + key).value) || 0));
+    }
+    return vals;
+  }
+
+  function generate() {
+    const canvas = document.getElementById('card');
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+
+    const name = document.getElementById('nameInput').value.trim().toUpperCase() || 'NAME';
+    const base = document.getElementById('baseSelect').value;
+    const phase = document.getElementById('phaseSelect').value;
+    const vals = getValues();
+
+    // Sort by value descending → lowest value = top of chart
+    const sorted = Object.entries(vals).sort((a, b) => b[1] - a[1]);
+    // sorted[0] = highest (bottom of chart in barh = rendered last)
+    // We render from top to bottom on canvas, so sorted[0] goes at bottom
+
+    const outerColor = TYPES[base].color;
+    const innerColor = TYPES[phase].color;
+
+    // Background
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, W, H);
+
+    // Outer border (thick, Base color)
+    const bOuter = 7;
+    ctx.strokeStyle = outerColor;
+    ctx.lineWidth = bOuter;
+    ctx.strokeRect(bOuter / 2, bOuter / 2, W - bOuter, H - bOuter);
+
+    // Inner border (thick, Phase color)
+    const bInner = 7;
+    const gap = 14;
+    const innerOff = bOuter + gap;
+    ctx.strokeStyle = innerColor;
+    ctx.lineWidth = bInner;
+    ctx.strokeRect(innerOff, innerOff, W - 2 * innerOff, H - 2 * innerOff);
+
+    // Title
+    ctx.fillStyle = '#111111';
+    ctx.font = 'bold 36px Georgia, serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(name, W / 2, 72);
+
+    // Chart area
+    const chartL = 210;   // left edge of bars
+    const chartR = W - 50;
+    const chartT = 105;   // top of first bar
+    const chartB = H - 145;
+    const chartW = chartR - chartL;
+    const chartH = chartB - chartT;
+    const n = sorted.length;
+    const barH = Math.floor(chartH / n * 0.62);
+    const rowH = chartH / n;
+
+    // Draw bars (top to bottom: smallest value first)
+    for (let i = 0; i < n; i++) {
+      const [key, val] = sorted[n - 1 - i]; // top = smallest
+      const barW = Math.round(val / 100 * chartW);
+      const y = chartT + i * rowH + (rowH - barH) / 2;
+
+      ctx.fillStyle = TYPES[key].color;
+      ctx.fillRect(chartL, y, barW, barH);
+
+      // Label
+      ctx.fillStyle = '#111111';
+      ctx.font = '18px Georgia, serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(TYPES[key].label, chartL - 14, y + barH * 0.72);
+    }
+
+    // X axis line
+    ctx.strokeStyle = '#666';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.moveTo(chartL, chartB);
+    ctx.lineTo(chartR, chartB);
+    ctx.stroke();
+
+    // X axis ticks & labels
+    ctx.fillStyle = '#333';
+    ctx.font = '13px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    for (let v = 0; v <= 100; v += 10) {
+      const x = chartL + v / 100 * chartW;
+      ctx.fillText(String(v), x, chartB + 18);
+      ctx.strokeStyle = '#999';
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.moveTo(x, chartB);
+      ctx.lineTo(x, chartB + 5);
+      ctx.stroke();
+    }
+
+    // Base / Phase labels
+    ctx.fillStyle = '#111111';
+    ctx.font = '17px Georgia, serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('Base = ' + base, chartL, H - 85);
+    ctx.textAlign = 'left';
+    ctx.fillText('Phase = ' + phase, chartL + chartW * 0.48, H - 85);
+
+    // Copyright
+    ctx.fillStyle = '#888';
+    ctx.font = '12px Arial, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('©2011 Kahler Communications, Inc.', W / 2, H - 50);
+  }
+
+  function download() {
+    const canvas = document.getElementById('card');
+    const name = document.getElementById('nameInput').value.trim().replace(/\s+/g, '_') || 'pcm_card';
+    const a = document.createElement('a');
+    a.download = name + '_pcm_card.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  }
+
+  // Auto-generate on load
+  generate();
+
+  // Auto-generate on input change
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('change', generate);
+    el.addEventListener('input', generate);
+  });
+</script>
+</body>
+</html>
