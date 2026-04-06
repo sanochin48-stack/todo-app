@@ -17,17 +17,17 @@ inner_border_color = '#7B3FA0'   # Persister purple
 fig = plt.figure(figsize=(8.5, 5.8))
 fig.patch.set_facecolor('white')
 
-# ---- Border: 3 lines — outer=Base color, middle gap, inner=Phase color ----
-# Outermost line (Base = Harmonizer orange)
-for pad in [0.010, 0.020]:
-    rect = patches.Rectangle((pad, pad), 1 - 2*pad, 1 - 2*pad,
-                               linewidth=1.4,
-                               edgecolor=outer_border_color, facecolor='none',
-                               transform=fig.transFigure, clip_on=False)
-    fig.add_artist(rect)
+# ---- Border: outer=thick single line (Base color), inner=thin single line (Phase color) ----
+# Outer thick line (Base = Harmonizer orange)
+pad = 0.012
+rect = patches.Rectangle((pad, pad), 1 - 2*pad, 1 - 2*pad,
+                           linewidth=5.0,
+                           edgecolor=outer_border_color, facecolor='none',
+                           transform=fig.transFigure, clip_on=False)
+fig.add_artist(rect)
 
-# Innermost line (Phase = Persister purple)
-pad = 0.036
+# Inner thin line (Phase = Persister purple)
+pad = 0.038
 rect = patches.Rectangle((pad, pad), 1 - 2*pad, 1 - 2*pad,
                            linewidth=1.4,
                            edgecolor=inner_border_color, facecolor='none',
