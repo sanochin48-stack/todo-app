@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 
 # ---- Form C data ----
-# Form A order top→bottom: Imaginer, Harmonizer, Rebel, Promoter, Persister, Thinker
+# Form C order top→bottom: Rebel, Imaginer, Promoter, Thinker, Persister, Harmonizer
 # barh plots bottom→top, so reversed:
-categories = ['Thinker',  'Persister', 'Promoter', 'Rebel',   'Harmonizer', 'Imaginer']
-values     = [38,          78,          22,          9,          100,          13]
-bar_colors = ['#5BA4BE',  '#7B3FA0',   '#C0181B',  '#F6C317',  '#E8760A',   '#A0522D']
+categories = ['Harmonizer', 'Persister', 'Thinker', 'Promoter', 'Imaginer', 'Rebel']
+values     = [100,           78,          38,         22,          13,         9]
+bar_colors = ['#E8760A',    '#7B3FA0',   '#5BA4BE',  '#C0181B',  '#A0522D',  '#F6C317']
 
 # Base = Harmonizer (orange), Phase = Persister (purple)
 outer_border_color = '#E8760A'   # Harmonizer orange
