@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCM Card Generator</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .panel {
+      width: 380px;
+      min-width: 380px;
+      background: #fff;
+      padding: 24px 20px;
+      overflow-y: auto;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .panel h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 18px;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      margin: 16px 0 6px;
+    }
+
+    /* API Key */
+    .apikey-row {
+      display: flex;
+      gap: 6px;
+    }
+    .apikey-row input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: monospace;
+      background: #fafafa;
+    }
+    .apikey-row input:focus { outline: none; border-color: #5BA4BE; background:#fff; }
+    .btn-small {
+      padding: 8px 12px;
+      background: #f0f2f5;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .btn-small:hover { background: #e4e6ea; }
+
+    /* Upload area */
+    .upload-area {
+      border: 2px dashed #c0c8d8;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fafbfc;
+      position: relative;
+    }
+    .upload-area:hover, .upload-area.dragover {
+      border-color: #5BA4BE;
+      background: #f0f8ff;
+    }
+    .upload-area input[type="file"] {
+      position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    }
+    .upload-icon { font-size: 28px; margin-bottom: 6px; }
+    .upload-text { font-size: 13px; color: #666; }
+    .upload-text strong { color: #5BA4BE; }
+
+    #thumbWrap { margin-top: 8px; display: none; }
+    #thumb { width: 100%; border-radius: 6px; max-height: 120px; object-fit: contain; }
+
+    .btn-analyze {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      background: #5BA4BE;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-analyze:hover { background: #4a93ad; }
+    .btn-analyze:disabled { background: #aac8d8; cursor: not-allowed; }
+
+    .spinner {
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status-msg {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+      display: none;
+    }
+    .status-msg.ok  { background: #e8f5e9; color: #2e7d32; }
+    .status-msg.err { background: #fdecea; color: #c62828; }
+
+    /* Divider */
+    .divider {
+      border: none;
+      border-top: 1px solid #e8e8e8;
+      margin: 16px 0 0;
+    }
+
+    /* Form fields */
+    input[type="text"], select {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #333;
+      background: #fafafa;
+    }
+    input[type="text"]:focus, select:focus {
+      outline: none; border-color: #5BA4BE; background: #fff;
+    }
+
+    .type-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 6px;
+    }
+    .type-swatch {
+      width: 13px; height: 13px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .type-name { width: 88px; font-size: 12px; color: #444; flex-shrink: 0; }
+    .type-row input[type="number"] {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #333;
+      background: #fafafa;
+    }
+    .type-row input[type="number"]:focus {
+      outline: none; border-color: #5BA4BE; background: #fff;
+    }
+    .order-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .order-btns button {
+      width: 22px; height: 18px;
+      padding: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      background: #f5f5f5;
+      font-size: 9px;
+      cursor: pointer;
+      line-height: 1;
+      color: #555;
+    }
+    .order-btns button:hover { background: #e0e0e0; }
+    .order-btns button:disabled { opacity: 0.3; cursor: default; }
+
+    .select-row { display: flex; gap: 10px; }
+    .select-row > div { flex: 1; }
+    .select-row label { font-size: 11px; color: #666; display: block; margin-bottom: 3px; }
+
+    .btn-generate {
+      width: 100%;
+      margin-top: 18px;
+      padding: 11px;
+      background: #1a1a2e;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-generate:hover { background: #2d2d50; }
+
+    .btn-download {
+      width: 100%;
+      margin-top: 8px;
+      padding: 10px;
+      background: #fff;
+      color: #1a1a2e;
+      border: 2px solid #1a1a2e;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-download:hover { background: #f0f2f5; }
+
+    /* Preview */
+    .preview {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    canvas {
+      max-width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="panel">
+  <h1>PCM Card Generator</h1>
+
+  <!-- API Key -->
+  <div class="section-label">Anthropic API Key</div>
+  <div class="apikey-row">
+    <input type="password" id="apiKey" placeholder="sk-ant-..." autocomplete="off">
+    <button class="btn-small" onclick="saveKey()">保存</button>
+  </div>
+
+  <!-- Upload -->
+  <div class="section-label">FormCの画像をアップロード</div>
+  <div class="upload-area" id="dropZone">
+    <input type="file" id="fileInput" accept="image/*" onchange="onFileSelect(event)">
+    <div class="upload-icon">📷</div>
+    <div class="upload-text"><strong>クリックまたはドラッグ</strong>して画像を選択</div>
+  </div>
+  <div id="thumbWrap"><img id="thumb" src="" alt="preview"></div>
+
+  <button class="btn-analyze" id="btnAnalyze" onclick="analyzeImage()" disabled>
+    <div class="spinner" id="spinner"></div>
+    <span id="btnText">画像からデータを読み取る</span>
+  </button>
+  <div class="status-msg" id="statusMsg"></div>
+
+  <hr class="divider">
+
+  <!-- Manual fields -->
+  <div class="section-label">名前</div>
+  <input type="text" id="nameInput" placeholder="例: MIZUHO SANO" value="">
+
+  <div class="section-label">Base / Phase</div>
+  <div class="select-row">
+    <div>
+      <label>Base（外枠色）</label>
+      <select id="baseSelect">
+        <option value="Thinker">Thinker</option>
+        <option value="Persister">Persister</option>
+        <option value="Harmonizer">Harmonizer</option>
+        <option value="Imaginer">Imaginer</option>
+        <option value="Rebel">Rebel</option>
+        <option value="Promoter">Promoter</option>
+      </select>
+    </div>
+    <div>
+      <label>Phase（内枠色）</label>
+      <select id="phaseSelect">
+        <option value="Thinker">Thinker</option>
+        <option value="Persister">Persister</option>
+        <option value="Harmonizer">Harmonizer</option>
+        <option value="Imaginer">Imaginer</option>
+        <option value="Rebel">Rebel</option>
+        <option value="Promoter">Promoter</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-label">各タイプのスコア（0〜100）　　<span style="font-weight:400;font-size:10px;color:#aaa">↑↓で並び順を調整</span></div>
+  <div id="typeInputs"></div>
+
+  <button class="btn-generate" onclick="generate()">カードを生成</button>
+  <button class="btn-download" onclick="download()">ダウンロード（PNG）</button>
+</div>
+
+<div class="preview">
+  <canvas id="card" width="850" height="580"></canvas>
+</div>
+
+<script>
+const TYPES = {
+  Thinker:    { color: '#5BA4BE' },
+  Persister:  { color: '#7B3FA0' },
+  Harmonizer: { color: '#E8760A' },
+  Imaginer:   { color: '#A0522D' },
+  Rebel:      { color: '#F6C317' },
+  Promoter:   { color: '#C0181B' },
+};
+
+// order: top→bottom in chart (user-adjustable)
+let order = ['Thinker', 'Persister', 'Harmonizer', 'Imaginer', 'Rebel', 'Promoter'];
+
+// Store values separately so re-render preserves them
+const vals = { Thinker:0, Persister:0, Harmonizer:0, Imaginer:0, Rebel:0, Promoter:0 };
+
+function renderTypeInputs() {
+  const container = document.getElementById('typeInputs');
+  container.innerHTML = '';
+  order.forEach((key, idx) => {
+    const t = TYPES[key];
+    const row = document.createElement('div');
+    row.className = 'type-row';
+    row.innerHTML = `
+      <div class="type-swatch" style="background:${t.color}"></div>
+      <span class="type-name">${key}</span>
+      <input type="number" id="val_${key}" min="0" max="100" value="${vals[key]}"
+             oninput="vals['${key}']=Math.min(100,Math.max(0,+this.value||0));generate()">
+      <div class="order-btns">
+        <button onclick="moveItem('${key}',-1)" ${idx===0?'disabled':''}>▲</button>
+        <button onclick="moveItem('${key}',+1)" ${idx===order.length-1?'disabled':''}>▼</button>
+      </div>
+    `;
+    container.appendChild(row);
+  });
+}
+
+function moveItem(key, dir) {
+  const i = order.indexOf(key);
+  const j = i + dir;
+  if (j < 0 || j >= order.length) return;
+  [order[i], order[j]] = [order[j], order[i]];
+  renderTypeInputs();
+  generate();
+}
+
+// API Key persistence
+window.addEventListener('load', () => {
+  const saved = localStorage.getItem('pcm_api_key');
+  if (saved) document.getElementById('apiKey').value = saved;
+  renderTypeInputs();
+  generate();
+});
+
+function saveKey() {
+  const k = document.getElementById('apiKey').value.trim();
+  if (k) {
+    localStorage.setItem('pcm_api_key', k);
+    showStatus('APIキーを保存しました', 'ok');
+  }
+}
+
+// Drag & drop
+const dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) loadFile(file);
+});
+
+let currentBase64 = null;
+let currentMediaType = null;
+
+function onFileSelect(e) {
+  const file = e.target.files[0];
+  if (file) loadFile(file);
+}
+
+function loadFile(file) {
+  currentMediaType = file.type || 'image/jpeg';
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const dataUrl = e.target.result;
+    currentBase64 = dataUrl.split(',')[1];
+    document.getElementById('thumb').src = dataUrl;
+    document.getElementById('thumbWrap').style.display = 'block';
+    document.getElementById('btnAnalyze').disabled = false;
+    hideStatus();
+  };
+  reader.readAsDataURL(file);
+}
+
+// Analyze image with Claude API
+async function analyzeImage() {
+  const apiKey = document.getElementById('apiKey').value.trim();
+  if (!apiKey) { showStatus('APIキーを入力してください', 'err'); return; }
+  if (!currentBase64) { showStatus('画像を選択してください', 'err'); return; }
+
+  setLoading(true);
+  hideStatus();
+
+  const prompt = `この画像はPCM（Process Communication Model）のプロファイルカードです。
+以下の情報をJSONで返してください。余分なテキストは不要で、JSONのみ返してください。
+
+{
+  "name": "氏名（大文字英字、例: MIZUHO SANO）",
+  "base": "BaseのタイプをThinker/Persister/Harmonizer/Imaginer/Rebel/Promoterのいずれかで",
+  "phase": "PhaseのタイプをThinker/Persister/Harmonizer/Imaginer/Rebel/Promoterのいずれかで",
+  "scores": {
+    "Thinker": 0～100の数値,
+    "Persister": 0～100の数値,
+    "Harmonizer": 0～100の数値,
+    "Imaginer": 0～100の数値,
+    "Rebel": 0～100の数値,
+    "Promoter": 0～100の数値
+  }
+}
+
+ハウス図のバーの長さからスコアを推定してください。最も長いバーを100として相対的に読み取ってください。
+日本語表記の場合: シンカー=Thinker, パシスター=Persister, ハーモナイザー=Harmonizer, イマジナー=Imaginer, レベル=Rebel, プロモーター=Promoter`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-6',
+        max_tokens: 1024,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: { type: 'base64', media_type: currentMediaType, data: currentBase64 }
+            },
+            { type: 'text', text: prompt }
+          ]
+        }]
+      })
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${res.status}`);
+    }
+
+    const data = await res.json();
+    const text = data.content.find(b => b.type === 'text')?.text || '';
+
+    // Extract JSON from response
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('JSONが見つかりませんでした');
+    const parsed = JSON.parse(jsonMatch[0]);
+
+    // Populate fields
+    if (parsed.name) document.getElementById('nameInput').value = parsed.name;
+    if (parsed.base && TYPES[parsed.base])
+      document.getElementById('baseSelect').value = parsed.base;
+    if (parsed.phase && TYPES[parsed.phase])
+      document.getElementById('phaseSelect').value = parsed.phase;
+    if (parsed.scores) {
+      for (const [key, val] of Object.entries(parsed.scores)) {
+        if (key in vals) vals[key] = Math.round(Math.min(100, Math.max(0, val)));
+      }
+      // Auto-sort order by score desc (user can adjust afterward)
+      order.sort((a, b) => vals[a] - vals[b]); // ascending = top of chart first
+    }
+    renderTypeInputs();
+    generate();
+    showStatus('✓ 読み取り完了！内容を確認してカードを生成してください', 'ok');
+
+  } catch (e) {
+    showStatus('エラー: ' + e.message, 'err');
+  } finally {
+    setLoading(false);
+  }
+}
+
+function setLoading(on) {
+  const btn = document.getElementById('btnAnalyze');
+  const spinner = document.getElementById('spinner');
+  const text = document.getElementById('btnText');
+  btn.disabled = on;
+  spinner.style.display = on ? 'block' : 'none';
+  text.textContent = on ? '読み取り中...' : '画像からデータを読み取る';
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('statusMsg');
+  el.textContent = msg;
+  el.className = 'status-msg ' + type;
+  el.style.display = 'block';
+}
+function hideStatus() {
+  document.getElementById('statusMsg').style.display = 'none';
+}
+
+// ---- Card generation ----
+
+function generate() {
+  const canvas = document.getElementById('card');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+
+  const name = document.getElementById('nameInput').value.trim().toUpperCase() || 'YOUR NAME';
+  const base = document.getElementById('baseSelect').value;
+  const phase = document.getElementById('phaseSelect').value;
+
+  // Sort by value desc; ties broken by user-defined order (top of list = top of chart)
+  const sorted = [...order].map(key => [key, vals[key]])
+    .sort((a, b) => b[1] !== a[1]
+      ? b[1] - a[1]
+      : order.indexOf(a[0]) - order.indexOf(b[0])  // lower order index → higher in chart
+    );
+  const outerColor = TYPES[base].color;
+  const innerColor = TYPES[phase].color;
+
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
+
+  // Outer border (thick, Base color)
+  const bOuter = 7;
+  ctx.strokeStyle = outerColor;
+  ctx.lineWidth = bOuter;
+  ctx.strokeRect(bOuter / 2, bOuter / 2, W - bOuter, H - bOuter);
+
+  // Inner border (thick, Phase color)
+  const gap = 14;
+  const innerOff = bOuter + gap;
+  ctx.strokeStyle = innerColor;
+  ctx.lineWidth = bOuter;
+  ctx.strokeRect(innerOff, innerOff, W - 2 * innerOff, H - 2 * innerOff);
+
+  // Title
+  ctx.fillStyle = '#111111';
+  ctx.font = 'bold 36px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(name, W / 2, 72);
+
+  // Chart area
+  const chartL = 210, chartR = W - 50;
+  const chartT = 105, chartB = H - 145;
+  const chartW = chartR - chartL;
+  const chartH = chartB - chartT;
+  const n = sorted.length;
+  const rowH = chartH / n;
+  const barH = Math.floor(rowH * 0.62);
+
+  for (let i = 0; i < n; i++) {
+    const [key, val] = sorted[n - 1 - i];
+    const barW = Math.round(val / 100 * chartW);
+    const y = chartT + i * rowH + (rowH - barH) / 2;
+
+    ctx.fillStyle = TYPES[key].color;
+    ctx.fillRect(chartL, y, barW, barH);
+
+    ctx.fillStyle = '#111111';
+    ctx.font = '18px Georgia, serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(key, chartL - 14, y + barH * 0.72);
+  }
+
+  // X axis
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 0.8;
+  ctx.beginPath();
+  ctx.moveTo(chartL, chartB);
+  ctx.lineTo(chartR, chartB);
+  ctx.stroke();
+
+  ctx.fillStyle = '#333';
+  ctx.font = '13px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  for (let v = 0; v <= 100; v += 10) {
+    const x = chartL + v / 100 * chartW;
+    ctx.fillText(String(v), x, chartB + 18);
+    ctx.strokeStyle = '#999';
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(x, chartB);
+    ctx.lineTo(x, chartB + 5);
+    ctx.stroke();
+  }
+
+  // Base / Phase labels
+  ctx.fillStyle = '#111111';
+  ctx.font = '17px Georgia, serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('Base = ' + base, chartL, H - 85);
+  ctx.fillText('Phase = ' + phase, chartL + chartW * 0.48, H - 85);
+
+  // Copyright
+  ctx.fillStyle = '#888';
+  ctx.font = '12px Arial, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('©2011 Kahler Communications, Inc.', W / 2, H - 50);
+}
+
+function download() {
+  const canvas = document.getElementById('card');
+  const name = document.getElementById('nameInput').value.trim().replace(/\s+/g, '_') || 'pcm_card';
+  const a = document.createElement('a');
+  a.download = name + '_pcm_card.png';
+  a.href = canvas.toDataURL('image/png');
+  a.click();
+}
+
+document.querySelectorAll('select, input[type="text"]').forEach(el => {
+  el.addEventListener('change', generate);
+  el.addEventListener('input', generate);
+});
+</script>
+</body>
+</html>
