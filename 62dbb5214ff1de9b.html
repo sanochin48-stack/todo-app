@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#33455E">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="PCM">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAALrklEQVR42u3coU5jWwOG4XZSjeIuIEGUhKBQRSEIllAE14UAgiUIFA5FSDAkcBcobqBjRkwQHfYsdtlrfc9j/zPndK/kz/eu3YHxdDZfjACAKL8cAQAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAAAeAIAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAADo08QRQPsWJxed/vnx1alDAwEAtD74//rzggAEANDo6H/13y0GQAAAjQ//sv+eEAABAAQMvxAAAQAED78QAAEABA+/EIC6+T0AYPxjPysIAMCgigAQAIAhFQEgAAADKgJAAACGUwSAAAAMpggAAQAYShEAAgAwkCIABACQPowiAAQAEDqIIgAEAAAgAMBN2LMDAgAAEADgBuwMAAEAAAgAcPN1FoAAAAAEALjxOhNAAACAAAAABADQE6+6nQ0IAABAAAAAAgAAEABQP99xOyMQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAAAQAACAAAQAAAhcZXpw7BGYEAAAAEAAAgAAAAAQCN8B23swEBAAAIAABAAECzvOp2JiAAAAABAG68zgIQAACAAAA3X2cACAAAQACAG7BnBwQAACAAwE3YMwN/mzgCSt28vnX+M0ebGw7u0yAuTi6Mf6iDj73Of+Zu7cHBUfb/xelsvnAM9D34guBrWo8A4///gy8IEAA0M/piICsC0se/j9EXAwgAmhh+IdBuBCSP/yqHXwggAKh6+IVAWxGQOv4/OfxCAAFA1cMvBOqPgMTxH9LwCwGW8WOAVDH+NXw+A2r8hzz+NXw+vAHAsHobUPmbgLTxr3FYvQ3AGwDj73MbVOMfeKv2NgBvAIx/1fy9AMNvRL0JQAAQeoP2UwKG3/iLAAQAYeOfHgE/GQJ+tr8tIkAAYPxFgBAw/GHjLwIEAMZfBIgBox86/iJAAGD8RYAgMPih4y8CBADGXwRA6PiLgBx+DwAACADc/j03pN/+k59bAGAEPT/Ej6AIEAAAgADA7dc54PbrHBAAAIAAwK3XeeDW6zwQAACAAMBt17ngtutcEAAAgAAAAAQAHXnN7Xwo4zW38xEAAIAAAAAEAAAgABgC3287J8r4fts5CQAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAYHS0ueEQnBMF7tYeHIJzEgAAgAAAAAQAACAAGAzfbzsfyvh+2/kIAABAAAAAAoAB85rbuVDGa27nIgAAAAGA267zwG3XeSAAAAABgFuvc8Ct1zkgAAAAAYDbr+fH7dfzIwAwgp4bI+i5EQAAgADAbdjz4jbseREAGEXPiVH0nAgAjKPxxzh6PgQARtL4YyQ9FwKAyLE0/hhLz4MAIGw0jT9G03MgAAgbT+OP8TT+CADCRtT4Y0SNP2XG09l84RgYjUajm9c3ww8FDj72DD/eAOBWbfzxNsDnwxsAvA0w/HgbYPgRAAgBw48QMPwIAISA4UcIGH4EAHkxYPQRA0YfAUBAEBh8KAsCg48AAAA682OAACAAAAABAAAIAABAAAAAAgAAEAAAwGBNHAHkeL6/eF/2v2/vn647JcjgFwGB4RcCIACA5OEXApDD3wEA49/rvwMQAEBF4y8CQAAAoeMvAkAAAKHjLwJAAACh4y8CQAAAAAIASLn9ewsAAgAAEABAyu3fWwAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAFhue/90PeG/CQgAAEAAAKu8kbv9gwAAAAQA0PpbALd/EABAWAQYfxAAQFgEGH8QAEBYBBh/EABAWAQYf2jXeDqbLxwDtO35/uLd8AMCAISA4QcBIAAAII2/AwAAAgAAEAAAgAAAAAQAACAAAAABAAAM1sQRUOrx/LLzn9k9mzs4+ONp67rzn9l5OXZwFPGLgFjJ4AsCKBt8QYAAoJnRFwMY/X6IAQQAVQ2/EMDwCwEEAMHDLwQw/EIAAUDw8AsBDL8QoD9+DJAqxr+GzwdDHv8aPh/eAGBYvQ3A8HsbgDcAGH9vAzD+PjcCACMqAjCiPj8CgOzxFAEYT8+BACB0NEUARtPzIAAIHUsRgLH0XAgAQkdSBGAkPR8CgNBxFAEYR8+JACB0FEUARtHzIgAAAAHg9u+5wW3YcyMAjKDnByPo+QUAACAAcPt1Drj9OgfnIAAAAAGAW6/zwK3XeSAAAAABgNuuc8Ft17kgAAAAAQAACAC+i9fczocyXnM7HwEAAAgAAEAAAAACgCHw/bZzoozvt52TAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgARrtnc4fgnCiw83LsEJyTAAAABAAAIAAAAAHAYPh+2/lQxvfbzkcAAAACAAAQAAyY19zOhTJeczsXAQAACADcdp0HbrvOAwEAAAgA3HqdA269zgEBAAAIANx+PT9uv54fAYAR9NwYQc+NAAAAVm08nc0XjqF9j+eXbv/Bbs+2Ov3zh+cvDu2Tp61rt38EACLA+Lc1+IJABBh/AYAIMP5GXwyERoDxFwCIAONv+IVAWAQYfwGACDD+hl8IhEWA8RcAiADjb/iFQFgEGH8BgAgw/oZfCIRFgPHP5vcAhKt1RI2/z2pEjT/eABD0NsAr/3r4SsDw4w0AbtXGP/A2nfYmoIZxNf54A0BVbwP8Lf+6+SkBw48AQAgY/tDbs98ZYPgRAAgBwx82/iJg9SFg+BEAVBMDfod/2+MvAvqPAaOPAKCKIDD4eeMvAr43CAw+AgCMvwgAOvNjgGD8PTMIAABAAABuwp4dBAAAIAAAN2BnAAIAABAAgJuvswABAAAIAHDjxZmAAAAABAAAIACgFV51OxsQAACAAAAABAAAIACgfr7jdkYgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAAAgAAEAAAgAAACh2evzgEZwQCAAAQAACAAAAABAA0wnfczgYEAAAgAAAAAQDN8qrbmYAAAAAEALjxOgtAAAAAAgDcfJ0BIAAAAAEAbsCeHRAAAIAAADdhzwwIADCInhUEAGAYPSMIAMBAejYQAICh9EwgAACDafxBAACG0/iDAAAMqPEHAQBkDqnxBwEAhA2q8Yc6jKez+cIxQD1uz7YMPyAAQAgYfkAAgBAw/IAAACFg+AEBAGLA6AMCAASBwQcBAADE8HsAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAAAAAQAACAAAQAAAAAIAABAAAIAAAAAEAAAgAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAA6NVvfpTvo36ZdbwAAAAASUVORK5CYII=">
+<title>PCM 組織活用ツール</title>
+<style>
+:root{
+  --paper:#EEF1F4; --surface:#FFF; --ink:#1B2430; --ink2:#5A6675; --ink3:#8A94A2;
+  --line:#DCE2E9; --line2:#EDF0F4; --chrome:#33455E;
+  --ok-bg:#E9F3EC; --ok-ink:#1F4A30;
+  --ng-bg:#FDECEC; --ng-ink:#7A2020;
+  --wa-bg:#FFF6DF; --wa-ink:#6B4E0A;
+  --tabh:60px;
+  /* 南京錠（塗りつぶし。currentColor をマスクで載せる） */
+  --lock:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zm0 2a3 3 0 0 1 3 3v3H9V7a3 3 0 0 1 3-3zm0 10a1.6 1.6 0 0 1 .8 3l.3 2.2h-2.2l.3-2.2A1.6 1.6 0 0 1 12 14z"/></svg>');
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+button,textarea,input{-webkit-appearance:none;appearance:none;border-radius:0}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  font-size:15px; line-height:1.75; -webkit-text-size-adjust:100%;
+  padding-bottom:calc(var(--tabh) + 24px + env(safe-area-inset-bottom));
+  overflow-wrap:break-word; word-break:break-word;
+}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--chrome);outline-offset:2px}
+[hidden]{display:none !important}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+
+.top{
+  background:var(--chrome);color:#fff;padding:11px 16px;
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;
+  padding-top:calc(11px + env(safe-area-inset-top));
+}
+.top .ttl{font-size:15px;font-weight:700;letter-spacing:.06em}
+.top .who{margin-left:auto;font-size:11.5px;opacity:.8;text-align:right}
+.back{background:none;border:0;color:#fff;padding:0 12px 0 0;font-size:19px;line-height:1}
+
+.page{padding:14px;max-width:720px;margin:0 auto}
+.page[hidden]{display:none}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;margin-bottom:12px;overflow:hidden}
+.card-h{padding:10px 14px;border-bottom:1px solid var(--line2);
+        font-size:11.5px;font-weight:700;letter-spacing:.12em;color:var(--ink2)}
+.card-b{padding:14px}
+.card-b p{margin:0 0 9px}
+.card-b p:last-child{margin-bottom:0}
+
+.lab{font-size:11px;color:var(--ink3);letter-spacing:.1em;display:block;margin-bottom:4px}
+.sub{font-size:12.5px;color:var(--ink2);line-height:1.7}
+.tiny{font-size:11.5px;color:var(--ink3);line-height:1.7}
+.exl{margin:1px 0 7px;padding-left:1.15em;font-size:13.5px;color:var(--ink2);line-height:1.8}
+.exl li{margin-bottom:3px}
+.chip{display:inline-block;background:#EEF1F5;color:var(--ink2);
+      border-radius:3px;padding:3px 10px;font-size:12.5px;margin:0 5px 6px 0}
+.kv{display:flex;padding:6px 0;border-bottom:1px dotted var(--line2);font-size:13.5px}
+.kv:last-child{border-bottom:0}
+.kv .k{flex:0 0 104px;color:var(--ink2);font-size:12px}
+@media (max-width:400px){ .kv{display:block} .kv .k{display:block;margin-bottom:1px} }
+.kv .v{flex:1 1 auto}
+.note-ok{background:var(--ok-bg);color:var(--ok-ink);border-radius:6px;padding:11px 13px;font-size:13px;line-height:1.75}
+.note-wa{background:var(--wa-bg);color:var(--wa-ink);border-radius:6px;padding:11px 13px;font-size:13px;line-height:1.75}
+.step{border-left:3px solid var(--chrome);padding:2px 0 2px 12px;margin-bottom:14px}
+.step:last-child{margin-bottom:0}
+.step .hd{font-size:11px;color:var(--ink3);display:block;margin-bottom:3px;letter-spacing:.06em}
+.step .tx{font-size:14.5px;line-height:1.8}
+
+/* ---- コンドミニアム（二重枠カード） ---- */
+.pc{border:9px solid var(--line);border-radius:9px;padding:11px;background:var(--surface)}
+.pc-in{border:4px solid var(--line);border-radius:5px;padding:16px 14px;position:relative}
+.pc-bc{position:absolute;top:6px;right:9px;font-size:11px;color:var(--ink2);
+       letter-spacing:.06em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pc-in.hasbc{padding-top:30px}
+.pc-nm{margin:0 0 14px;text-align:center;font-size:19px;font-weight:700;letter-spacing:.06em}
+.fr{display:flex;align-items:center;margin-bottom:6px}
+.fr:last-child{margin-bottom:0}
+.fr .tn{width:88px;flex:0 0 auto;font-size:11.5px;white-space:nowrap}
+.fr .tk{flex:1 1 auto;display:block;height:16px;background:#F0F2F5;border-radius:3px}
+.fr .bb{display:block;height:16px;border-radius:3px;min-width:4px}
+.fr.g .tn{font-weight:700}
+.pc-cap{margin:11px 2px 0;font-size:11.5px;color:var(--ink2);text-align:center;line-height:1.8}
+.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;position:relative;top:1px}
+.pcwrap{margin-bottom:14px}
+.pcwrap .pc{border-width:7px;padding:9px}
+.pcwrap .pc-in{border-width:3px;padding:12px}
+.pcwrap .pc-in.hasbc{padding-top:26px}
+.pcwrap .fr{margin-bottom:5px}
+.pcwrap .fr .tk,.pcwrap .fr .bb{height:14px}
+.pcwrap .pc-cap{margin-top:9px;font-size:11px}
+
+/* ---- 開閉できる項目行 ---- */
+.ex{border-bottom:1px dotted var(--line2)}
+.ex:last-of-type{border-bottom:0}
+.ex > summary{display:flex;align-items:baseline;gap:12px;padding:9px 0;font-size:13.5px;list-style:none}
+.ex > summary::-webkit-details-marker{display:none}
+.ex > summary .k{flex:0 0 8.6em;color:var(--ink2);font-size:12px;line-height:1.5}
+.ex > summary .v{flex:1 1 auto}
+.ex > summary .m{flex:0 0 auto;color:var(--ink3);font-size:13px;line-height:1}
+.ex[open] > summary .m::before{content:"−"}
+.ex > summary .m::before{content:"＋"}
+.ex .exb{font-size:13px;line-height:1.9;color:var(--ink2);background:#F5F7FA;
+         border-radius:6px;padding:10px 12px;margin:0 0 10px}
+.ex.flat > summary{cursor:default}
+@media (max-width:400px){
+  .ex > summary{display:block;position:relative;padding-right:20px}
+  .ex > summary .k{display:block;margin-bottom:1px}
+  .ex > summary .m{position:absolute;right:0;top:10px}
+}
+
+/* ---- ツインタワー（やりとり） ---- */
+.twin{position:relative;display:flex;margin-bottom:10px}
+.twin .col{flex:1 1 0;min-width:0}
+.twin .gap{flex:0 0 30px;width:30px}
+.twin .ch{text-align:center;font-size:10.5px;color:var(--ink3);margin-bottom:5px;line-height:1.4}
+.twin .ch b{display:block;font-size:13px;color:var(--ink);font-weight:700}
+.tf{position:relative;background:var(--surface);border:1px solid var(--line2);border-bottom:0;
+    padding:4px 6px 6px;overflow:hidden}
+.col .tf:first-of-type{border-radius:6px 6px 0 0}
+.col .tf:last-of-type{border-bottom:1px solid var(--line2);border-radius:0 0 6px 6px}
+.tf .lv{display:block;font-size:9px;color:var(--ink3);line-height:1.2}
+.tf .tn{display:block;font-size:11px;line-height:1.45}
+.tf .bb2{display:block;height:3px;border-radius:1px;margin-top:3px;min-width:3px}
+.tf .mk{position:absolute;top:5px;right:5px;width:9px;height:9px;border-radius:50%;box-sizing:border-box}
+.tf .mk.ring{background:#fff;border:2px solid}
+.tf.on{box-shadow:inset 0 0 0 2px var(--chrome)}
+.tf.on .tn{font-weight:700}
+.wire{position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+.wire i{position:absolute;background:var(--chrome);display:block}
+.wire u{position:absolute;width:0;height:0;border-style:solid;display:block}
+.wire u.r{border-width:5px 0 5px 8px;border-color:transparent transparent transparent var(--chrome)}
+.wire u.l{border-width:5px 8px 5px 0;border-color:transparent var(--chrome) transparent transparent}
+.flegend{font-size:11px;color:var(--ink3);line-height:1.7;margin:0 2px 12px}
+
+/* ---- メンバー一覧 ---- */
+.mgrp{margin-bottom:16px}
+.msub{margin:7px 0 14px 13px;border-left:2px solid var(--line);padding-left:11px}
+.msub .stt{margin:0 0 5px}
+.stt{font-size:11px;color:var(--ink3);letter-spacing:.06em;margin:0 0 5px 2px}
+.stt .who{background:none;border:0;padding:0;font-size:12.5px;color:var(--ink2);
+          border-bottom:1px solid var(--line)}
+.mlist{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mrow{display:flex;align-items:center;width:100%;text-align:left;
+      padding:12px 14px;background:none;border:0;border-bottom:1px solid var(--line2)}
+.mrow:last-child{border-bottom:0}
+.mrow:active{background:#F4F7FA}
+.mrow .bar{width:8px;height:34px;border-radius:2px;flex:0 0 auto;margin-right:12px}
+.mrow .nm{flex:1 1 auto;min-width:0}
+.mrow .nm > b{display:block;font-size:15px;font-weight:700}
+.mrow .nm > span{display:block;font-size:11.5px;color:var(--ink2)}
+.mrow .ar{flex:0 0 auto;color:var(--ink3);font-size:15px}
+.mrow.na .bar{background:repeating-linear-gradient(45deg,#CFD6DE,#CFD6DE 3px,#E6EAEF 3px,#E6EAEF 6px)}
+.mrow.na .nm b{color:var(--ink2);font-weight:400}
+.bB{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;color:var(--chrome);
+    border:1px solid var(--chrome);border-radius:3px;padding:0 4px;margin-left:6px;
+    vertical-align:2px;line-height:1.5}
+.bAlso{display:inline-block;font-size:10px;color:var(--ink3);border:1px solid var(--line);
+       border-radius:9px;padding:0 7px;margin-left:6px;vertical-align:1px;font-weight:400}
+
+/* ---- セグメント ---- */
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.seg button{flex:1 1 0;padding:11px 1px;background:none;border:0;border-right:1px solid var(--line2);
+            font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--chrome);color:#fff;font-weight:700}
+.seg button.lk{color:var(--ink3)}
+.seg button.lk::after{
+  content:"";display:inline-block;width:11px;height:11px;margin-left:5px;
+  vertical-align:-1px;background:currentColor;
+  -webkit-mask:var(--lock) center/contain no-repeat;mask:var(--lock) center/contain no-repeat;
+}
+@media (max-width:380px){ .seg button{font-size:11px;padding:11px 0} .seg button.lk::after{margin-left:3px} }
+
+/* ---- 組織図 ---- */
+.facility{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+          padding:14px 14px 20px;margin-bottom:16px}
+.fhead{display:flex;align-items:center;gap:9px;flex-wrap:wrap;width:100%;text-align:left;
+       background:none;border:0;padding:0 0 4px}
+.fname{font-size:16px;font-weight:700;letter-spacing:.04em}
+.fmeta{font-size:11.5px;color:var(--ink3)}
+.fmix{display:flex;gap:9px;flex-wrap:wrap;width:100%;margin:6px 0 2px}
+.mixdot{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--ink2)}
+.mixdot .d{width:9px;height:9px;border-radius:50%;display:inline-block}
+.mixdot.un{color:var(--ink3)}
+.mixdot.un .d{border:1.5px dashed #b8b2a8;background:none;box-sizing:border-box}
+.fchev{margin-left:auto;color:var(--ink3);font-size:15px;transition:transform .2s}
+.facility[data-open="1"] .fchev{transform:rotate(90deg)}
+.fbody{display:none;padding-top:12px}
+.facility[data-open="1"] .fbody{display:block}
+
+.tree{display:flex;flex-direction:column;align-items:center}
+.trunk{width:1px;height:20px;background:#cfc9bd}
+.mgr-row{display:flex;flex-wrap:wrap;gap:16px 12px;justify-content:center}
+.staff{display:flex;flex-wrap:wrap;gap:16px 12px;justify-content:center;
+       border-top:1px solid #cfc9bd;width:100%}
+.staff.nobar{border-top:0;padding-top:0}
+.staff.nobar .cell::before{display:none}
+.cell{display:flex;flex-direction:column;align-items:center}
+.cell::before{content:"";width:1px;height:16px;background:#cfc9bd}
+
+.node{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;
+      padding:9px 11px 10px;width:144px;text-align:left;box-shadow:0 1px 2px rgba(0,0,0,.04);
+      display:flex;flex-direction:column;gap:7px;transition:border-color .15s,transform .15s}
+.node:hover{border-color:#b9b3a8;transform:translateY(-1px)}
+.node.mgr{border-color:#c9b27a;background:#fffdf6;box-shadow:0 2px 8px rgba(150,120,40,.1)}
+.node.me{border-color:var(--chrome);box-shadow:0 0 0 1px var(--chrome)}
+.role-tag{position:absolute;top:-9px;left:10px;background:#7a6320;color:#fff;font-size:9.5px;
+          font-weight:700;padding:1px 7px;border-radius:10px;letter-spacing:.03em;white-space:nowrap;
+          max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis}
+.node-name{font-size:13px;font-weight:600}
+.node-bp{display:flex;flex-direction:column;gap:3px}
+.bprow{display:flex;align-items:center;gap:5px;font-size:10px}
+.bptag{width:9px;font-weight:700;color:#a8a299;flex-shrink:0}
+.bpdot{width:9px;height:9px;border-radius:50%;flex-shrink:0;box-sizing:border-box}
+.bpdot.ring{background:#fff;border:1.5px solid}
+.bpname{font-weight:600;color:#333}
+.mini{display:flex;flex-direction:column;gap:2px}
+.mini-track{height:3.5px;background:#efece6;border-radius:2px;overflow:hidden}
+.mini-fill{display:block;height:100%}
+.node.unrec{background:#F4F5F7;border-style:dashed;border-color:#D6DAE0;box-shadow:none}
+.node.unrec .node-name{color:var(--ink2);font-weight:400}
+.unrec-tag{font-size:9.5px;color:var(--ink3);background:#E9ECF0;border-radius:8px;padding:2px 8px;align-self:flex-start}
+
+/* 分布の集計 */
+#page-org,#page-project{max-width:1120px}
+.layout{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.board{flex:1 1 560px;min-width:280px}
+.an{flex:0 0 268px;background:var(--surface);border:1px solid var(--line);
+    border-radius:12px;padding:16px 16px 18px;position:sticky;top:70px;
+    max-height:calc(100vh - 70px - var(--tabh) - 24px);overflow-y:auto;
+    -webkit-overflow-scrolling:touch}
+@media (max-width:860px){ .an{flex:1 1 100%;position:static;max-height:none;overflow:visible} }
+.an h4{margin:0 0 10px;font-size:11.5px;letter-spacing:.1em;color:var(--ink2);font-weight:700}
+.an-block{margin-bottom:20px}
+.an-block:last-child{margin-bottom:0}
+.an-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px}
+.an-key{width:84px;flex-shrink:0;font-size:11px;font-weight:700}
+.an-track{flex:1;height:8px;background:#EFF1F4;border-radius:4px;overflow:hidden}
+.an-fill{display:block;height:100%}
+.an-num{width:24px;text-align:right;color:var(--ink3);font-variant-numeric:tabular-nums}
+.matrix{display:grid;grid-template-columns:auto repeat(6,1fr);gap:2px}
+.mx-corner{font-size:8.5px;color:var(--ink3);display:flex;align-items:center;justify-content:center}
+.mx-head{display:flex;flex-direction:column;align-items:center;justify-content:center;
+         font-size:9px;color:var(--ink2);gap:1px;padding:2px 0}
+.mx-head.row{flex-direction:row;gap:3px;justify-content:flex-start;font-size:10px;padding-right:3px}
+.mx-dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0}
+.mx-cell{aspect-ratio:1;min-height:22px;display:flex;align-items:center;justify-content:center;
+         font-size:10px;color:var(--ink);background:#F4F5F7;border-radius:3px;font-variant-numeric:tabular-nums}
+.mx-cell.diag{outline:1px solid #CFD5DD;outline-offset:-1px}
+.mx-cap{font-size:10px;color:var(--ink3);line-height:1.6;margin:7px 0 0}
+.cleg{display:flex;flex-wrap:wrap;gap:3px 14px;font-size:11px;color:var(--ink2);margin-bottom:6px}
+.cleg span{display:inline-flex;align-items:center;gap:5px;font-variant-numeric:tabular-nums}
+.cleg b{display:inline-block;width:9px;height:9px;border-radius:2px;flex:none;font-size:0;line-height:0;overflow:hidden}
+.cbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line2);margin:10px 0 8px}
+.cbar i{display:block;height:100%}
+.tools{display:flex;gap:8px;margin-bottom:12px}
+.tools button{background:var(--surface);border:1px solid var(--line);border-radius:6px;
+              padding:6px 13px;font-size:12px;color:var(--ink2)}
+
+/* ---- ボタン・入力 ---- */
+.btn{background:var(--chrome);color:#fff;border:0;border-radius:6px;padding:11px 18px;font-size:14px}
+.btn.sub{background:var(--surface);color:var(--ink2);border:1px solid var(--line)}
+.btn.wide{display:block;width:100%;text-align:center}
+.btn[disabled]{opacity:.4}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+textarea,input.f{width:100%;border:1px solid var(--line);border-radius:6px;padding:10px;
+  font-family:inherit;font-size:16px;line-height:1.7;color:var(--ink);background:var(--surface)}
+textarea{min-height:88px;resize:vertical}
+
+/* ---- タブ内のログ ---- */
+.log{border-top:1px solid var(--line2);padding:9px 0}
+.log:first-of-type{border-top:0;padding-top:2px}
+.log .d{font-size:11px;color:var(--ink3);display:flex;align-items:center;gap:8px}
+.log .d .del{margin-left:auto;background:none;border:0;color:var(--ink3);font-size:11px;padding:0}
+.log .t{font-size:13.5px;line-height:1.8;white-space:pre-wrap;margin-top:2px}
+
+/* ---- 記録 ---- */
+.rec{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:10px}
+.rec .meta{font-size:11px;color:var(--ink3);margin-bottom:5px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.rec .meta .who{color:var(--ink2);border:0;border-bottom:1px solid var(--line);background:none;padding:0 0 1px;font-size:11px}
+.rec .meta .tag{padding:1px 8px;border-radius:3px;background:#EEF1F5;color:var(--ink2);font-size:10.5px;letter-spacing:.06em}
+.rec .meta .del{margin-left:auto;background:none;border:0;color:var(--ink3);font-size:11px}
+.rec .body{font-size:14px;line-height:1.75;white-space:pre-wrap}
+.cfm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;
+     background:#F5F7FA;border-radius:6px;padding:9px 11px;font-size:12.5px;color:var(--ink2)}
+.cfm .y{color:var(--ng-ink);border:1px solid #D25A5A;border-radius:99px;padding:3px 12px;font-size:12px;background:none}
+.cfm .n{color:var(--ink2);border:1px solid var(--line);border-radius:99px;padding:3px 12px;font-size:12px;background:none}
+
+/* ---- プロジェクト ---- */
+.pj{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+    padding:13px 14px;margin-bottom:10px;width:100%;text-align:left;display:block}
+.pj b{display:block;font-size:15px;font-weight:700;margin-bottom:7px}
+.chk{display:flex;align-items:center;width:100%;text-align:left;gap:11px;
+     padding:10px 14px;background:none;border:0;border-bottom:1px solid var(--line2)}
+.chk:last-child{border-bottom:0}
+.chk .bx{width:19px;height:19px;border:1.5px solid var(--line);border-radius:4px;flex:none;
+         display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.chk[aria-pressed="true"] .bx{background:var(--chrome);border-color:var(--chrome)}
+.chk .cn{font-size:14px;flex:1 1 auto}
+.chk .ct{font-size:11.5px;color:var(--ink3)}
+
+/* ---- 鍵 ---- */
+.lk{background:var(--surface);border:1px solid var(--line);border-radius:8px;
+    padding:26px 20px;text-align:center;margin-bottom:12px}
+.lk .ic{display:block;width:26px;height:26px;margin:0 auto 11px;background:var(--ink3);
+        -webkit-mask:var(--lock) center/contain no-repeat;mask:var(--lock) center/contain no-repeat}
+.lk .c{font-size:14px;color:var(--ink);margin:0 0 7px;line-height:1.7}
+.lk .d{font-size:12.5px;color:var(--ink2);margin:0;line-height:1.8}
+
+/* ---- 起動オーバーレイ ---- */
+.ov{position:fixed;top:0;right:0;bottom:0;left:0;z-index:60;background:var(--paper);
+    display:flex;align-items:center;justify-content:center;padding:28px 22px;overflow-y:auto}
+.ovin{max-width:32em}
+.ovin h2{font-size:17px;font-weight:700;letter-spacing:.08em;margin:0 0 16px}
+.ovin p{font-size:14px;color:var(--ink2);margin:0 0 11px;line-height:1.9}
+.ovin p.s{color:var(--ink);font-weight:700}
+.micro{margin:0 0 12px;font-size:13px;color:var(--ink2);border-left:2px solid var(--line);padding-left:11px;line-height:1.8}
+
+/* ---- 下タブ ---- */
+.tabs{position:fixed;left:0;right:0;bottom:0;
+  height:calc(var(--tabh) + env(safe-area-inset-bottom));
+  padding-bottom:env(safe-area-inset-bottom);
+  background:var(--surface);border-top:1px solid var(--line);display:flex;z-index:30}
+.tabs button{flex:1 1 0;background:none;border:0;font-size:10.5px;color:var(--ink3);padding:8px 0 6px;line-height:1.3}
+.tabs button b{display:block;font-size:16px;font-weight:400;margin-bottom:2px}
+.tabs button.on{color:var(--chrome);font-weight:700}
+.tabs button.lk2{opacity:.45}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);
+  bottom:calc(var(--tabh) + 20px + env(safe-area-inset-bottom));z-index:70;
+  background:var(--chrome);color:#fff;font-size:12.5px;border-radius:99px;padding:9px 18px;
+  box-shadow:0 4px 16px rgba(15,22,32,.28)}
+
+
+</style>
+</head>
+<body>
+
+<div class="ov" id="ov" hidden><div class="ovin" id="ovin"></div></div>
+
+<header class="top">
+  <button class="back" id="back" hidden>‹</button>
+  <span class="ttl" id="ttl">PCM</span>
+  <span class="who" id="who"></span>
+</header>
+
+<div class="page" id="page-self"></div>
+<div class="page" id="page-list" hidden></div>
+<div class="page" id="page-person" hidden></div>
+<div class="page" id="page-org" hidden></div>
+<div class="page" id="page-project" hidden></div>
+<div class="page" id="page-recs" hidden></div>
+
+<input type="file" id="impFile" accept="application/json,.json" hidden>
+<p class="toast" id="toast" hidden></p>
+
+<nav class="tabs" id="tabs"></nav>
+
+
+
+<script id="appdata" type="application/json">{"me":{"key":"30","name":"有野哲章","team":"コアメンバー","title":"理事長","profile":{"base":"レベル","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":2,"ハーモナイザー":3,"イマジナー":5,"レベル":1,"プロモーター":6},"score":{"シンカー":78,"パシスター":100,"ハーモナイザー":80,"イマジナー":70,"レベル":100,"プロモーター":58},"bcpc":"BC 88　PC 88"}},"chart":[{"name":"コアメンバー","tiers":[[{"key":"30","name":"有野哲章","role":"理事長","ord":0,"alsoIn":null,"b":true}],[{"key":"20","name":"曲山美穂","role":"マネージャー","ord":0,"alsoIn":null,"b":false},{"key":"23","name":"渡邉充恵","role":"マネージャー","ord":1,"alsoIn":null,"b":false},{"key":"25","name":"岡田文子","role":"マネージャー","ord":2,"alsoIn":null,"b":false},{"key":"26","name":"坂本祐子","role":"マネージャー","ord":3,"alsoIn":null,"b":false},{"key":"28","name":"水地一城","role":"マネージャー","ord":4,"alsoIn":null,"b":false}]],"members":[]},{"name":"ケール","tiers":[[{"key":"26","name":"坂本祐子","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"12","name":"藤原圭佑","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"15","name":"岩下みゆき","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"16","name":"大西理恵","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"32","name":"堀口真悟","role":"スタッフ","ord":3,"alsoIn":null,"b":false},{"key":"33","name":"本間文","role":"スタッフ","ord":4,"alsoIn":null,"b":false}]},{"name":"サヴァ","tiers":[[{"key":"25","name":"岡田文子","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"11","name":"河西晴美","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"24","name":"本間佳代子","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"27","name":"小岱誠史","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"34","name":"廣田恵子","role":"スタッフ","ord":3,"alsoIn":null,"b":false}]},{"name":"ボヤージュ","tiers":[[{"key":"23","name":"渡邉充恵","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"2","name":"高坂希衣","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"3","name":"西本宏太朗","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"4","name":"井上真紀子","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"6","name":"中沢恵","role":"スタッフ","ord":3,"alsoIn":null,"b":false},{"key":"7","name":"丸川智子","role":"スタッフ","ord":4,"alsoIn":null,"b":false},{"key":"19","name":"望月百合子","role":"スタッフ","ord":5,"alsoIn":null,"b":false},{"key":"41","name":"小野雄太","role":"スタッフ","ord":6,"alsoIn":null,"b":false},{"key":"42","name":"矢崎俊道","role":"スタッフ","ord":7,"alsoIn":null,"b":false},{"key":"43","name":"望月麻里子","role":"スタッフ","ord":8,"alsoIn":null,"b":false}]},{"name":"カマラド","tiers":[[{"key":"23","name":"渡邉充恵","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"9","name":"山田正仁","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"10","name":"新津雄己","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"22","name":"石川麻美","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"31","name":"鹿山雄志","role":"スタッフ","ord":3,"alsoIn":null,"b":false}]},{"name":"ボヌール","tiers":[[{"key":"28","name":"水地一城","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"1","name":"中野妃花","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"5","name":"山本真","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"8","name":"吉松とも子","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"14","name":"中島実咲","role":"スタッフ","ord":3,"alsoIn":null,"b":false},{"key":"18","name":"今井淳","role":"スタッフ","ord":4,"alsoIn":null,"b":false},{"key":"21","name":"大木和美","role":"スタッフ","ord":5,"alsoIn":null,"b":false},{"key":"35","name":"半田","role":"スタッフ","ord":6,"alsoIn":null,"b":false},{"key":"36","name":"戸倉勘汰","role":"スタッフ","ord":7,"alsoIn":null,"b":false},{"key":"37","name":"望月司","role":"スタッフ","ord":8,"alsoIn":null,"b":false},{"key":"38","name":"向井大","role":"スタッフ","ord":9,"alsoIn":null,"b":false},{"key":"39","name":"石川浩一","role":"スタッフ","ord":10,"alsoIn":null,"b":false},{"key":"40","name":"早川友祐","role":"スタッフ","ord":11,"alsoIn":null,"b":false}]},{"name":"ラヴィ","tiers":[[{"key":"20","name":"曲山美穂","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"13","name":"井上美香","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"17","name":"近藤咲子","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"29","name":"有野静香","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"44","name":"山下久美子","role":"スタッフ","ord":3,"alsoIn":null,"b":false}]},{"name":"既存ＧＨ","tiers":[[{"key":"28","name":"水地一城","role":"マネージャー","ord":0,"alsoIn":null,"b":false}]],"members":[{"key":"45","name":"小田切久美","role":"スタッフ","ord":0,"alsoIn":null,"b":false},{"key":"46","name":"清水美和","role":"スタッフ","ord":1,"alsoIn":null,"b":false},{"key":"47","name":"青木政明","role":"スタッフ","ord":2,"alsoIn":null,"b":false},{"key":"48","name":"佐野絵里","role":"スタッフ","ord":3,"alsoIn":null,"b":false},{"key":"49","name":"内田","role":"スタッフ","ord":4,"alsoIn":null,"b":false},{"key":"50","name":"小松秀子","role":"スタッフ","ord":5,"alsoIn":null,"b":false},{"key":"51","name":"川口利一","role":"スタッフ","ord":6,"alsoIn":null,"b":false},{"key":"52","name":"松広雪江","role":"スタッフ","ord":7,"alsoIn":null,"b":false},{"key":"53","name":"河野妃磨子","role":"スタッフ","ord":8,"alsoIn":null,"b":false}]}],"profiles":{"1":{"base":"イマジナー","phase":"イマジナー","rank":{"シンカー":4,"パシスター":5,"ハーモナイザー":3,"イマジナー":1,"レベル":2,"プロモーター":6},"score":{"シンカー":26,"パシスター":15,"ハーモナイザー":61,"イマジナー":100,"レベル":65,"プロモーター":5},"bcpc":"BC 87　PC 78"},"2":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":5,"パシスター":2,"ハーモナイザー":1,"イマジナー":6,"レベル":4,"プロモーター":3},"score":{"シンカー":14,"パシスター":30,"ハーモナイザー":100,"イマジナー":11,"レベル":26,"プロモーター":28},"bcpc":"BC 88　PC 99"},"3":{"base":"ハーモナイザー","phase":"レベル","rank":{"シンカー":3,"パシスター":6,"ハーモナイザー":1,"イマジナー":5,"レベル":2,"プロモーター":4},"score":{"シンカー":48,"パシスター":8,"ハーモナイザー":100,"イマジナー":26,"レベル":83,"プロモーター":39},"bcpc":"BC 87　PC 73"},"4":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":5,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":6},"score":{"シンカー":24,"パシスター":22,"ハーモナイザー":100,"イマジナー":28,"レベル":71,"プロモーター":6},"bcpc":"BC 75　PC 75"},"5":{"base":"イマジナー","phase":"イマジナー","rank":{"シンカー":4,"パシスター":6,"ハーモナイザー":5,"イマジナー":1,"レベル":2,"プロモーター":3},"score":{"シンカー":37,"パシスター":5,"ハーモナイザー":34,"イマジナー":100,"レベル":66,"プロモーター":49},"bcpc":"BC 79　PC QV"},"6":{"base":"ハーモナイザー","phase":"レベル","rank":{"シンカー":4,"パシスター":5,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":6},"score":{"シンカー":23,"パシスター":17,"ハーモナイザー":100,"イマジナー":56,"レベル":82,"プロモーター":15},"bcpc":"BC 82　PC 99"},"7":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":2,"パシスター":4,"ハーモナイザー":1,"イマジナー":6,"レベル":3,"プロモーター":5},"score":{"シンカー":73,"パシスター":30,"ハーモナイザー":100,"イマジナー":16,"レベル":37,"プロモーター":24},"bcpc":"BC 84　PC 78"},"8":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":6,"パシスター":3,"ハーモナイザー":1,"イマジナー":2,"レベル":5,"プロモーター":4},"score":{"シンカー":5,"パシスター":49,"ハーモナイザー":100,"イマジナー":55,"レベル":30,"プロモーター":39},"bcpc":"BC 79　PC 99"},"9":{"base":"ハーモナイザー","phase":"イマジナー","rank":{"シンカー":6,"パシスター":5,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":4},"score":{"シンカー":7,"パシスター":26,"ハーモナイザー":100,"イマジナー":85,"レベル":100,"プロモーター":54},"bcpc":"BC 75　PC 73"},"10":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":6,"パシスター":3,"ハーモナイザー":1,"イマジナー":4,"レベル":2,"プロモーター":5},"score":{"シンカー":25,"パシスター":64,"ハーモナイザー":100,"イマジナー":60,"レベル":67,"プロモーター":59},"bcpc":"BC 79　PC 75"},"11":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":6,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":5},"score":{"シンカー":46,"パシスター":16,"ハーモナイザー":100,"イマジナー":53,"レベル":61,"プロモーター":22},"bcpc":"BC 75　PC 99"},"12":{"base":"ハーモナイザー","phase":"パシスター","rank":{"シンカー":6,"パシスター":2,"ハーモナイザー":1,"イマジナー":3,"レベル":4,"プロモーター":5},"score":{"シンカー":5,"パシスター":40,"ハーモナイザー":100,"イマジナー":28,"レベル":24,"プロモーター":17},"bcpc":"BC 97　PC 73"},"13":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":6,"パシスター":3,"ハーモナイザー":1,"イマジナー":4,"レベル":2,"プロモーター":5},"score":{"シンカー":15,"パシスター":34,"ハーモナイザー":100,"イマジナー":28,"レベル":80,"プロモーター":27},"bcpc":"BC 87　PC 78"},"14":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":5,"ハーモナイザー":1,"イマジナー":2,"レベル":3,"プロモーター":6},"score":{"シンカー":18,"パシスター":15,"ハーモナイザー":100,"イマジナー":58,"レベル":30,"プロモーター":5},"bcpc":"BC 85　PC 74"},"15":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":5,"パシスター":2,"ハーモナイザー":1,"イマジナー":4,"レベル":3,"プロモーター":6},"score":{"シンカー":18,"パシスター":50,"ハーモナイザー":100,"イマジナー":32,"レベル":42,"プロモーター":5},"bcpc":"BC 80　PC 75"},"16":{"base":"レベル","phase":"レベル","rank":{"シンカー":4,"パシスター":5,"ハーモナイザー":2,"イマジナー":6,"レベル":1,"プロモーター":3},"score":{"シンカー":26,"パシスター":25,"ハーモナイザー":74,"イマジナー":9,"レベル":100,"プロモーター":42},"bcpc":"BC 75　PC 73"},"17":{"base":"レベル","phase":"ハーモナイザー","rank":{"シンカー":5,"パシスター":4,"ハーモナイザー":2,"イマジナー":3,"レベル":1,"プロモーター":6},"score":{"シンカー":30,"パシスター":46,"ハーモナイザー":87,"イマジナー":83,"レベル":100,"プロモーター":22},"bcpc":"BC 75　PC 75"},"18":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":5,"パシスター":4,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":6},"score":{"シンカー":39,"パシスター":49,"ハーモナイザー":100,"イマジナー":62,"レベル":63,"プロモーター":32},"bcpc":"BC 80　PC 99"},"19":{"base":"イマジナー","phase":"イマジナー","rank":{"シンカー":2,"パシスター":6,"ハーモナイザー":3,"イマジナー":1,"レベル":5,"プロモーター":4},"score":{"シンカー":57,"パシスター":5,"ハーモナイザー":39,"イマジナー":100,"レベル":22,"プロモーター":24},"bcpc":"BC 79　PC 75"},"20":{"base":"ハーモナイザー","phase":"イマジナー","rank":{"シンカー":5,"パシスター":6,"ハーモナイザー":1,"イマジナー":2,"レベル":3,"プロモーター":4},"score":{"シンカー":25,"パシスター":15,"ハーモナイザー":100,"イマジナー":87,"レベル":42,"プロモーター":38},"bcpc":"BC 83　PC 77"},"21":{"base":"ハーモナイザー","phase":"レベル","rank":{"シンカー":5,"パシスター":3,"ハーモナイザー":1,"イマジナー":6,"レベル":2,"プロモーター":4},"score":{"シンカー":30,"パシスター":33,"ハーモナイザー":100,"イマジナー":27,"レベル":62,"プロモーター":32},"bcpc":"BC 81　PC 78"},"22":{"base":"レベル","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":6,"ハーモナイザー":2,"イマジナー":3,"レベル":1,"プロモーター":5},"score":{"シンカー":47,"パシスター":35,"ハーモナイザー":82,"イマジナー":50,"レベル":100,"プロモーター":37},"bcpc":"BC 89　PC 81"},"23":{"base":"ハーモナイザー","phase":"シンカー","rank":{"シンカー":4,"パシスター":6,"ハーモナイザー":1,"イマジナー":5,"レベル":2,"プロモーター":3},"score":{"シンカー":75,"パシスター":65,"ハーモナイザー":100,"イマジナー":72,"レベル":100,"プロモーター":100},"bcpc":"BC 83　PC 73"},"24":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":6,"ハーモナイザー":1,"イマジナー":3,"レベル":2,"プロモーター":5},"score":{"シンカー":49,"パシスター":28,"ハーモナイザー":100,"イマジナー":54,"レベル":57,"プロモーター":33},"bcpc":"BC 82　PC 79"},"25":{"base":"パシスター","phase":"レベル","rank":{"シンカー":3,"パシスター":1,"ハーモナイザー":4,"イマジナー":6,"レベル":5,"プロモーター":2},"score":{"シンカー":100,"パシスター":100,"ハーモナイザー":100,"イマジナー":40,"レベル":60,"プロモーター":100},"bcpc":"BC 80　PC 79"},"26":{"base":"プロモーター","phase":"ハーモナイザー","rank":{"シンカー":2,"パシスター":5,"ハーモナイザー":3,"イマジナー":6,"レベル":4,"プロモーター":1},"score":{"シンカー":100,"パシスター":58,"ハーモナイザー":82,"イマジナー":31,"レベル":73,"プロモーター":100},"bcpc":"BC 79　PC 84"},"27":{"base":"レベル","phase":"レベル","rank":{"シンカー":3,"パシスター":6,"ハーモナイザー":2,"イマジナー":5,"レベル":1,"プロモーター":4},"score":{"シンカー":70,"パシスター":25,"ハーモナイザー":80,"イマジナー":40,"レベル":100,"プロモーター":50},"bcpc":"BC 84　PC 75"},"28":{"base":"ハーモナイザー","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":3,"ハーモナイザー":1,"イマジナー":5,"レベル":2,"プロモーター":6},"score":{"シンカー":37,"パシスター":40,"ハーモナイザー":100,"イマジナー":25,"レベル":62,"プロモーター":22},"bcpc":"BC 88　PC 99"},"29":{"base":"ハーモナイザー","phase":"イマジナー","rank":{"シンカー":2,"パシスター":6,"ハーモナイザー":1,"イマジナー":4,"レベル":5,"プロモーター":3},"score":{"シンカー":100,"パシスター":28,"ハーモナイザー":100,"イマジナー":85,"レベル":80,"プロモーター":100},"bcpc":"BC 88　PC 75"},"30":{"base":"レベル","phase":"ハーモナイザー","rank":{"シンカー":4,"パシスター":2,"ハーモナイザー":3,"イマジナー":5,"レベル":1,"プロモーター":6},"score":{"シンカー":78,"パシスター":100,"ハーモナイザー":80,"イマジナー":70,"レベル":100,"プロモーター":58},"bcpc":"BC 88　PC 88"}},"viewer":{"learning":"basic","canViewOthers":true},"built":"2026-09-08","expireDays":60,"m":{"futsu":{"シンカー":{"認知":"思考（論理）","認知+":"事実を重んじる。人や物事を見分け、分類することで外の世界を捉える。データや情報を大切にする。用いる通貨は「論理」。／よく使う言葉：「私は～と考える」「他の選択肢は」「それはどういう意味」「誰が」「何が」「いつ」「どこで」「事実は～」「～情報」「データ」「段取り」","チャンネル":"要請的（チャンネル3）","チャンネル+":"コンピューターとコンピューターの間の情報交換。明確で単刀直入で、感情の入る余地はない。事実を問う質問や情報の提供でやりとりする。","パーツ":"コンピューター","パーツ+":"要請的で事実を追求するパーツ。感情や意見、命令は含まれず、発せられるのは要請。考えを整理したり論理的な結論を導いたりするのに役立つ。トーンは一本調子、姿勢はまっすぐ、無表情。","使う管理スタイル":"デモクラティック（民主的交流）","使う管理スタイル+":"グループへの参加、グループでの決定という原則に基づく。相手との交流を積極的に進め、フィードバックを歓迎し、各自が自分の頭で考えることを助長する。","避ける管理スタイル":"オートクラティック（一方的交流）","避ける管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。グループでの交流や下からのフィードバックを歓迎せず、自分で考えてやろうとしている人の意欲をそぐ。","好む環境":"1対1","好む環境+":"内からの動機づけ・人から離れる。達成に重きを置き、オフィスにおいては独り、または誰か1人と作業・思索することで力を発揮する。","強み":"論理的、責任感があり、計画性がある","強み+":"論理的に考える能力。事実や概念を捉え、総合的に扱える。","苦手意識":"6階は、いちばん使う経験が少ない階。思考・論理の認知を使う機会が少ないため、事実やデータ、段取りや効率を先に求める人と接したり、一緒に仕事をしたりするときに難しさを感じやすい。"},"パシスター":{"認知":"意見（価値観）","認知+":"信頼を重んじる。自らの信念の体系に照らし合わせ、人や状況を評価することで外の世界を捉える。忠誠やコミットメントを大切にする。用いる通貨は「価値」。／よく使う言葉：「私の意見は～」「我々は～すべき」「私は～と信じています」「～尊重する」「～価値がある」「～賞賛する」「～約束する」「献身的に～」「～信頼する」","チャンネル":"要請的（チャンネル3）","チャンネル+":"コンピューターとコンピューターの間の情報交換。明確で単刀直入で、感情の入る余地はない。事実を問う質問や情報の提供でやりとりする。","パーツ":"コンピューター","パーツ+":"要請的で事実を追求するパーツ。感情や意見、命令は含まれない。信念や価値観を支えるのに役立つ。トーンは一本調子、姿勢はまっすぐ、無表情。","使う管理スタイル":"デモクラティック（民主的交流）","使う管理スタイル+":"グループへの参加、グループでの決定という原則に基づく。相手との交流を積極的に進め、フィードバックを歓迎し、各自が自分の頭で考えることを助長する。","避ける管理スタイル":"オートクラティック（一方的交流）","避ける管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。グループでの交流や下からのフィードバックを歓迎せず、自分で考えてやろうとしている人の意欲をそぐ。","好む環境":"1対1","好む環境+":"内からの動機づけ・人から離れる。達成に重きを置き、オフィスにおいては独り、または誰か1人と作業・思索することで力を発揮する。","強み":"献身的、鋭い観察力、誠実さ","強み+":"意見、信念、判断を述べる能力。","苦手意識":"6階は、いちばん使う経験が少ない階。意見・価値観の認知を使う機会が少ないため、信念や意義を強く述べる人、価値観の一致を求める人と接するときに難しさを感じやすい。"},"ハーモナイザー":{"認知":"心情（思いやり）","認知+":"人間関係を重んじる。周りの人々や状況について、心で感じることによって外の世界を捉える。家族や友情を大切にする。用いる通貨は「思いやり」。／よく使う言葉：「私は～と感じます」「私は～心地よい」「私は～気にかける」「～幸せ」「～悲しい」「私は～愛しています」「～親しい」","チャンネル":"包容的（チャンネル4）","チャンネル+":"カンファーターから発信され、エモーターが受信する。情報や意見の交換が目的ではなく、相手に「気にかけられている」「受け容れられている」と感じてもらうためのやりとり。","パーツ":"カンファーター","パーツ+":"暖かくて人を養育する親のような性質で、相手の感情の部分に訴えかける。目的は情報を得ることではなく、相手に「癒されている」「気にかけられている」と感じてもらうこと。トーンはソフトで優しく、姿勢はオープン。","使う管理スタイル":"ベネボラント（受容的交流）","使う管理スタイル+":"考えや仕事よりも人に関心がある人の特徴。お互いをいたわり、受け容れるような接し方をすることで、人々と結びついているという感覚を育む。","避ける管理スタイル":"オートクラティック（一方的交流）","避ける管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。過剰に合わせさせ、反抗的な態度を招くことがある。","好む環境":"グループ","好む環境+":"内からの動機づけ・人と関わる。グループでの仕事を好み、他の人と共に役割を分担し、共有や調和が生まれるようなプロジェクトに喜びを感じる。","強み":"思いやり、豊かな感受性、温かさ","強み+":"人を育み「与える」能力。調和を生みだすのが上手。","苦手意識":"6階は、いちばん使う経験が少ない階。心情・思いやりの認知を使う機会が少ないため、気持ちや関係性を大切にする人、人として受け容れられることを求める人と接するときに難しさを感じやすい。"},"イマジナー":{"認知":"内省（想像）","認知+":"指示を受けることを重んじる。起きていることについて思いを巡らせることで外の世界を捉える。プライバシーや自分だけの空間を大切にする。用いる通貨は「想像」。／よく使う言葉：「よくわかりません…」「指示を待ちます…」「控えておこう…」「無理のないペースで…」「自分だけの時間／空間を…」「平穏でいたい…」","チャンネル":"指示的（チャンネル2）受信のみ","チャンネル+":"ディレクターが働きかけ、コンピューターが受け入れる。命令や指示を相手の思考する部分に働きかけるように発する。相手を攻撃したり見下したりすることはない。","パーツ":"コンピューター","パーツ+":"要請的で事実を追求するパーツ。感情や意見、命令は含まれない。ルーティーン化された仕事をこなしたり、想像力を働かせたりするのに役立つ。","使う管理スタイル":"オートクラティック（一方的交流）","使う管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。指示・全体像・定義・トレーニングなどを必要としている人には有効。","避ける管理スタイル":"レッセフェール（自由放任的交流）","避ける管理スタイル+":"デモクラティックを更に非指令的にしたもの。独自性と創造性を引き出す一方で、一部の人が必要とする指示や全体像を提供しない。","好む環境":"独りきり","好む環境+":"外からの動機づけ・人から離れる。人を避け、目立たないところで自問自答する。仕事上では、与えられた仕事を独りで黙々とこなしていくことを好む。","強み":"豊かな想像力、内省的、物静か","強み+":"冷静に物事を振り返って内省する能力。物事や与えられた仕事をきちっとこなす。器用さが要求される仕事を得意とする。","苦手意識":"6階は、いちばん使う経験が少ない階。内省・想像の認知を使う機会が少ないため、静かに考える人、自分だけの時間と空間を必要とする人と接するときに難しさを感じやすい。"},"レベル":{"認知":"反応（ユーモア）","認知+":"楽しさを重んじる。周りの人々や状況に対して、好き嫌いで反応することで外の世界を捉える。自発性や創造性を大切にする。用いる通貨は「ユーモア」。／よく使う言葉：「えーっ！」「～好き」「～好きじゃない（嫌い）」「～したくない」、および楽しいくだけた表現","チャンネル":"活動的（チャンネル5）","チャンネル+":"エモーターとエモーターの交流。遊び心のある、ユーモアにあふれたやりとり。からかうようなことのない、無邪気で楽しい雰囲気が生まれる。","パーツ":"エモーター","パーツ+":"自由奔放で遊び心に溢れる部分。悪意やからかいは含まれない。声が高く元気があり、動きが大きく、子供のような無邪気な笑顔。人を責めない怒りや健全な悲しみもこのパーツから表される。","使う管理スタイル":"レッセフェール（自由放任的交流）","使う管理スタイル+":"デモクラティックを更に非指令的にしたもの。他の人が自分のできる範囲で責任を持つように促す。独自性と創造性を引き出す。","避ける管理スタイル":"オートクラティック（一方的交流）","避ける管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。過剰に合わせさせ、反抗的な態度を招くことがある。","好む環境":"グループからグループへ","好む環境+":"外からの動機づけ・人と関わる。いくつかのグループやチームに参加することを楽しみ、特に創造力を試される課題を与えられると最も力を発揮する。","強み":"自由奔放、クリエイティブ、遊び心に溢れる","強み+":"遊び心を持って今を楽しむ能力。","苦手意識":"6階は、いちばん使う経験が少ない階。反応・ユーモアの認知を使う機会が少ないため、好き嫌いで率直に反応する人、楽しい接触を求める人と接するときに難しさを感じやすい。"},"プロモーター":{"認知":"行動（魅力）","認知+":"イニシアティブを重んじる。実際に体験すること、自ら事を起こすことによって外の世界を捉える。順応性や「自分のことは自分でする」ことを大切にする。用いる通貨は「（人を惹きつける）魅力」。／よく使う言葉：「要は～」「～決めた」「～しないと始まらない」「～やるだけ」「結論から言って」","チャンネル":"指示的（チャンネル2）","チャンネル+":"ディレクターが働きかけ、コンピューターが受け入れる。命令や指示を相手の思考する部分に働きかけるように発する。相手を攻撃したり見下したりすることはない。","パーツ":"ディレクター","パーツ+":"誰かの思考する部分に訴えるように命令や指示をするパーツ。怒り、脅し、攻撃は含まれない。トーンは断固としていて批判的でなく、背筋をまっすぐ伸ばした姿勢、無表情。","使う管理スタイル":"オートクラティック（一方的交流）","使う管理スタイル+":"命令や指示をし、ストレートな返答を求める仕事指向のスタイル。指示・全体像・定義・トレーニングなどを必要としている人には有効。","避ける管理スタイル":"デモクラティック（民主的交流）","避ける管理スタイル+":"グループへの参加、グループでの決定という原則に基づく。作業の全体像を必要とする人や、自分の果たすべき役割の理解が足りない人には、求めるものを充分に提供しない。","好む環境":"グループからグループへ","好む環境+":"外からの動機づけ・人と関わる。いくつかのグループやチームに参加することを楽しみ、特に創造力を試される課題を与えられると最も力を発揮する。","強み":"環境適応力、（人に行動を起こさせる）説得力、人を惹きつける魅力","強み+":"決断が早く、ストレートに物事を進める能力。","苦手意識":"6階は、いちばん使う経験が少ない階。行動・魅力の認知を使う機会が少ないため、結論と行動を急ぐ人、刺激やチャレンジを求める人と接するときに難しさを感じやすい。"}},"ktItems":["認知","強み"],"basicOnly":["チャンネル","パーツ","使う管理スタイル","避ける管理スタイル","好む環境"],"team":{"シンカー":{"比較的多い":"事実・根拠・現実性・効率などを確認する視点が出やすい。","確認する視点":"根拠は？／現実的？／もっと効果的にできる？"},"パシスター":{"比較的多い":"重要性・意義・価値・『どうあるべきか』を考える視点が出やすい。","確認する視点":"何が重要？／この取り組みの意義は？／何を大切にする？"},"ハーモナイザー":{"比較的多い":"人への影響・気持ち・関係性・負担への視点が出やすい。","確認する視点":"誰にどんな影響がある？／みんなの負担や気持ちは？"},"イマジナー":{"比較的多い":"一度考える、頭の中で整理する、静かに検討する視点が出やすい。","確認する視点":"一度立ち止まって考える時間は取れている？／考える余白はある？"},"レベル":{"比較的多い":"反応・面白さ・自由なアイデア・場の活性化につながる視点が出やすい。","確認する視点":"面白くできない？／別のアイデアは？／楽しく取り組める？"},"プロモーター":{"比較的多い":"行動・結果・スピード・次の一手へ意識が向きやすい。","確認する視点":"結局どうする？／次の一手は？／まず何をやる？"}},"micro":["自分の「当たり前」が、相手の「当たり前」とは限らない。","受け取り方は、一つではない。","違いは、間違いではない。単に、違うだけ。","同じ言葉でも、受け取り方は人それぞれ。","違いはあっても、誰もが6つのタイプを持っている。","相手が見ている世界はどんな世界？","タイプがわかっても、その人自身のことがわかったわけではない。","タイプを知ったところから、その人を知ることが始まる。","コンドミニアムは答えではなく、その人を知るための一つの仮説であり、手掛かり。さあ、ここからがスタート。","コンドミニアムを見たら、次はその人そのものを観察しよう。","タイプが同じでも、人は同じじゃない。","仮説を持ったら、目の前の相手をよく観察する。","コンドミニアムの横幅の長さは、能力の高さではなく、自分の中のバランス。","「きっと～に違いない」と決めつける前に、相手に尋ねてみよう。","相手がどう受け取ったか、尋ねてみよう。","コミュニケーションの正解があるとしたら、その相手との間にしかない。だから、相手に聞かないと、本当のところはわからないまま。","自分の受け取り方を、変えてみる。","相手は同じでも、自分の受け取り方は変えられる。","コミュニケーションとは、相手が伝えたいことを理解すること。","「何を」伝えるかよりも、「どのように」伝えるか。","コミュニケーションには、伝える技術と受け取る技術がある。","伝えたことと、伝わったことは同じとは限らない。","自分に伝わる言い方が、相手にも伝わるとは限らない。","PCMはスキルだけど、中身が伴わなければ伝わらない。","相手は変えられなくても、自分の関わり方は変えられる。","相手に合わせることは、自分を曲げることではない。","ときには、距離を置くことも大切な関わり方。","相手に合わせて伝え方を変えるのは、コミュニケーションの近道。","自分の機嫌は、自分でとる。","心には、晴れの日もあれば雨の日もある。","自分を満たすことも、コミュニケーションの一部。","誰もが、心のエネルギーを必要としている。","心が満たされなければ、誰にでも「いつもと違う」は起こる。","心理的欲求は、心のごはん。心にも、毎日の栄養補給を。","自分という車がちゃんと動くかは、心理的欲求というガソリンが鍵。","今日、いちばん話しにくいと感じている相手は誰だろう？","あの言い方、相手にはどう届いただろう？","「わかってくれない」と感じたとき、自分は何を伝えていただろう？","いま自分は、どの階から話しているだろう？","相手が黙っているとき、何が起きているんだろう？","最近、自分の心理的欲求は満たせているだろうか？"],"intro":{"lines":[{"strong":true,"text":"人は、同じものを見ても、同じようには受け取りません。"},{"strong":false,"text":"自分の「当たり前」が、相手の「当たり前」とは限らない。"},{"strong":false,"text":"受け取り方は、一つじゃない。"},{"strong":true,"text":"それでいいんです。"},{"strong":false,"text":"PCMは、人をタイプで決めつけるためのものではありません。"},{"strong":false,"text":"違いを知ることで、関わり方の選択肢を増やすためのものです。"},{"strong":false,"text":"ときには、相手より先に、自分自身の状態に目を向ける。"},{"strong":true,"text":"答えは、ここにはありません。"},{"strong":true,"text":"答えは、目の前の相手の中にあります。"},{"strong":true,"text":"PCMを、「知っている」から「使える」へ。"}],"button":"はじめる"},"needs":{"シンカー":{"needs":["仕事の承認（能力・手法・成果）","時間の枠組み"],"work":["仕事の優先順位と予定を整理する","終えた仕事や達成したことを確認する","自分が良い仕事をしたとき、自分を認める"],"life":["休日や自分の時間にも予定をつくる","家族や友人と過ごす時間を予定に入れる","達成感を得られるスポーツや運動をする"]},"パシスター":{"needs":["仕事の承認（取り組む姿勢）","信念・確信"],"work":["自分が納得のいく仕事ができたとき、自分を認める","意見交換を行い、建設的なフィードバックをもらう","自分がブレていないか、ミッションステートメントを再確認する"],"life":["納得のいくスローガンや信条を作成して掲示する","同じ価値観や信念を持つ人と交流する","自分が重要だと思う活動や社会貢献に参加する"]},"ハーモナイザー":{"needs":["一人の人として無条件に受け容れられること","感覚的な心地よさ"],"work":["気持ちを大切にしてくれる人と一緒に仕事をする","自分のことを気にかけてもらえる人との時間をつくる","職場を心地よく感じられる環境にする"],"life":["大切な人と一緒に過ごす時間をつくる","思い出の写真や愛情を感じられるものを飾る","いい香りのするアロマやお香を焚いてリラックスする"]},"イマジナー":{"needs":["自分だけの（独りの）時間・空間"],"work":["邪魔されず、一人で集中できる時間をつくる","静かに考えたり、アイデアを練ったりする時間を確保する","一人で仕事ができる場所や環境を確保する"],"life":["朝や夕方に独りで散歩をする","独りで出来る趣味をはじめる","自分のためだけの休暇をとる"]},"レベル":{"needs":["楽しい接触"],"work":["気の合う人と楽しく話せる時間をつくる","仕事の合間に身体を動かしたり、気分転換をする","自分の周りに好きな物や楽しい刺激を取り入れる"],"life":["友人や仲間と楽しい時間を過ごす","音楽・ゲーム・遊びなど、好きなことを楽しむ","楽しみながら身体を動かす"]},"プロモーター":{"needs":["エキサイティングな事が起こること／起こすこと"],"work":["新しいことや、チャレンジできる仕事に取り組む","人より高い目標を設定し挑戦する","困難なミッションを遂行できる者として認められる"],"life":["新しい場所や未経験のことに挑戦する","刺激やスリルを感じられる活動を楽しむ","短期間で達成感を得られることに取り組む"]}},"tsutae":{"シンカー":{"チャンネル":"要請的","認知の核":"思考・論理","伝え方のポイント":"事実・データ・根拠・現状・整理・効率・優先順位・全体像","依頼する":"この資料の3ページ目の数値を最新データに差し替えて、金曜日までに仕上げてもらえますか？","進捗確認する":"（金曜日までに）お願いしている資料ですが、今どこまで進んでいますか？ 現状を教えてもらえますか？","意見を聞く":"この新しい業務フロー案について、どう考えますか？ 現実的かどうか、もっと効果的にするアイディアがあれば教えてもらえますか？"},"パシスター":{"チャンネル":"要請的","認知の核":"意見・価値観","伝え方のポイント":"意義・重要・価値・信念・筋・こだわり・尊重","依頼する":"この資料の3ページ目、間違いがないか確かめてもらって、最新データに差し替えてもらえますか？ 金曜日までにお願いします。","進捗確認する":"（金曜日までに）お願いしている資料ですが、今どこまで進んでいますか？ 確認すべき点や、こうした方が良いといった意見はありますか？","意見を聞く":"この新しい業務フロー案について、どう思いますか？ 重要だと思う点や、もっと話し合っておくべき点があれば、意見を聞かせてもらえますか？"},"ハーモナイザー":{"チャンネル":"包容的","認知の核":"心情・思いやり","伝え方のポイント":"気持ち・嬉しい・親しみ・つながり・気づかい・一緒に","依頼する":"○○さんにお願いできると嬉しいんだけど、この資料の3ページ目を最新データに差し替えて、金曜日までに仕上げてもらってもいいかな？","進捗確認する":"お疲れさま～。お願いしている資料、今どんな感じ？ 金曜日までだけど、大丈夫？","意見を聞く":"○○さんは、この新しい業務フロー案、どう思う？ みんなの負担にならないように、何かケアした方がいいことってある？"},"イマジナー":{"チャンネル":"指示的","認知の核":"内省・想像","伝え方のポイント":"簡潔・明確・具体的。何を／いつ／誰に／どう返すかを明確に","依頼する":"この資料の3ページ目を最新データに差し替えて、金曜日の15時までに仕上げておいてください。","進捗確認する":"金曜日までにお願いしている資料の進捗を、今日15時までに私にメールで教えてください。","意見を聞く":"この新しい業務フロー案について考えておいてください。明日の15時までに、意見を私にメールで送ってください。特になければ、その旨を知らせてください。"},"レベル":{"チャンネル":"活動的","認知の核":"反応・ユーモア","伝え方のポイント":"好き・面白い・感嘆・遊び心・チャレンジ・ワクワク","依頼する":"この資料の3ページ目、最新の数字に差し替えて、金曜日までに仕上げちゃおう！お願い！","進捗確認する":"資料どう？ いい感じに進んでる？ 金曜日までだけど、今どのへん？","意見を聞く":"この新しい業務フロー、どう？ いい感じ？ イマイチ？ 率直に聞かせて！"},"プロモーター":{"チャンネル":"指示的","認知の核":"行動・魅力","伝え方のポイント":"結論・要点・即行動。分かる情報は省き短く","依頼する":"（資料の3ページを見せて）ここ差し替えて。金曜日まで。よろしく。","進捗確認する":"資料、今どこまで？","意見を聞く":"これ、どう？ 使える？"}},"uke":{"シンカー>シンカー":{"認知":"思考 → 思考","普段は":"お互いに事実や根拠をもとに考えるので、話を整理しやすく、理屈が通ればスムーズに進みやすい組み合わせです。","でも、ズレると…":"お互いが持っている情報や立場が違うことで、優先する点や、何を合理的と考えるかが異なることがあります。\nすると、「その根拠は？」「その理屈では問題がある」と、お互いに自分の考えの方が合理的だと考え、議論がヒートアップすることがあります。"},"シンカー>パシスター":{"認知":"思考 → 意見","相手は":"意味・事実・情報・根拠・データ・理屈を中心に発信します。","あなたは":"意義・重要・価値・信念・筋で受け取りやすくなります。","こんな受け取り方も":"事実やデータの説明が続くと、「何を重要だと思っているの？」「そこにどんな意義があるの？」と捉えることがあります。","別の受け取り方は":"相手は価値や信念を軽視しているのではなく、まず事実や根拠を整理することで、意味のある判断をしようとしているのかもしれない。"},"シンカー>ハーモナイザー":{"認知":"思考 → 心情","相手は":"意味・事実・情報・根拠・データ・理屈を中心に発信します。","あなたは":"気持ち・人・温かさ・関係性で受け取りやすくなります。","こんな受け取り方も":"感情表現が少なく淡々としていると、「冷たいなぁ」「怒っているのかなぁ」「私を見ていない」と感じることがあります。","別の受け取り方は":"言葉に温かさが少ないことと、気持ちがないこととは別。相手は事実や情報を正確に伝えることに意識が向いているのかもしれない。"},"シンカー>イマジナー":{"認知":"思考 → 内省","相手は":"意味・事実・情報・根拠・データ・理屈を中心に発信します。","あなたは":"自分の中で考える・イメージ・時間・余白で受け取りやすくなります。","こんな受け取り方も":"情報や説明が多いと、「何をすればいいの？」と捉え、考えが止まってしまうことがあります。","別の受け取り方は":"相手は急かしているのではなく、判断に必要な情報をきちんと渡そうとしているのかもしれない。必要なことを整理して、一つずつ受け取ってみる。"},"シンカー>レベル":{"認知":"思考 → 反応","相手は":"意味・事実・情報・根拠・データ・理屈を中心に発信します。","あなたは":"好き・嫌い・面白い・つまらない・反応で受け取りやすくなります。","こんな受け取り方も":"説明が長く淡々としていると、「つまらないなぁ」「メンドクサイなぁ」と感じることがあります。","別の受け取り方は":"相手は堅苦しくしたいのではなく、分かるように整理して伝えようとしているのかもしれない。必要なところだけ拾ってみる。"},"シンカー>プロモーター":{"認知":"思考 → 行動","相手は":"意味・事実・情報・根拠・データ・理屈を中心に発信します。","あなたは":"で？・結局は？・どうする？・行動・結果で受け取りやすくなります。","こんな受け取り方も":"説明や根拠が続くと、「で？」「結局は？」と捉えることがあります。","別の受け取り方は":"相手は結論を先延ばしにしているのではなく、問題なく進めるために必要な情報や根拠を確認しているのかもしれない。"},"パシスター>シンカー":{"認知":"意見 → 思考","相手は":"意義・重要・価値・信念・筋を中心に発信します。","あなたは":"意味・事実・情報・根拠・データ・理屈で受け取りやすくなります。","こんな受け取り方も":"意見や信念が強く語られると、「その根拠は？」「事実としてどうなの？」と捉えることがあります。","別の受け取り方は":"相手は根拠を無視しているのではなく、何を重要と考え、どんな価値を置いているかを伝えているのかもしれない。"},"パシスター>パシスター":{"認知":"意見 → 意見","普段は":"お互いに意義や価値を重視し、自分の意見を持っているので、重要だと思うことが一致すると、強い信頼関係が生まれやすい組み合わせです。","でも、ズレると…":"何を重要と考えるか、何に価値を置くかが違うと、お互いに譲れなくなることがあります。\n「そこが重要なんじゃない」「それでは筋が通らない」と、それぞれが自分の信念に基づいて主張し、議論がヒートアップすることがあります。"},"パシスター>ハーモナイザー":{"認知":"意見 → 心情","相手は":"意義・重要・価値・信念・筋を中心に発信します。","あなたは":"気持ち・人・温かさ・関係性で受け取りやすくなります。","こんな受け取り方も":"評価や意見をはっきり言われると、「責められている」「私を否定された」と感じることがあります。","別の受け取り方は":"相手はあなた自身を否定したいのではなく、自分が重要だと思うことや、こうあるべきだという意見を伝えているのかもしれない。"},"パシスター>イマジナー":{"認知":"意見 → 内省","相手は":"意義・重要・価値・信念・筋を中心に発信します。","あなたは":"自分の中で考える・イメージ・時間・余白で受け取りやすくなります。","こんな受け取り方も":"強い意見や「こうあるべき」が続くと、圧を感じて黙り込んでしまうことがあります。","別の受け取り方は":"相手は答えを無理に押しつけたいのではなく、自分が重要だと思うことをはっきり伝えているのかもしれない。いったん自分の中で考える時間をとる。"},"パシスター>レベル":{"認知":"意見 → 反応","相手は":"意義・重要・価値・信念・筋を中心に発信します。","あなたは":"好き・嫌い・面白い・つまらない・反応で受け取りやすくなります。","こんな受け取り方も":"「こうあるべき」「これは重要」と言われると、「堅いなぁ」「メンドクサイなぁ」「好きにさせてよ」と感じることがあります。","別の受け取り方は":"相手は自由を奪いたいのではなく、自分が価値を置いていることや、重要だと思うことを伝えているのかもしれない。"},"パシスター>プロモーター":{"認知":"意見 → 行動","相手は":"意義・重要・価値・信念・筋を中心に発信します。","あなたは":"で？・結局は？・どうする？・行動・結果で受け取りやすくなります。","こんな受け取り方も":"意義や価値についての話が続くと、「で、結局どうするの？」と捉えることがあります。","別の受け取り方は":"相手は行動を遅らせたいのではなく、何のためにやるのか、何を重要とするのかを確認してから進みたいのかもしれない。"},"ハーモナイザー>シンカー":{"認知":"心情 → 思考","相手は":"気持ち・人・温かさ・関係性を中心に発信します。","あなたは":"意味・事実・情報・根拠・データ・理屈で受け取りやすくなります。","こんな受け取り方も":"気持ちや人への配慮を中心に話されると、「結局、何が言いたいの？」「事実はどうなの？」と捉えることがあります。","別の受け取り方は":"相手は論点を曖昧にしたいのではなく、人や気持ちへの影響も重要な情報として伝えているのかもしれない。"},"ハーモナイザー>パシスター":{"認知":"心情 → 意見","相手は":"気持ち・人・温かさ・関係性を中心に発信します。","あなたは":"意義・重要・価値・信念・筋で受け取りやすくなります。","こんな受け取り方も":"気持ちや関係性を大切にする話が続くと、「何を重要だと考えているの？」「意見は？」と捉えることがあります。","別の受け取り方は":"相手は信念がないのではなく、人や気持ち、関係性に価値を置いて判断しているのかもしれない。"},"ハーモナイザー>ハーモナイザー":{"認知":"心情 → 心情","普段は":"お互いに人や気持ちを大切にするので、気づかいや思いやりが自然に行き交い、温かい関係をつくりやすい組み合わせです。","でも、ズレると…":"同じように相手を思いやっていても、感じ方や、してほしいこと・してあげたいことが違うことがあります。\nすると、「あなたのことを思っているのに」「私の気持ちを分かってくれない」と、お互いに傷ついたり、感情的になったりすることがあります。"},"ハーモナイザー>イマジナー":{"認知":"心情 → 内省","相手は":"気持ち・人・温かさ・関係性を中心に発信します。","あなたは":"自分の中で考える・イメージ・時間・余白で受け取りやすくなります。","こんな受け取り方も":"気持ちを尋ねられたり、親しく関わられたりすると、考える余白がなくなり、少し距離を取りたくなることがあります。","別の受け取り方は":"相手は答えを急がせたいのではなく、あなたのことを気にかけ、気持ちを知りたいと思っているのかもしれない。"},"ハーモナイザー>レベル":{"認知":"心情 → 反応","相手は":"気持ち・人・温かさ・関係性を中心に発信します。","あなたは":"好き・嫌い・面白い・つまらない・反応で受け取りやすくなります。","こんな受け取り方も":"気持ちを丁寧に確認されたり、気づかわれたりすると、「メンドクサイなぁ」「面白くないなぁ」「うっとおしいなぁ」「好きにさせろよ」と感じることがあります。","別の受け取り方は":"相手はあなたを縛りたいのではなく、あなたを喜ばせたい、気持ちよく関わりたいと思っているのかもしれない。"},"ハーモナイザー>プロモーター":{"認知":"心情 → 行動","相手は":"気持ち・人・温かさ・関係性を中心に発信します。","あなたは":"で？・結局は？・どうする？・行動・結果で受け取りやすくなります。","こんな受け取り方も":"気持ちや人への配慮を丁寧に話されると、「で？」「結局どうするの？」と捉えることがあります。","別の受け取り方は":"相手は行動を避けたいのではなく、人への影響や気持ちを確認してから進みたいのかもしれない。"},"イマジナー>シンカー":{"認知":"内省 → 思考","相手は":"自分の中で考える・イメージ・時間・余白を中心に発信します。","あなたは":"意味・事実・情報・根拠・データ・理屈で受け取りやすくなります。","こんな受け取り方も":"言葉や反応が少ないと、「情報が足りない」「何を考えているのか分からない」と捉えることがあります。","別の受け取り方は":"相手は何も考えていないのではなく、自分の中で考えたりイメージしたりしているのかもしれない。必要な情報は具体的に尋ねてみる。"},"イマジナー>パシスター":{"認知":"内省 → 意見","相手は":"自分の中で考える・イメージ・時間・余白を中心に発信します。","あなたは":"意義・重要・価値・信念・筋で受け取りやすくなります。","こんな受け取り方も":"意見をはっきり表明しない相手に、「信念がない」と捉えることがあります。","別の受け取り方は":"意見をすぐ言葉にしないことと、何も重要視していないこととは別。相手は自分の中で考えを整理しているのかもしれない。"},"イマジナー>ハーモナイザー":{"認知":"内省 → 心情","相手は":"自分の中で考える・イメージ・時間・余白を中心に発信します。","あなたは":"気持ち・人・温かさ・関係性で受け取りやすくなります。","こんな受け取り方も":"反応や感情表現が少ないと、「不機嫌なのかなぁ」と感じることがあります。","別の受け取り方は":"反応が少ないことと、あなたへの気持ちとは別。相手は自分の中で静かに考えているだけなのかもしれない。"},"イマジナー>イマジナー":{"認知":"内省 → 内省","普段は":"お互いに静かに考えることが自然なので、無理に話さなくてもよく、それぞれのペースを尊重しやすい組み合わせです。","でも、ズレると…":"お互いに自分の中で考えるため、言葉にして確認しないまま、それぞれが違うイメージを持っていることがあります。\n後になって認識の違いに気づくことがあります。\nまた、これはイマジナー同士に限りませんが、お互いに言葉にして確かめることも大切です。"},"イマジナー>レベル":{"認知":"内省 → 反応","相手は":"自分の中で考える・イメージ・時間・余白を中心に発信します。","あなたは":"好き・嫌い・面白い・つまらない・反応で受け取りやすくなります。","こんな受け取り方も":"反応が少なく静かだと、「つまらないなぁ」「ノリ悪いなぁ」と感じ、構いたくなることがあります。","別の受け取り方は":"相手は楽しんでいないとは限らない。静かに自分の中で感じたり考えたりすることが自然なのかもしれない。"},"イマジナー>プロモーター":{"認知":"内省 → 行動","相手は":"自分の中で考える・イメージ・時間・余白を中心に発信します。","あなたは":"で？・結局は？・どうする？・行動・結果で受け取りやすくなります。","こんな受け取り方も":"返事や行動までに時間がかかると、「遅い」「結局どうするの？」と捉えることがあります。","別の受け取り方は":"相手はやる気がないのではなく、自分の中で考えたりイメージしたりする時間が必要なのかもしれない。"},"レベル>シンカー":{"認知":"反応 → 思考","相手は":"好き・嫌い・面白い・つまらない・反応を中心に発信します。","あなたは":"意味・事実・情報・根拠・データ・理屈で受け取りやすくなります。","こんな受け取り方も":"感覚的に話す相手に、「理由が分からない」「根拠がない」と捉えることがあります。","別の受け取り方は":"感覚的に話すことと、何も分かっていないこととは別。「好き」「嫌い」という反応そのものにも、その人が受け取った情報が表れているのかもしれない。"},"レベル>パシスター":{"認知":"反応 → 意見","相手は":"好き・嫌い・面白い・つまらない・反応を中心に発信します。","あなたは":"意義・重要・価値・信念・筋で受け取りやすくなります。","こんな受け取り方も":"好き嫌いやノリで話しているように見えると、「不真面目」「何を重要だと思っているの？」と捉えることがあります。","別の受け取り方は":"相手は重要なことを軽く扱っているとは限らない。まず反応し、そこから考えを広げているのかもしれない。"},"レベル>ハーモナイザー":{"認知":"反応 → 心情","相手は":"好き・嫌い・面白い・つまらない・反応を中心に発信します。","あなたは":"気持ち・人・温かさ・関係性で受け取りやすくなります。","こんな受け取り方も":"そのとき感じたことをストレートに言葉や顔に出されると、「傷つけられた」「否定された」と感じることがあります。","別の受け取り方は":"相手の反応がストレートなことと、あなたを嫌っていることとは別。その瞬間の「好き・嫌い」を素直に表しているのかもしれない。"},"レベル>イマジナー":{"認知":"反応 → 内省","相手は":"好き・嫌い・面白い・つまらない・反応を中心に発信します。","あなたは":"自分の中で考える・イメージ・時間・余白で受け取りやすくなります。","こんな受け取り方も":"テンションが高く、次々に反応されると、圧を感じて引いてしまうことがあります。","別の受け取り方は":"相手はあなたを急かしたいのではなく、その場で起きたことに自然に反応しているのかもしれない。自分のペースで考えてよい。"},"レベル>レベル":{"認知":"反応 → 反応","普段は":"お互いに反応が早く、好き嫌いや面白さを素直に表現するので、テンポよくやりとりでき、楽しい関係をつくりやすい組み合わせです。","でも、ズレると…":"同じように反応していても、何を好き・嫌いと感じるか、何を面白いと感じるかは違うことがあります。\n自分が「面白い！」と思ったことに相手が乗ってこなかったり、自分が嫌だと思ったことを相手が面白がったりすると、急につまらなくなったり、ムッとしたりすることがあります。"},"レベル>プロモーター":{"認知":"反応 → 行動","相手は":"好き・嫌い・面白い・つまらない・反応を中心に発信します。","あなたは":"で？・結局は？・どうする？・行動・結果で受け取りやすくなります。","こんな受け取り方も":"楽しそうに話したり、その場の反応で動いたりすると、「結局どうするの？」「結果につながるの？」と捉えることがあります。","別の受け取り方は":"楽しんでいることと、結果を出さないこととは別。相手にとっては、面白さや楽しさが行動するきっかけになっているのかもしれない。"},"プロモーター>シンカー":{"認知":"行動 → 思考","相手は":"で？・結局は？・どうする？・行動・結果を中心に発信します。","あなたは":"意味・事実・情報・根拠・データ・理屈で受け取りやすくなります。","こんな受け取り方も":"説明や根拠が十分に示されないまま話が進むと、「それでは問題はないの？」と捉えることがあります。","別の受け取り方は":"相手は考えていないのではなく、まず動いて結果を確かめることに意識が向いているのかもしれない。必要な根拠は具体的に確認してみる。"},"プロモーター>パシスター":{"認知":"行動 → 意見","相手は":"で？・結局は？・どうする？・行動・結果を中心に発信します。","あなたは":"意義・重要・価値・信念・筋で受け取りやすくなります。","こんな受け取り方も":"意義や価値についてあまり触れず、「とにかくやろう」「こうすればいい」と進められると、「意義は？」と捉えることがあります。","別の受け取り方は":"相手は「まずやってみる」「すぐに結果をだす」というところに価値を置いているのかもしれない。"},"プロモーター>ハーモナイザー":{"認知":"行動 → 心情","相手は":"で？・結局は？・どうする？・行動・結果を中心に発信します。","あなたは":"気持ち・人・温かさ・関係性で受け取りやすくなります。","こんな受け取り方も":"短くストレートに言われたり、すぐに行動を求められたりすると、「冷たいなぁ」「怒ってるのかなぁ」「私をみていない」と感じることがあります。","別の受け取り方は":"言葉が短いことと、私を見ているかどうかとは別。相手はあなたを悲しませたいのではなく、次の行動に意識が向いているだけなのかもしれない。"},"プロモーター>イマジナー":{"認知":"行動 → 内省","相手は":"で？・結局は？・どうする？・行動・結果を中心に発信します。","あなたは":"自分の中で考える・イメージ・時間・余白で受け取りやすくなります。","こんな受け取り方も":"テンポよく結論や行動を求められると、圧を感じて固まってしまうことがあります。","別の受け取り方は":"相手はあなたを追い詰めたいのではなく、次に何をするかを早く決めたいのかもしれない。必要なら考える時間を取る。"},"プロモーター>レベル":{"認知":"行動 → 反応","相手は":"で？・結局は？・どうする？・行動・結果を中心に発信します。","あなたは":"好き・嫌い・面白い・つまらない・反応で受け取りやすくなります。","こんな受け取り方も":"結果や行動を強く求められると、「好きにやらせてよ」「面白くないなぁ」と感じることがあります。","別の受け取り方は":"相手は楽しさを否定したいのではなく、結果や次の行動に意識が向いているのかもしれない。"},"プロモーター>プロモーター":{"認知":"行動 → 行動","普段は":"お互いに結論や結果を重視し、すぐに行動に移せるので、話が早く、テンポよく物事を進めやすい組み合わせです。","でも、ズレると…":"お互いに結果を出そうとしていても、狙っている結果や、どう動くかが違うことがあります。\nすると、お互いに「こっちでいこう」「いや、こっちだ」と主導権を握ろうとして、競い合うようになることがあります。"}},"distress":{"シンカー":{"初期表示1":"過剰な弁明・説明をする","初期表示2":"人に仕事を任せられず、自分でやってしまう","第1段階":"完全さを自分に求め過ぎる。説明し過ぎる／他人の代わりに考え過ぎる／委任できず自分で抱える。","第2段階":"過剰にコントロールする。時間・公平さ・責任などに苛立ち、相手の考え方を批判する。","第3段階":"相手を拒絶・見限る。"},"パシスター":{"初期表示1":"何が正しいかより、何が間違っているかに焦点を当てる","初期表示2":"複雑でややこしい質問をする","第1段階":"完全さを相手に求め過ぎる。間違いに焦点を当て、条件付けや複雑な質問が増える。","第2段階":"信念を押し付ける。独断的・独善的・説教がましくなり、異なる信念を批判する。","第3段階":"相手を見限る。"},"ハーモナイザー":{"初期表示1":"相手に合わせ過ぎる","初期表示2":"意思決定の際に、過度に優柔不断になる","第1段階":"人を喜ばせようとして相手に過剰適応する。優柔不断になり、自分の意見・希望を言いにくくなる。","第2段階":"ミス、自己不信、批判を招く言動、自分を卑下する言動が増える。","第3段階":"拒絶感を抱き、『誰からも求められていない』感覚へ進む。"},"イマジナー":{"初期表示1":"自分を外に表さな過ぎる","初期表示2":"自ら行動を起こすことを避ける","第1段階":"強くあろうとして、自分を外に表さず、自発的な行動を避ける。","第2段階":"消極的に待つ／引きこもる／始めたことを終えにくくなる。","第3段階":"独り取り残された感覚が強まり、何をすればよいか分からなくなる。"},"レベル":{"初期表示1":"理解しようと一生懸命になるが『できない』となる","初期表示2":"何も指示せず、丸投げして相手にやらせる","第1段階":"頑張り過ぎ、理解しようとして『できない』となる。不適切に人へ丸投げする。","第2段階":"責任転嫁・不平不満・ネガティブな批判が増え、『うん、そうだけどさぁ...』が出る。","第3段階":"非難・拒絶を招き、仕返し的な反応へ進む。"},"プロモーター":{"初期表示1":"他者のサポートをしない","初期表示2":"切り離す","第1段階":"相手に強さを求め、十分なサポートをせず『自分のことは自分で』を当然視する。","第2段階":"操作する。規則を破る・無視する、状況を自分に都合よく歪曲する、ネガティブなドラマや対立を作る。","第3段階":"相手を見捨てる。"}},"guard":"この情報は、相手の状態を決めつけるためのものではありません。普段との違いに気づき、関わり方を考えるためのヒントとして活用してください。","project":{"title":"プロジェクトで意識したいこと","items":["検討・議論が深まりやすい構成では、実行に移るタイミングや次のアクションも確認する。","人への影響や納得感を重視しやすい構成では、意見が割れた際に論点・判断基準を明確にする。","行動やスピードが出やすい構成では、決定事項・役割・期限・根拠の確認を意識する。","静かに考えるメンバーがいる場合は、その場で即答だけを求めず、事前共有や考える時間も設計する。","どの構成でも、6タイプの視点を一度確認できる導線を置く。"]},"meeting":{"title":"会議で意識したいこと","before":["議題・目的を明確にする","必要に応じて資料を事前共有する","考える時間が必要な人には先に議題を知らせる"],"during":["事実・根拠／重要性・意義／人への影響／考える余白／面白さ・別案／行動・結論、の6視点を必要に応じて確認する"],"after":["結論、誰が、何を、いつまでに、を確認する"],"note":"会議コメントは『このタイプにはこう話せ』という個人向け伝え方ではなく、チーム全体として多様な認知を活かすための会議設計のヒントです。"}}}</script>
+<script>
+(function(){
+'use strict';
+
+var D = JSON.parse(document.getElementById('appdata').textContent);
+var M = D.m || {};
+var V = D.viewer || { learning:'basic', canViewOthers:true };
+var TYPES = ['シンカー','パシスター','ハーモナイザー','イマジナー','レベル','プロモーター'];
+var COLOR = { 'シンカー':'#32A2FF','パシスター':'#7F379D','ハーモナイザー':'#FC7403',
+              'イマジナー':'#E3A88D','レベル':'#FAE200','プロモーター':'#E11933' };
+
+var VIEW = 'self', CUR = null, SUBTAB = 'normal', TALK = 'send', SELFSEG = 'work', LEFT = null;
+var PEOPLE = {}, RECS = [], STORE_OK = true, DUMP = false, RECDEL = null;
+var PJ = { mode:'list', id:null, name:'', keys:{}, del:false };
+
+function $(s){ return document.querySelector(s); }
+function esc(t){ return String(t).replace(/[&<>"]/g, function(c){
+  return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function prof(k){ return D.profiles[k] || null; }
+function isBasic(){ return V.learning === 'basic'; }
+function canView(){ return !!V.canViewOthers; }
+
+var TT = null;
+function toast(msg){
+  var el = $('#toast'); el.textContent = msg; el.hidden = false;
+  clearTimeout(TT); TT = setTimeout(function(){ el.hidden = true; }, 2200);
+}
+
+/* ============ 権限（§13-7） ============ */
+var LOCK_DESC = {
+  talk:'相手の認知に合わせた伝え方と、受け取り方のズレを扱います。',
+  fuel:'心理的欲求は本人が自分で満たすものです。ここでは、その手がかりを扱います。',
+  off :'普段との違いに気づくための情報です。人を判断するためのものではありません。'
+};
+function lockCond(need){
+  var wantB = !isBasic(), wantM = (need === 'mg') && !canView();
+  if (wantB && wantM) return 'この機能はBasic受講と、マネジメント権限の設定が必要です。';
+  if (wantB) return 'この機能はBasic受講後に使えます。';
+  if (wantM) return 'この機能はマネジメント権限の設定が必要です。';
+  return null;
+}
+var SUBTABS = [
+  { id:'normal', name:'普段',        need:'kt' },
+  { id:'talk',   name:'やりとり',     need:'basic' },
+  { id:'fuel',   name:'動機付け',     need:'mg' },
+  { id:'off',    name:'ディストレス？', need:'mg' }
+];
+function subLocked(t){
+  if (t.need === 'kt') return null;
+  if (t.need === 'basic') return isBasic() ? null : lockCond('basic');
+  return lockCond('mg');
+}
+function lockCard(cond, desc){
+  return '<div class="lk"><span class="ic" role="img" aria-label="ロック"></span>' +
+    '<p class="c">' + cond + '</p><p class="d">' + desc + '</p></div>';
+}
+
+/* ============ コンドミニアム ============ */
+/* ベースを必ず1階に置き、他は rank の大きい順に上へ積む */
+function floors(p){
+  return TYPES.slice().sort(function(a,b){
+    if (a === p.base) return 1;
+    if (b === p.base) return -1;
+    return (p.rank[b] - p.rank[a]) || (p.score[a] - p.score[b]);
+  });
+}
+function floorNo(p, ty){ var o = floors(p); return o.length - o.indexOf(ty); }
+
+function condoHtml(p, name, showB){
+  var o = floors(p), h = '';
+  o.forEach(function(ty, i){
+    h += '<div class="fr' + (ty === p.base ? ' g' : '') + '">' +
+      '<span class="tn">' + esc(ty) + '</span>' +
+      '<span class="tk"><span class="bb" style="width:' + p.score[ty] + '%;background:' + COLOR[ty] + '"></span></span>' +
+    '</div>';
+  });
+  return '<div class="pc" style="border-color:' + COLOR[p.base] + '">' +
+    '<div class="pc-in' + (p.bcpc ? ' hasbc' : '') + '" style="border-color:' + COLOR[p.phase] + '">' +
+      (p.bcpc ? '<span class="pc-bc">' + esc(p.bcpc) + '</span>' : '') +
+      (name ? '<h3 class="pc-nm">' + esc(name) +
+        (showB ? '<span class="bB">B</span>' : '') + '</h3>' : '') + h +
+    '</div></div>';
+}
+function exHtml(list){
+  return '<ul class="exl">' + (list || []).map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+}
+
+/* ============ 集計（§18-2 / A-1・A-2） ============ */
+function tally(list){
+  var seen = {}, total = 0, trained = 0, count = {};
+  TYPES.forEach(function(t){ count[t] = 0; });
+  list.forEach(function(p){
+    if (seen[p.key]) return;
+    seen[p.key] = 1; total++;
+    var pr = prof(p.key);
+    if (pr){ trained++; count[pr.base]++; }
+  });
+  return { total:total, trained:trained, count:count };
+}
+function tallyPhase(list){
+  var seen = {}, trained = 0, count = {};
+  TYPES.forEach(function(t){ count[t] = 0; });
+  list.forEach(function(p){
+    if (seen[p.key]) return;
+    seen[p.key] = 1;
+    var pr = prof(p.key);
+    if (pr){ trained++; count[pr.phase]++; }
+  });
+  return { trained:trained, count:count };
+}
+function stage(n){ return n < 2 ? 'none' : (n < 4 ? 'ratio' : 'full'); }
+
+function barHtml(t){
+  if (!t.trained) return '';
+  var h = '<div class="cbar" role="img" aria-label="ベース構成">';
+  TYPES.forEach(function(ty){
+    if (!t.count[ty]) return;
+    h += '<i style="width:' + (t.count[ty] / t.trained * 100) + '%;background:' + COLOR[ty] + '"></i>';
+  });
+  return h + '</div>';
+}
+function legHtml(t){
+  if (!t.trained) return '';
+  var h = '<div class="cleg">';
+  TYPES.forEach(function(ty){
+    if (!t.count[ty]) return;
+    h += '<span><b style="background:' + COLOR[ty] + '">.</b>' + ty + ' ' +
+         t.count[ty] + '名・' + Math.round(t.count[ty] / t.trained * 100) + '%</span>';
+  });
+  return h + '</div>';
+}
+function commentHtml(t){
+  var st = stage(t.trained);
+  if (st === 'none') return '<p class="tiny">PCMを取得しているのが' + t.trained + '名のため、構成の傾向は表示しません。</p>';
+  if (st === 'ratio') return '<p class="tiny">PCMを取得しているのが' + t.trained + '名のため、構成比のみを表示しています。多い・少ないの判定は行いません。</p>';
+  var many = [], pick = [];
+  TYPES.forEach(function(ty){
+    var r = t.count[ty] / t.trained * 100;
+    if (r >= 30) many.push(ty);
+    else if (r < 10) pick.push(ty);
+  });
+  var h = '';
+  if (many.length){
+    h += '<p class="note-ok" style="margin-bottom:9px"><b>比較的多く見られる視点</b><br>' +
+      many.map(function(ty){ return esc(ty) + '：' + esc((M.team[ty]||{})['比較的多い'] || ''); }).join('<br>') + '</p>';
+  }
+  if (pick.length){
+    h += '<p class="note-wa"><b>意識して取り入れたい視点</b><br>' +
+      pick.map(function(ty){ return esc((M.team[ty]||{})['確認する視点'] || ''); }).join('<br>') + '</p>';
+  }
+  return h || '<p class="tiny">構成に大きな偏りは見られません。</p>';
+}
+
+/* ============ 自分 ============ */
+/* ベース由来の項目＋心理的欲求・ディストレスを1つのリストにする。
+   「自分」画面とメンバーの「普段」で共通に使う。 */
+function traitRows(pr, forSelf){
+  var f = M.futsu[pr.base] || {};
+  var kt = M.ktItems || ['認知','強み'];
+  var order = [kt[0]];
+  if (isBasic()) order = order.concat(M.basicOnly || []);
+  order = order.concat(kt.slice(1));
+
+  var h = '';
+  order.forEach(function(k){
+    h += exRow(k, f[k], f[k + '+'] ? esc(f[k + '+']) : '');
+  });
+
+  /* 6階が20以下なら「苦手意識があること」 */
+  var top6 = floors(pr)[0];
+  if (pr.score[top6] <= 20){
+    var f6 = M.futsu[top6] || {};
+    h += exRow('苦手意識があること', top6, f6['苦手意識'] ? esc(f6['苦手意識']) : '');
+  }
+
+  /* 心理的欲求（フェーズが主、ベースが違えば詳細に併記） */
+  var main = pr.phase, sub = (pr.base !== pr.phase) ? pr.base : null;
+  var nm = M.needs[main] || { needs:[] };
+  var nd;
+  if (sub){
+    var s2 = M.needs[sub] || { needs:[] };
+    nd = 'ベース（' + esc(sub) + '）の心理的欲求：' + esc(s2.needs.join('・')) +
+      '<br>いま効いているのはフェーズ側です。心理的欲求は、本人が自分で満たすものです。';
+  } else {
+    nd = 'ベースとフェーズが同じため、心理的欲求は1組です。心理的欲求は、本人が自分で満たすものです。';
+  }
+  h += exRow('心理的欲求', nm.needs.join('・'), nd);
+
+  /* ディストレス（フェーズ。開くと一連の流れ） */
+  var d = (M.distress || {})[main];
+  if (d){
+    var dd = '';
+    ['第1段階','第2段階','第3段階'].forEach(function(k){
+      if (d[k]) dd += '<b style="display:block;font-size:11px;color:var(--ink3);font-weight:400;' +
+        'letter-spacing:.06em;margin-top:8px">' + k + '</b>' + esc(d[k]);
+    });
+    /* 他者を見るときだけ、決めつけを戒める文言を添える */
+    if (!forSelf && M.guard) dd += '<span style="display:block;margin-top:10px;color:var(--ink3);' +
+      'font-size:12px">' + esc(M.guard) + '</span>';
+    h += exRow('ディストレス', (d['初期表示1'] || '') + '／' + (d['初期表示2'] || ''), dd);
+  }
+  return h;
+}
+
+/* 開閉できる1行 */
+function exRow(k, v, d){
+  if (!v && !d) return '';
+  return '<details class="ex' + (d ? '' : ' flat') + '">' +
+    '<summary><span class="k">' + esc(k) + '</span>' +
+    '<span class="v">' + esc(v || '') + '</span>' +
+    (d ? '<span class="m"></span>' : '') + '</summary>' +
+    (d ? '<div class="exb">' + d + '</div>' : '') + '</details>';
+}
+
+function renderSelf(){
+  var pr = D.me.profile, main = pr.phase, sub = (pr.base !== pr.phase) ? pr.base : null;
+  var nm = M.needs[main] || { needs:[], work:[], life:[] };
+  var f = M.futsu[pr.base] || {};
+  var h = condoHtml(pr, D.me.name, isBasic());
+
+  h += '<div class="card"><div class="card-h">自分の手がかり</div><div class="card-b">' +
+       '<p class="tiny" style="margin-bottom:10px">項目を押すと、詳しい説明が開きます。</p>' +
+       traitRows(pr, true) +
+       '<p class="tiny" style="margin-top:12px">ベースを手がかりにした特徴と、いまのフェーズの状態です。</p>' +
+       '</div></div>';
+
+  h += '<div class="card"><div class="card-h">自己接待</div><div class="card-b">' +
+    '<div class="seg">' +
+      '<button data-seg="work" class="' + (SELFSEG === 'work' ? 'on' : '') + '">仕事で満たす</button>' +
+      '<button data-seg="life" class="' + (SELFSEG === 'life' ? 'on' : '') + '">私生活で満たす</button>' +
+    '</div>' + exHtml(SELFSEG === 'work' ? nm.work : nm.life);
+  if (sub){
+    var s3 = M.needs[sub] || { work:[], life:[] };
+    h += '<p class="lab" style="margin-top:12px">ベース：' + esc(sub) + '</p>' +
+         exHtml(SELFSEG === 'work' ? s3.work : s3.life);
+  }
+  h += '</div></div>';
+
+  if (EXP && EXP.left !== null && EXP.left <= 14){
+    h = '<div class="card"><div class="card-b"><p class="note-wa">' +
+      'このファイルは、あと' + EXP.left + '日で使えなくなります（' + ymd(EXP.end) + '）。' +
+      '新しい版を受け取ってください。記録は「記録」タブから保存して引き継げます。' +
+      '</p></div></div>' + h;
+  }
+  h += '<div class="card"><div class="card-h">自分について書く</div><div class="card-b">' +
+    '<textarea class="memo" placeholder="やってみたこと、気づいたこと"></textarea>' +
+    '<p class="tiny" style="margin-top:8px">キーボードのマイクボタンから、音声でも入力できます。</p>' +
+    '<div class="btnrow"><button class="btn" data-recadd="' + esc(D.me.key) +
+      '" data-rectab="自分" data-recwho="' + esc(D.me.name) + '">記録する</button></div>' +
+    '</div></div>';
+  var slogs = RECS.filter(function(r){ return r.key === D.me.key; });
+  if (slogs.length){
+    h += '<div class="card"><div class="card-h">自分の記録　' + slogs.length + '件</div>' +
+      '<div class="card-b">' + slogs.map(logRow).join('') + '</div></div>';
+  }
+
+  h += '<div class="card"><div class="card-b"><button class="btn sub wide" data-intro="1">このアプリで大切にしていること</button></div></div>';
+  $('#page-self').innerHTML = h;
+}
+
+/* ============ メンバー ============ */
+/* 兼任＝2つ以上のチームのマネージャー。
+   上位の管理職層（chart[0]）に名前が出ることは兼任ではない。 */
+var MGRTEAMS = {};
+function buildMgrTeams(){
+  D.chart.slice(1).forEach(function(c){
+    (c.tiers || []).forEach(function(tier){
+      tier.forEach(function(p){ MGRTEAMS[p.key] = (MGRTEAMS[p.key] || 0) + 1; });
+    });
+  });
+}
+function isDup(key){ return (MGRTEAMS[key] || 0) >= 2; }
+
+function buildPeople(){
+  D.chart.forEach(function(c){
+    (c.tiers || []).forEach(function(t){ t.forEach(reg); });
+    (c.members || []).forEach(reg);
+  });
+  function reg(p){ if (!PEOPLE[p.key]) PEOPLE[p.key] = p; }
+}
+function unitPeople(c){
+  var out = [];
+  (c.tiers || []).forEach(function(t){ t.forEach(function(p){ out.push(p); }); });
+  (c.members || []).forEach(function(p){ out.push(p); });
+  return out;
+}
+function mrowHtml(p, alsoLabel){
+  var pr = prof(p.key);
+  var badge = (p.b ? '<span class="bB" title="Basic受講">B</span>' : '') +
+              (alsoLabel ? '<span class="bAlso">' + esc(alsoLabel) + '</span>' : '');
+  if (!pr){
+    return '<div class="mrow na"><span class="bar"></span>' +
+      '<span class="nm"><b>' + esc(p.name) + badge + '</b><span>タイプ未取得' +
+      (p.role ? '　' + esc(p.role) : '') + '</span></span></div>';
+  }
+  return '<button class="mrow" data-person="' + esc(p.key) + '">' +
+    '<span class="bar" style="background:' + COLOR[pr.base] + '"></span>' +
+    '<span class="nm"><b>' + esc(p.name) + badge + '</b>' +
+      '<span>' + esc(pr.base) + '／' + esc(pr.phase) + (p.role ? '　' + esc(p.role) : '') + '</span></span>' +
+    '<span class="ar">›</span></button>';
+}
+function renderList(){
+  /* 事業部の段を上から並べ、グループを率いる人の下にそのグループを入れ子にする */
+  /* 1人が複数の組織の長を兼ねることがあるので、配列で持つ */
+  var root = D.chart[0], rest = D.chart.slice(1), byLeader = {}, used = {};
+  rest.forEach(function(c){
+    var lead = c.tiers && c.tiers[0] && c.tiers[0][0];
+    if (lead) (byLeader[lead.key] = byLeader[lead.key] || []).push(c);
+  });
+
+  function subBlock(c){
+    used[c.name] = 1;
+    var lead = c.tiers[0][0], t = tally(unitPeople(c)), rows = '';
+    (c.members || []).forEach(function(p){
+      if (p.key === D.me.key || p.key === lead.key) return;
+      rows += mrowHtml(p, isDup(p.key) ? '兼任' : '');
+    });
+    if (!rows) return '';
+    return '<div class="msub"><div class="stt">' + esc(c.name) +
+      '　PCM取得 ' + t.trained + ' ／ ' + t.total + '</div>' +
+      '<div class="mlist">' + rows + '</div></div>';
+  }
+
+  var h = '<div class="mgrp"><div class="stt">' + esc(root.name) + '</div>';
+  (root.tiers || []).forEach(function(tier){
+    tier.forEach(function(p){
+      if (p.key !== D.me.key){
+        h += '<div class="mlist">' + mrowHtml(p, isDup(p.key) ? '兼任' : '') + '</div>';
+      }
+      (byLeader[p.key] || []).forEach(function(sub){ h += subBlock(sub); });
+    });
+  });
+  (root.members || []).forEach(function(p){
+    if (p.key === D.me.key) return;
+    h += '<div class="mlist">' + mrowHtml(p, isDup(p.key) ? '兼任' : '') + '</div>';
+  });
+  h += '</div>';
+
+  /* 事業部にひもづかない組織は独立して並べる */
+  rest.forEach(function(c){
+    if (used[c.name]) return;
+    var rows = '', seen = {};
+    unitPeople(c).forEach(function(p){
+      if (seen[p.key] || p.key === D.me.key) return;
+      seen[p.key] = 1; rows += mrowHtml(p, isDup(p.key) ? '兼任' : '');
+    });
+    if (!rows) return;
+    h += '<div class="mgrp"><div class="stt">' + esc(c.name) + '</div>' +
+         '<div class="mlist">' + rows + '</div></div>';
+  });
+
+  h += '<p class="tiny" style="margin:4px">色は1階（ベース）です。名前を選ぶとコンドミニアムが開きます。</p>';
+  $('#page-list').innerHTML = h;
+}
+
+/* ============ 個人 ============ */
+function openPerson(key){
+  if (key === D.me.key){ go('self'); return; }
+  if (!prof(key)) return;
+  CUR = key; SUBTAB = 'normal'; TALK = 'send'; LEFT = null; go('person');
+}
+function renderPerson(){
+  var p = PEOPLE[CUR], pr = prof(CUR);
+  if (!p || !pr){ go('list'); return; }
+  $('#ttl').textContent = p.name;
+
+  /* やりとりのときだけ、自分と相手のカードを並べる */
+  var h = (SUBTAB === 'talk')
+    ? twinBlock(pr, p.name)
+    : '<div class="pcwrap">' + condoHtml(pr, p.name, !!p.b) + '</div>';
+  h += '<div class="seg">';
+  SUBTABS.forEach(function(t){
+    var lk = subLocked(t);
+    h += '<button data-sub="' + t.id + '" class="' + (SUBTAB === t.id ? 'on' : '') + (lk ? ' lk' : '') + '">' +
+      t.name + '</button>';
+  });
+  h += '</div>';
+
+  var cur = SUBTABS.filter(function(t){ return t.id === SUBTAB; })[0];
+  var lk2 = subLocked(cur);
+  h += lk2 ? lockCard(lk2, LOCK_DESC[cur.id])
+           : ({ normal:paneNormal, talk:paneTalk, fuel:paneFuel, off:paneOff })[cur.id](pr, p);
+
+  /* やりとりは「伝え方」「受け取り方」を別の項目として扱う */
+  var logName = (cur.id === 'talk') ? (TALK === 'send' ? '伝え方' : '受け取り方') : cur.name;
+
+  h += '<div class="card"><div class="card-h">この人について書く　' + esc(logName) + '</div><div class="card-b">' +
+    '<textarea class="memo" placeholder="やってみたこと、気づいたこと"></textarea>' +
+    '<p class="tiny" style="margin-top:8px">キーボードのマイクボタンから、音声でも入力できます。</p>' +
+    '<div class="btnrow"><button class="btn" data-recadd="' + esc(CUR) + '" data-rectab="' + esc(logName) + '">記録する</button></div>' +
+    '</div></div>';
+
+  var logs = RECS.filter(function(r){ return r.key === CUR && r.tab === logName; });
+  if (logs.length){
+    h += '<div class="card"><div class="card-h">' + esc(logName) + 'の記録　' + logs.length + '件</div>' +
+      '<div class="card-b">' + logs.map(logRow).join('') + '</div></div>';
+  }
+  $('#page-person').innerHTML = h;
+  if (SUBTAB === 'talk') drawWire();
+}
+window.addEventListener('resize', function(){
+  if (VIEW === 'person' && SUBTAB === 'talk') drawWire();
+});
+
+function paneNormal(pr){
+  return '<div class="card"><div class="card-h">普段の手がかり　ベース：' + esc(pr.base) + '</div>' +
+    '<div class="card-b">' +
+      '<p class="tiny" style="margin-bottom:10px">項目を押すと、詳しい説明が開きます。</p>' +
+      traitRows(pr, false) +
+      '<p class="tiny" style="margin-top:12px">ベースを手がかりにした特徴と、いまのフェーズの状態です。' +
+      '決めつけずに、目の前の相手を見てください。</p>' +
+    '</div></div>';
+}
+
+function towerHtml(p, side, cap, name, markType){
+  var o = floors(p), h = '';
+  o.forEach(function(ty, i){
+    var mk = (ty === p.base) ? '<span class="mk" style="background:' + COLOR[ty] + '"></span>'
+           : (ty === p.phase) ? '<span class="mk ring" style="border-color:' + COLOR[ty] + '"></span>' : '';
+    h += '<div class="tf' + (ty === markType ? ' on' : '') + '">' +
+      '<span class="lv">' + (o.length - i) + 'F</span>' +
+      '<span class="tn">' + esc(ty) + '</span>' +
+      '<span class="bb2" style="width:' + p.score[ty] + '%;background:' + COLOR[ty] + '"></span>' +
+      mk + '</div>';
+  });
+  return '<div class="col ' + side + '"><div class="ch">' + esc(cap) +
+    '<b>' + esc(name) + '</b></div>' + h + '</div>';
+}
+
+/* 左の棟に立てる人。自分と、その人のマネージャー */
+function leftChoices(key){
+  var out = [{ key:null, name:D.me.name, cap:'あなた' }];
+  (MGROF[key] || []).forEach(function(m){
+    if (m.key === D.me.key || m.key === key) return;
+    if (!prof(m.key)) return;
+    out.push({ key:m.key, name:m.name, cap:m.team + 'のマネージャー' });
+  });
+  return out;
+}
+
+function twinBlock(pr, name){
+  var recv = (TALK === 'recv');
+  var ch = leftChoices(CUR);
+  var cur = ch.filter(function(x){ return x.key === LEFT; })[0] || ch[0];
+  var lp = cur.key ? prof(cur.key) : D.me.profile;
+  var leftMark = recv ? lp.base : pr.base;   /* 受け取り方は左の人のベースが着地点 */
+  var who = cur.key ? esc(cur.name) + 'さん' : 'あなた';
+  var note = recv
+    ? '線は、相手のベース（' + esc(pr.base) + '）から、' + who + 'のベース（' + esc(lp.base) + '）へ向かっています。'
+    : '線は、' + who + 'から、相手のベース（' + esc(pr.base) + '）の階へ向かっています。';
+
+  var sel = '';
+  if (ch.length > 1){
+    sel = '<div class="seg" style="margin-bottom:12px">' + ch.map(function(x){
+      return '<button data-left="' + (x.key || '') + '" class="' + (x.key === cur.key ? 'on' : '') + '">' +
+        esc(x.name) + (x.key ? '<span style="font-size:10px;opacity:.75">（' + esc(x.cap) + '）</span>' : '') +
+        '</button>';
+    }).join('') + '</div>';
+  }
+
+  return '<div class="card"><div class="card-b">' + sel +
+    '<div class="twin" id="twin"><div class="wire" id="wire"></div>' +
+      towerHtml(lp, 'me', cur.cap, cur.name, leftMark) +
+      '<div class="gap"></div>' +
+      towerHtml(pr, 'you', 'この人', name, pr.base) +
+    '</div>' +
+    '<p class="flegend" style="margin-bottom:0">●＝1階（ベース）　○＝フェーズ　棒の長さ＝%。' +
+      note + '</p>' +
+  '</div></div>';
+}
+
+/* 相手のベースの階どうしを線で結ぶ */
+function drawWire(){
+  var twin = $('#twin'), wire = $('#wire');
+  if (!twin || !wire) return;
+  var a = twin.querySelector('.col.me .tf.on'), z = twin.querySelector('.col.you .tf.on');
+  if (!a || !z){ wire.innerHTML = ''; return; }
+  var tr = twin.getBoundingClientRect(), ra = a.getBoundingClientRect(), rz = z.getBoundingClientRect();
+  var x1 = ra.right - tr.left, y1 = ra.top + ra.height / 2 - tr.top;
+  var x2 = rz.left - tr.left,  y2 = rz.top + rz.height / 2 - tr.top;
+  var xm = (x1 + x2) / 2, recv = (TALK === 'recv'), head = 8;
+  var lw = recv ? (xm - x1 - head) : (xm - x1);          /* 矢じりのぶん短くする */
+  var rw = recv ? (x2 - xm) : (x2 - xm - head);
+  wire.innerHTML =
+    '<i style="left:' + (recv ? x1 + head : x1) + 'px;top:' + (y1 - 1) + 'px;width:' +
+      Math.max(lw, 0) + 'px;height:2px"></i>' +
+    '<i style="left:' + (xm - 1) + 'px;top:' + Math.min(y1, y2) + 'px;width:2px;height:' +
+      Math.abs(y2 - y1) + 'px"></i>' +
+    '<i style="left:' + xm + 'px;top:' + (y2 - 1) + 'px;width:' + Math.max(rw, 0) + 'px;height:2px"></i>' +
+    (recv
+      ? '<u class="l" style="left:' + x1 + 'px;top:' + (y1 - 5) + 'px"></u>'
+      : '<u class="r" style="left:' + (x2 - head) + 'px;top:' + (y2 - 5) + 'px"></u>');
+}
+
+function paneTalk(pr){
+  var chL = leftChoices(CUR);
+  var curL = chL.filter(function(x){ return x.key === LEFT; })[0] || chL[0];
+  var me = curL.key ? prof(curL.key) : D.me.profile;
+  var youLabel = curL.key ? esc(curL.name) + 'さん' : 'あなた';
+  var h = '<div class="seg">' +
+    '<button data-talk="send" class="' + (TALK === 'send' ? 'on' : '') + '">伝え方</button>' +
+    '<button data-talk="recv" class="' + (TALK === 'recv' ? 'on' : '') + '">受け取り方</button></div>';
+
+  if (TALK === 'send'){
+    var t = (M.tsutae || {})[pr.base] || {};
+    h += '<div class="card"><div class="card-h">相手のベースに合わせる</div><div class="card-b">' +
+      '<p class="sub">' + youLabel + 'の' + floorNo(me, pr.base) + 'F ' + esc(pr.base) +
+      '　→　相手の' + floorNo(pr, pr.base) + 'F ' + esc(pr.base) + '</p>' +
+      '<div class="kv"><span class="k">チャンネル</span><span class="v">' + esc(t['チャンネル'] || '') + '</span></div>' +
+      '<div class="kv"><span class="k">認知の核</span><span class="v">' + esc(t['認知の核'] || '') + '</span></div>' +
+      '<div class="kv"><span class="k">ポイント</span><span class="v">' + esc(t['伝え方のポイント'] || '') + '</span></div>' +
+      '</div></div>';
+    h += '<div class="card"><div class="card-h">言い方の例</div><div class="card-b">';
+    ['依頼する','進捗確認する','意見を聞く'].forEach(function(k){
+      h += '<div class="step"><span class="hd">' + k + '</span><span class="tx">「' + esc(t[k] || '') + '」</span></div>';
+    });
+    h += '<p class="tiny" style="margin-top:12px">「何を」は変えず、「どのように」だけを変えています。</p></div></div>';
+  } else {
+    var u = (M.uke || {})[pr.base + '>' + me.base] || {};
+    var same = pr.base === me.base;
+    h += '<div class="card"><div class="card-h">' + esc(pr.base) + ' → ' + esc(me.base) +
+         (u['認知'] ? '　' + esc(u['認知']) : '') + '</div><div class="card-b">';
+    (same ? ['普段は','でも、ズレると…'] : ['相手は','あなたは','こんな受け取り方も','別の受け取り方は'])
+      .forEach(function(k){
+        if (!u[k]) return;
+        h += '<div class="step"><span class="hd">' + esc(k) + '</span><span class="tx">' +
+             esc(u[k]).replace(/\n/g, '<br><br>') + '</span></div>';
+      });
+    h += '<p class="tiny" style="margin-top:12px">受け取り方に「正しい」はありません。ズレて感じること自体は自然なことです。</p></div></div>';
+  }
+  return h;
+}
+
+function paneFuel(pr){
+  var main = pr.phase, sub = (pr.base !== pr.phase) ? pr.base : null;
+  var h = '<div class="card"><div class="card-h">心理的欲求　フェーズ：' + esc(main) + '</div><div class="card-b">';
+  ((M.needs[main] || {}).needs || []).forEach(function(x){ h += '<span class="chip">' + esc(x) + '</span>'; });
+  if (sub){
+    h += '<p class="lab" style="margin-top:12px">ベース：' + esc(sub) + '</p>';
+    ((M.needs[sub] || {}).needs || []).forEach(function(x){ h += '<span class="chip">' + esc(x) + '</span>'; });
+  }
+  h += '<p class="note-wa" style="margin-top:12px">心理的欲求は、本人が自分で満たすものです。' +
+       'ここでは名称だけを手がかりとして示しています。満たし方は表示しません。</p>';
+  return h + '</div></div>';
+}
+
+function paneOff(pr){
+  var d = (M.distress || {})[pr.phase] || {};
+  var h = '<div class="card"><div class="card-h">普段との違い　フェーズ：' + esc(pr.phase) + '</div><div class="card-b">' +
+    '<div class="step"><span class="tx">' + esc(d['初期表示1'] || '') + '</span></div>' +
+    '<div class="step"><span class="tx">' + esc(d['初期表示2'] || '') + '</span></div>' +
+    '</div></div>';
+  h += '<div class="card"><div class="card-h">一連の流れ</div><div class="card-b">';
+  ['第1段階','第2段階','第3段階'].forEach(function(k){
+    h += '<div class="step"><span class="hd">' + k + '</span><span class="tx">' + esc(d[k] || '') + '</span></div>';
+  });
+  h += '</div></div>';
+  h += '<div class="card"><div class="card-b"><p class="note-wa">' + esc(M.guard || '') + '</p></div></div>';
+  return h;
+}
+
+/* ============ 組織図 ============ */
+function nodeHtml(p, roleTag){
+  var pr = prof(p.key);
+  var badge = p.b ? '<span class="bB">B</span>' : '';
+  var tag = roleTag ? '<span class="role-tag">' + esc(roleTag) + '</span>' : '';
+  if (!pr){
+    return '<div class="node unrec" title="PCM未取得のためタイプ情報なし">' + tag +
+      '<span class="node-name">' + esc(p.name) + badge + '</span>' +
+      '<span class="unrec-tag">タイプ未取得</span></div>';
+  }
+  var mini = '<span class="mini">' + floors(pr).map(function(t){
+    return '<span class="mini-track"><span class="mini-fill" style="width:' + pr.score[t] +
+           '%;background:' + COLOR[t] + '"></span></span>';
+  }).join('') + '</span>';
+  return '<button class="node' + (roleTag ? ' mgr' : '') + (p.key === D.me.key ? ' me' : '') +
+      '" data-person="' + esc(p.key) + '">' + tag +
+    '<span class="node-name">' + esc(p.name) + badge + '</span>' +
+    '<span class="node-bp">' +
+      /* コンドミニアムと同じく、ベースを下に置く */
+      '<span class="bprow" title="フェーズ：' + esc(pr.phase) + '"><span class="bptag">P</span>' +
+        '<span class="bpdot ring" style="border-color:' + COLOR[pr.phase] + '"></span>' +
+        '<span class="bpname">' + esc(pr.phase) + '</span></span>' +
+      '<span class="bprow" title="ベース：' + esc(pr.base) + '"><span class="bptag">B</span>' +
+        '<span class="bpdot" style="background:' + COLOR[pr.base] + '"></span>' +
+        '<span class="bpname">' + esc(pr.base) + '</span></span>' +
+    '</span>' + mini + '</button>';
+}
+
+/* 段の配列からツリーを組む。facility とプロジェクトで共用 */
+function treeHtml(rows){
+  var out = '';
+  rows.forEach(function(row, i){
+    var nodes = row.members.map(function(p){
+      var tag = row.staff ? null : ((p.role || '管理者') + (isDup(p.key) ? '・兼任' : ''));
+      return nodeHtml(p, tag);
+    });
+    if (i === 0){
+      out += '<div class="mgr-row">' + nodes.join('') + '</div>';
+    } else if (row.members.length === 1 && !row.staff){
+      out += '<span class="trunk"></span><div class="mgr-row">' + nodes.join('') + '</div>';
+    } else {
+      out += '<span class="trunk"></span><div class="staff">' +
+        nodes.map(function(n){ return '<div class="cell">' + n + '</div>'; }).join('') + '</div>';
+    }
+  });
+  if (rows.length === 1 && rows[0].staff){
+    out = '<div class="staff nobar">' +
+      rows[0].members.map(function(p){ return '<div class="cell">' + nodeHtml(p, null) + '</div>'; }).join('') +
+      '</div>';
+  }
+  return '<div class="tree">' + out + '</div>';
+}
+
+/* その人の上に立つマネージャー（所属する組織の段1の人）。複数所属なら複数 */
+var MGROF = {};
+function buildMgrOf(){
+  D.chart.forEach(function(c){
+    var tiers = c.tiers || [];
+    if (!tiers.length) return;
+    var lead = tiers[0][0];
+    if (!lead) return;
+    var below = [];
+    tiers.slice(1).forEach(function(t){ t.forEach(function(p){ below.push(p); }); });
+    (c.members || []).forEach(function(p){ below.push(p); });
+    below.forEach(function(p){
+      if (p.key === lead.key) return;
+      var arr = MGROF[p.key] = MGROF[p.key] || [];
+      if (!arr.some(function(x){ return x.key === lead.key; }))
+        arr.push({ key:lead.key, name:lead.name, team:c.name });
+    });
+  });
+}
+
+/* 管理職か（いずれかの組織の段に載っている人） */
+var ISMGR = {}, MGRLEVEL = {};
+function buildMgrFlags(){
+  D.chart.forEach(function(c, ci){
+    (c.tiers || []).forEach(function(t, ti){
+      t.forEach(function(p){
+        ISMGR[p.key] = 1;
+        /* 上位組織の段をそのまま階層とし、下位組織の長はその下に置く */
+        var lv = (ci === 0) ? ti : 90;
+        if (MGRLEVEL[p.key] === undefined || lv < MGRLEVEL[p.key]) MGRLEVEL[p.key] = lv;
+      });
+    });
+  });
+}
+
+function facilityHtml(c, open){
+  var ppl = unitPeople(c), t = tally(ppl);
+  var mix = '';
+  TYPES.forEach(function(ty){
+    if (!t.count[ty]) return;
+    mix += '<span class="mixdot" title="' + ty + '"><span class="d" style="background:' +
+           COLOR[ty] + '"></span>' + t.count[ty] + '</span>';
+  });
+  var un = t.total - t.trained;
+  if (un) mix += '<span class="mixdot un" title="タイプ未取得 ' + un + '名"><span class="d"></span>未' + un + '</span>';
+
+  /* 役職が「スタッフ」だけの段は、管理職ノードにしない */
+  function isStaffRow(tier){
+    return tier.every(function(p){
+      var r = (p.role || '').trim();
+      return r === '' || r === 'スタッフ';
+    });
+  }
+  var rows = (c.tiers || []).map(function(tier){
+    return { members:tier, staff:isStaffRow(tier) };
+  });
+  if ((c.members || []).length) rows.push({ members:c.members, staff:true });
+
+  return '<section class="facility" data-open="' + (open ? '1' : '0') + '">' +
+    '<button class="fhead" data-toggle="1">' +
+      '<span class="fname">' + esc(c.name) + '</span>' +
+      '<span class="fmeta">' + t.total + '名（PCM取得 ' + t.trained + '）</span>' +
+      '<span class="fchev">›</span>' +
+      '<span class="fmix">' + mix + '</span>' +
+    '</button>' +
+    '<div class="fbody">' + treeHtml(rows) + '</div>' +
+  '</section>';
+}
+
+/* 分布の集計。対象の profile 配列と、末尾に足すブロックを受け取る */
+function distPanel(list, extra){
+  if (!list.length) return extra ? '<div class="an">' + extra + '</div>' : '';
+  var cb = {}, cp = {}, mx = {};
+  TYPES.forEach(function(a){ cb[a] = 0; cp[a] = 0; mx[a] = {}; TYPES.forEach(function(b){ mx[a][b] = 0; }); });
+  list.forEach(function(pr){ cb[pr.base]++; cp[pr.phase]++; mx[pr.base][pr.phase]++; });
+  var max = Math.max.apply(null, TYPES.map(function(t){ return Math.max(cb[t], cp[t]); })) || 1;
+
+  function rows(cnt){
+    return TYPES.map(function(t){
+      return '<div class="an-row"><span class="an-key" style="color:' + COLOR[t] + '">' + t + '</span>' +
+        '<span class="an-track"><span class="an-fill" style="width:' + (cnt[t] / max * 100) +
+        '%;background:' + COLOR[t] + '"></span></span>' +
+        '<span class="an-num">' + cnt[t] + '</span></div>';
+    }).join('');
+  }
+  var h = '<div class="an">' +
+    '<div class="an-block"><h4>ベース分布（PCM取得 ' + list.length + '名）</h4>' + rows(cb) + '</div>' +
+    '<div class="an-block"><h4>フェーズ分布</h4>' + rows(cp) + '</div>' +
+    '<div class="an-block"><h4>ベース × フェーズ</h4><div class="matrix">' +
+      '<span class="mx-corner" title="縦＝ベース／横＝フェーズ">B＼P</span>';
+  TYPES.forEach(function(t){
+    h += '<span class="mx-head" title="フェーズ ' + t + '"><span class="mx-dot" style="background:' +
+         COLOR[t] + '"></span></span>';
+  });
+  TYPES.forEach(function(b2){
+    h += '<span class="mx-head row" title="ベース ' + b2 + '"><span class="mx-dot" style="background:' +
+         COLOR[b2] + '"></span></span>';
+    TYPES.forEach(function(p2){
+      var n = mx[b2][p2];
+      h += '<span class="mx-cell' + (b2 === p2 ? ' diag' : '') + '" title="' + b2 + '×' + p2 + '：' + n + '名">' +
+        (n || '') + '</span>';
+    });
+  });
+  h += '</div><p class="mx-cap">縦＝ベース、横＝フェーズ。数字は人数。枠は、ベースとフェーズが同じ人。</p></div>';
+  return h + (extra || '') + '</div>';
+}
+
+function orgProfiles(){
+  var seen = {}, list = [];
+  D.chart.forEach(function(c){
+    unitPeople(c).forEach(function(p){
+      if (seen[p.key]) return;
+      seen[p.key] = 1;
+      var pr = prof(p.key);
+      if (pr) list.push(pr);
+    });
+  });
+  return list;
+}
+
+function renderOrg(){
+  var board = '<div class="tools"><button data-all="1">すべて開く</button>' +
+              '<button data-all="0">すべて閉じる</button></div>';
+  D.chart.forEach(function(c, i){ board += facilityHtml(c, i === 0); });
+  $('#page-org').innerHTML = '<div class="layout"><div class="board">' + board + '</div>' +
+    distPanel(orgProfiles()) + '</div>';
+}
+
+/* ============ プロジェクト（§18-5〜18-9） ============ */
+function storeOk(){
+  try { localStorage.setItem('pcm.probe','1'); localStorage.removeItem('pcm.probe'); return true; }
+  catch(e){ return false; }
+}
+function loadPJ(){ try { return JSON.parse(localStorage.getItem('pcm.projects') || '[]'); } catch(e){ return []; } }
+function savePJ(l){ try { localStorage.setItem('pcm.projects', JSON.stringify(l)); return true; } catch(e){ return false; } }
+function pjPeople(keys){ return keys.map(function(k){ return PEOPLE[k]; }).filter(Boolean); }
+
+function renderProject(){
+  if (!canView()){
+    $('#page-project').innerHTML =
+      lockCard('この機能はマネジメント権限の設定が必要です。',
+               '部署をまたいでメンバーを選び、その顔ぶれの構成を確かめます。');
+    return;
+  }
+  $('#page-project').innerHTML =
+    PJ.mode === 'edit' ? pjEdit() : PJ.mode === 'detail' ? pjDetail() : pjList();
+}
+function pjList(){
+  var list = loadPJ(), h = '';
+  if (!storeOk()) h += '<div class="card"><div class="card-b"><p class="note-wa">この開き方では、作ったプロジェクトが端末に残りません。内容は「書き出す」で控えを取ってください。</p></div></div>';
+  if (!list.length){
+    h += '<div class="card"><div class="card-b"><p class="sub">部署をまたいでメンバーを選ぶと、その顔ぶれの構成を確かめられます。会議の前や、立ち上げの前に使ってください。</p></div></div>';
+  } else {
+    list.forEach(function(pj){
+      var t = tally(pjPeople(pj.keys));
+      h += '<button class="pj" data-pjopen="' + esc(pj.id) + '"><b>' + esc(pj.name) + '</b>' +
+        barHtml(t) + '<span class="tiny">' + t.total + '名／PCM取得 ' + t.trained + '名</span></button>';
+    });
+  }
+  return h + '<div class="btnrow"><button class="btn wide" data-pjnew="1">新しいプロジェクトを作る</button></div>';
+}
+function pjEdit(){
+  var n = 0; for (var k in PJ.keys){ if (PJ.keys[k]) n++; }
+  var h = '<input class="f" id="pjName" placeholder="プロジェクト名" value="' + esc(PJ.name || '') + '">' +
+          '<p class="tiny" style="margin:8px 4px 12px">部署をまたいで選べます。PCMを取得していないメンバーも含められます。</p>';
+  D.chart.forEach(function(c){
+    var rows = '', seen = {};
+    function put(p){
+      if (seen[p.key]) return;
+      seen[p.key] = 1;
+      var pr = prof(p.key), on = !!PJ.keys[p.key];
+      rows += '<button class="chk" data-pjtoggle="' + esc(p.key) + '" aria-pressed="' + on + '">' +
+        '<span class="bx">' + (on ? '✓' : '') + '</span>' +
+        '<span class="cn">' + esc(p.name) + '</span>' +
+        '<span class="ct">' + (pr ? esc(pr.base) : 'タイプ未取得') + '</span></button>';
+    }
+    (c.tiers || []).forEach(function(t){ t.forEach(put); });
+    (c.members || []).forEach(put);
+    if (!rows) return;
+    h += '<div class="oteam" data-open="0">' +
+      '<button class="oth" data-toggle="1"><b>' + esc(c.name) + '</b><span class="ar">›</span></button>' +
+      '<div class="obody" style="padding:0"><div class="mlist" style="border:0;border-radius:0">' + rows + '</div></div></div>';
+  });
+  return h + '<div class="btnrow"><button class="btn wide" data-pjsave="1"' + (n ? '' : ' disabled') +
+    '>保存する（' + n + '名）</button>' +
+    '<button class="btn sub wide" data-pjcancel="1">キャンセル</button></div>';
+}
+function pjDetail(){
+  var pj = loadPJ().filter(function(x){ return x.id === PJ.id; })[0];
+  if (!pj){ PJ.mode = 'list'; return pjList(); }
+  var ppl = pjPeople(pj.keys), t = tally(ppl);
+
+  /* 左：顔ぶれのツリー。役職の段で並べ、それ以外を下段に置く */
+  var rest = ppl.filter(function(p){ return !ISMGR[p.key]; });
+  var byLv = {};
+  ppl.forEach(function(p){
+    if (!ISMGR[p.key]) return;
+    (byLv[MGRLEVEL[p.key]] = byLv[MGRLEVEL[p.key]] || []).push(p);
+  });
+  var rows = Object.keys(byLv).map(Number).sort(function(a, b){ return a - b; })
+    .map(function(lv){ return { members:byLv[lv], staff:false }; });
+  if (rest.length) rows.push({ members:rest, staff:true });
+  if (!rows.length) rows = [{ members:ppl, staff:true }];
+
+  var board = '<div class="card"><div class="card-h">' + esc(pj.name) + '　' +
+    t.total + '名／PCM取得 ' + t.trained + '名</div></div>';
+  board += '<div class="facility" data-open="1" style="margin-bottom:12px">' +
+    '<div class="fbody" style="display:block;padding-top:4px">' + treeHtml(rows) + '</div></div>';
+
+  if (stage(t.trained) === 'full'){
+    board += '<div class="card"><div class="card-h">' + esc(M.project.title) + '</div><div class="card-b">' +
+      exHtml(M.project.items) + '</div></div>';
+    var mt = M.meeting;
+    board += '<div class="card"><div class="card-h">' + esc(mt.title) + '</div><div class="card-b">';
+    [['会議前', mt.before], ['会議中', mt.during], ['会議終了時', mt.after]].forEach(function(pair){
+      board += '<div class="step"><span class="hd">' + pair[0] + '</span><span class="tx">' +
+        pair[1].map(esc).join('<br>') + '</span></div>';
+    });
+    board += '<p class="tiny" style="margin-top:12px">' + esc(mt.note) + '</p></div></div>';
+  }
+  var pjKey = 'pj:' + pj.id;
+  board += '<div class="card"><div class="card-h">このプロジェクトについて書く</div><div class="card-b">' +
+    '<textarea class="memo" placeholder="決めたこと、気づいたこと"></textarea>' +
+    '<p class="tiny" style="margin-top:8px">キーボードのマイクボタンから、音声でも入力できます。</p>' +
+    '<div class="btnrow"><button class="btn" data-recadd="' + esc(pjKey) +
+      '" data-rectab="プロジェクト" data-recwho="' + esc(pj.name) + '">記録する</button></div>' +
+    '</div></div>';
+  var plogs = RECS.filter(function(r){ return r.key === pjKey; });
+  if (plogs.length){
+    board += '<div class="card"><div class="card-h">このプロジェクトの記録　' + plogs.length + '件</div>' +
+      '<div class="card-b">' + plogs.map(logRow).join('') + '</div></div>';
+  }
+
+  board += '<div class="btnrow">' +
+    '<button class="btn sub" data-pjback="1">‹ プロジェクト一覧</button>' +
+    '<button class="btn sub" data-pjedit="1">メンバーを変える</button>' +
+    '<button class="btn sub" data-pjcopy="1">書き出す</button>' +
+    '<button class="btn sub" data-pjdel="1">削除</button></div>';
+  if (PJ.del){
+    board += '<div class="cfm"><span>このプロジェクトを削除します。元に戻せません。</span>' +
+      '<button class="y" data-pjdelok="1">削除する</button><button class="n" data-pjdelno="1">キャンセル</button></div>';
+  }
+
+  /* 右：分布とチームの特徴 */
+  var profs = [];
+  var seen = {};
+  ppl.forEach(function(p){
+    if (seen[p.key]) return;
+    seen[p.key] = 1;
+    var pr = prof(p.key);
+    if (pr) profs.push(pr);
+  });
+  var extra = '<div class="an-block"><h4>チームの特徴</h4>' + commentHtml(t) + '</div>';
+
+  return '<div class="layout"><div class="board">' + board + '</div>' + distPanel(profs, extra) + '</div>';
+}
+
+function pjText(){
+  var pj = loadPJ().filter(function(x){ return x.id === PJ.id; })[0];
+  if (!pj) return '';
+  var ppl = pjPeople(pj.keys), t = tally(ppl), lines = [pj.name, ''];
+  ppl.forEach(function(p){
+    var pr = prof(p.key);
+    lines.push('・' + p.name + '（' + (pr ? pr.base + ' / ' + pr.phase : 'タイプ未取得') + '）');
+  });
+  lines.push('', 'PCM取得 ' + t.trained + '名 / 全' + t.total + '名');
+  return lines.join('\n');
+}
+
+/* ============ 記録 ============ */
+function loadRecs(){
+  try {
+    localStorage.setItem('pcm.probe','1'); localStorage.removeItem('pcm.probe');
+    RECS = JSON.parse(localStorage.getItem('pcm.recs') || '[]');
+  } catch(e){ STORE_OK = false; RECS = []; }
+}
+function saveRecs(){ try { localStorage.setItem('pcm.recs', JSON.stringify(RECS)); } catch(e){ STORE_OK = false; } }
+function addRec(key, who, tab, body){
+  var d = new Date();
+  RECS.unshift({ id:'r' + Date.now(),
+    d: d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate(),
+    key:key, who:who, tab:tab, body:body });
+  saveRecs();
+}
+function dumpText(){
+  var order = [], byKey = {};
+  RECS.forEach(function(r){
+    if (!byKey[r.key]){ byKey[r.key] = { name:r.who, tabs:{}, tabOrder:[] }; order.push(r.key); }
+    var g = byKey[r.key], tb = r.tab || 'その他';
+    if (!g.tabs[tb]){ g.tabs[tb] = []; g.tabOrder.push(tb); }
+    g.tabs[tb].push(r);
+  });
+  var out = [];
+  order.forEach(function(k){
+    var g = byKey[k];
+    out.push('■ ' + g.name);
+    g.tabOrder.forEach(function(tb){
+      out.push('［' + tb + '］');
+      g.tabs[tb].forEach(function(r){ out.push(r.d + '　' + r.body); });
+    });
+    out.push('');
+  });
+  return out.join('\n');
+}
+function logRow(r){
+  return '<div class="log"><div class="d"><span>' + esc(r.d) + '</span>' +
+    '<button class="del" data-recdel="' + esc(r.id) + '">削除</button></div>' +
+    '<div class="t">' + esc(r.body) + '</div>' +
+    (RECDEL === r.id
+      ? '<div class="cfm"><span>この記録を削除します。元に戻せません。</span>' +
+        '<button class="y" data-recdelok="' + esc(r.id) + '">削除する</button>' +
+        '<button class="n" data-recdelno="1">キャンセル</button></div>' : '') +
+  '</div>';
+}
+
+function exportRecs(){
+  var data = {
+    app: 'pcm-log', v: 2,
+    exported: new Date().toISOString().slice(0, 10),
+    me: { key: D.me.key, name: D.me.name },
+    recs: RECS,
+    projects: loadPJ()
+  };
+  var name = 'PCM記録_' + D.me.name + '_' + data.exported + '.json';
+  try {
+    var url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 1)], { type:'application/json' }));
+    var a = document.createElement('a');
+    a.href = url; a.download = name; a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    toast('ファイルに保存しました');
+  } catch(e){
+    toast('保存できませんでした。テキストで書き出してください');
+  }
+}
+
+/* 読み込んだ記録を取り込む。この配布版にいない相手の記録は無視する */
+function importRecs(text){
+  var data;
+  try { data = JSON.parse(text); } catch(e){ toast('読み込めないファイルです'); return; }
+  var list = data && data.recs;
+  if (!Array.isArray(list)){ toast('記録が入っていないファイルです'); return; }
+
+  var have = {};
+  RECS.forEach(function(r){ have[r.id] = 1; });
+  var add = 0, dup = 0, skip = 0;
+
+  list.forEach(function(r){
+    if (!r || !r.id || !r.body){ skip++; return; }
+    if (have[r.id]){ dup++; return; }
+    var isPj = (String(r.key).indexOf('pj:') === 0);
+    if (!isPj && !PEOPLE[r.key]){ skip++; return; }   /* この配布版にいない相手 */
+    RECS.push({ id:r.id, d:r.d || '', key:r.key, who:r.who || '', tab:r.tab || '', body:r.body });
+    have[r.id] = 1; add++;
+  });
+
+  RECS.sort(function(a, b){ return a.id < b.id ? 1 : (a.id > b.id ? -1 : 0); });
+  saveRecs();
+
+  /* プロジェクトも引き継ぐ。いなくなったメンバーは外し、全員いなければ取り込まない */
+  var pAdd = 0, pDup = 0, pSkip = 0, pTrim = 0;
+  if (Array.isArray(data.projects)){
+    var cur = loadPJ(), hasId = {};
+    cur.forEach(function(x){ hasId[x.id] = 1; });
+    data.projects.forEach(function(x){
+      if (!x || !x.id || !Array.isArray(x.keys)){ pSkip++; return; }
+      if (hasId[x.id]){ pDup++; return; }
+      var keys = x.keys.filter(function(k){ return !!PEOPLE[k]; });
+      if (!keys.length){ pSkip++; return; }
+      if (keys.length < x.keys.length) pTrim++;
+      cur.push({ id:x.id, name:x.name || '名称未設定のプロジェクト', keys:keys });
+      hasId[x.id] = 1; pAdd++;
+    });
+    savePJ(cur);
+  }
+
+  renderRecs();
+  var msg = add + '件を読み込みました';
+  var note = [];
+  if (dup) note.push('重複 ' + dup + '件');
+  if (skip) note.push('対象外 ' + skip + '件');
+  if (note.length) msg += '（' + note.join('、') + '）';
+  if (pAdd || pDup || pSkip){
+    msg += '／プロジェクト ' + pAdd + '件';
+    var pn = [];
+    if (pTrim) pn.push(pTrim + '件はメンバーを調整');
+    if (pDup) pn.push('重複 ' + pDup + '件');
+    if (pSkip) pn.push('対象外 ' + pSkip + '件');
+    if (pn.length) msg += '（' + pn.join('、') + '）';
+  }
+  toast(msg);
+}
+
+function renderRecs(){
+  var h = '';
+  if (!STORE_OK) h += '<div class="card"><div class="card-b"><p class="note-wa">この開き方では、記録が端末に残りません。アプリを閉じると消えます。書いたら「書き出す」でコピーして、メモやメールに貼ってください。</p></div></div>';
+  if (!RECS.length) h += '<div class="card"><div class="card-b">' +
+    '<p class="sub">メンバーやプロジェクトの画面をいちばん下まで開くと、書き残せます。</p>' +
+    '<div class="btnrow"><button class="btn sub" data-recload="1">読み込む</button></div>' +
+    '<p class="tiny" style="margin-top:9px">前の版で保存したファイルから、記録とプロジェクトを引き継げます。</p></div></div>';
+
+  /* 相手ごと、さらに項目ごとにまとめる。どちらも新しい順 */
+  var order = [], byKey = {};
+  RECS.forEach(function(r){
+    if (!byKey[r.key]){ byKey[r.key] = { name:r.who, tabs:{}, tabOrder:[] }; order.push(r.key); }
+    var g = byKey[r.key], tb = r.tab || 'その他';
+    if (!g.tabs[tb]){ g.tabs[tb] = []; g.tabOrder.push(tb); }
+    g.tabs[tb].push(r);
+  });
+
+  order.forEach(function(k){
+    var g = byKey[k], n = 0;
+    g.tabOrder.forEach(function(tb){ n += g.tabs[tb].length; });
+    var isPj = (k.indexOf('pj:') === 0), isMe = (k === D.me.key);
+    var canOpen = isPj ? (canView() && loadPJ().some(function(x){ return 'pj:' + x.id === k; }))
+                       : (isMe || (PEOPLE[k] && prof(k)));
+    var label = isPj
+      ? '<button class="who" data-pjgo="' + esc(k.slice(3)) + '">' + esc(g.name) + '</button>'
+      : isMe
+        ? '<button class="who" data-tab="self">' + esc(g.name) + '</button>'
+        : '<button class="who" data-person="' + esc(k) + '">' + esc(g.name) + '</button>';
+    h += '<div class="mgrp"><div class="stt">' +
+      (canOpen ? label : esc(g.name)) + '　' + n + '件</div>';
+    g.tabOrder.forEach(function(tb){
+      h += '<div class="card"><div class="card-h">' + esc(tb) + '　' + g.tabs[tb].length + '件</div>' +
+        '<div class="card-b">' + g.tabs[tb].map(logRow).join('') + '</div></div>';
+    });
+    h += '</div>';
+  });
+
+  if (RECS.length){
+    h += '<div class="btnrow">' +
+      '<button class="btn sub" data-recsave="1">ファイルに保存</button>' +
+      '<button class="btn sub" data-recload="1">読み込む</button>' +
+      '<button class="btn sub" data-recdump="1">' + (DUMP ? '閉じる' : 'テキストで書き出す') + '</button></div>';
+    if (DUMP) h += '<div class="card" style="margin-top:10px"><div class="card-b">' +
+      '<textarea id="dumpText" readonly style="min-height:150px;font-size:13px">' + esc(dumpText()) + '</textarea>' +
+      '<div class="btnrow"><button class="btn sub" data-reccopy="1">コピー</button></div>' +
+      '<p class="tiny" style="margin-top:9px">コピーしてメールやメモに貼り付けてください。' +
+      '別の版へ引き継ぐときは「ファイルに保存」を使ってください（プロジェクトも一緒に保存されます）。</p></div></div>';
+  }
+  $('#page-recs').innerHTML = h;
+}
+
+/* ============ タブと遷移 ============ */
+var TABS = [
+  { id:'self',    name:'自分',        g:'●' },
+  { id:'list',    name:'メンバー',     g:'▤' },
+  { id:'org',     name:'組織図',      g:'▦' },
+  { id:'project', name:'プロジェクト', g:'◧' },
+  { id:'recs',    name:'記録',        g:'✎' }
+];
+function renderTabs(){
+  $('#tabs').innerHTML = TABS.map(function(t){
+    var on = (VIEW === t.id) || (VIEW === 'person' && t.id === 'list');
+    var lk = (t.id === 'project') && !canView();
+    return '<button data-tab="' + t.id + '" class="' + (on ? 'on' : '') + (lk ? ' lk2' : '') + '">' +
+      '<b>' + t.g + '</b>' + t.name + '</button>';
+  }).join('');
+}
+var TITLE = { self:'自分', list:'メンバー', org:'組織図', project:'プロジェクト', recs:'記録' };
+function go(v){
+  VIEW = v;
+  ['self','list','person','org','project','recs'].forEach(function(id){
+    $('#page-' + id).hidden = (id !== v);
+  });
+  $('#back').hidden = (v !== 'person');
+  if (v !== 'person') $('#ttl').textContent = TITLE[v] || 'PCM';
+  if (v === 'self')    renderSelf();
+  if (v === 'list')    renderList();
+  if (v === 'person')  renderPerson();
+  if (v === 'org')     renderOrg();
+  if (v === 'project') renderProject();
+  if (v === 'recs')    renderRecs();
+  renderTabs();
+  window.scrollTo(0, 0);
+}
+
+/* ============ 操作 ============ */
+document.addEventListener('click', function(e){
+  var t;
+  if ((t = e.target.closest('[data-toggle]'))){
+    var box = t.parentElement;
+    box.dataset.open = box.dataset.open === '1' ? '0' : '1';
+    return;
+  }
+  if ((t = e.target.closest('[data-all]'))){
+    var op = t.dataset.all === '1';
+    [].forEach.call(document.querySelectorAll('#page-org .facility'), function(b){
+      b.dataset.open = op ? '1' : '0';
+    });
+    return;
+  }
+  if (e.target.closest('#back')){ go('list'); return; }
+  if ((t = e.target.closest('[data-tab]'))){ CUR = null; go(t.dataset.tab); return; }
+  if ((t = e.target.closest('[data-person]'))){ openPerson(t.dataset.person); return; }
+  if ((t = e.target.closest('[data-sub]'))){ SUBTAB = t.dataset.sub; renderPerson(); return; }
+  if ((t = e.target.closest('[data-talk]'))){ TALK = t.dataset.talk; renderPerson(); return; }
+  if ((t = e.target.closest('[data-left]'))){ LEFT = t.dataset.left || null; renderPerson(); return; }
+  if ((t = e.target.closest('[data-seg]'))){ SELFSEG = t.dataset.seg; renderSelf(); return; }
+
+  if (e.target.closest('[data-intro]')){
+    $('#introGo').textContent = '閉じる'; $('#ov').hidden = false; return;
+  }
+  if (e.target.closest('#introGo')){ $('#ov').hidden = true; return; }
+
+  /* 記録 */
+  if ((t = e.target.closest('[data-recadd]'))){
+    var ta = t.closest('.card').querySelector('.memo');
+    var body = ta ? ta.value.trim() : '';
+    if (!body){ if (ta) ta.focus(); return; }
+    var who = t.dataset.recwho || (PEOPLE[t.dataset.recadd] || {}).name || '';
+    addRec(t.dataset.recadd, who, t.dataset.rectab, body);
+    ta.value = '';
+    if (VIEW === 'person') renderPerson();
+    else if (VIEW === 'project') renderProject();
+    else if (VIEW === 'self') renderSelf();
+    toast('書き残しました'); return;
+  }
+  if ((t = e.target.closest('[data-recdelok]'))){
+    var rid = t.dataset.recdelok;
+    RECS = RECS.filter(function(r){ return r.id !== rid; });
+    RECDEL = null; saveRecs();
+    if (VIEW === 'person') renderPerson();
+    else if (VIEW === 'project') renderProject();
+    else if (VIEW === 'self') renderSelf();
+    else renderRecs();
+    toast('削除しました'); return;
+  }
+  if (e.target.closest('[data-recdelno]')){
+    RECDEL = null;
+    if (VIEW === 'person') renderPerson();
+    else if (VIEW === 'project') renderProject();
+    else if (VIEW === 'self') renderSelf();
+    else renderRecs();
+    return;
+  }
+  if ((t = e.target.closest('[data-recdel]'))){
+    RECDEL = (RECDEL === t.dataset.recdel) ? null : t.dataset.recdel;
+    if (VIEW === 'person') renderPerson();
+    else if (VIEW === 'project') renderProject();
+    else if (VIEW === 'self') renderSelf();
+    else renderRecs();
+    return;
+  }
+  if (e.target.closest('[data-recdump]')){ DUMP = !DUMP; renderRecs(); return; }
+  if (e.target.closest('[data-recsave]')){ exportRecs(); return; }
+  if (e.target.closest('[data-recload]')){ $('#impFile').click(); return; }
+  if (e.target.closest('[data-reccopy]')){
+    var bx = $('#dumpText'); if (!bx) return;
+    bx.select();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(bx.value).then(function(){ toast('コピーしました'); },
+        function(){ toast('選択した状態です。手動でコピーしてください'); });
+    } else {
+      try { document.execCommand('copy'); toast('コピーしました'); }
+      catch(err){ toast('選択した状態です。手動でコピーしてください'); }
+    }
+    return;
+  }
+
+  /* プロジェクト */
+  if (e.target.closest('[data-pjnew]')){
+    PJ = { mode:'edit', id:null, name:'', keys:{}, del:false };
+    PJ.keys[D.me.key] = true;
+    renderProject(); window.scrollTo(0,0); return;
+  }
+  if ((t = e.target.closest('[data-pjgo]'))){
+    PJ.mode = 'detail'; PJ.id = t.dataset.pjgo; PJ.del = false;
+    go('project'); return;
+  }
+  if ((t = e.target.closest('[data-pjopen]'))){
+    PJ.mode = 'detail'; PJ.id = t.dataset.pjopen; PJ.del = false;
+    renderProject(); window.scrollTo(0,0); return;
+  }
+  if ((t = e.target.closest('[data-pjtoggle]'))){
+    var kk = t.dataset.pjtoggle, on2 = !PJ.keys[kk];
+    PJ.keys[kk] = on2;
+    t.setAttribute('aria-pressed', on2);
+    t.querySelector('.bx').textContent = on2 ? '✓' : '';
+    var n2 = 0; for (var q in PJ.keys){ if (PJ.keys[q]) n2++; }
+    var sv = document.querySelector('[data-pjsave]');
+    if (sv){ sv.textContent = '保存する（' + n2 + '名）'; sv.disabled = !n2; }
+    return;
+  }
+  if (e.target.closest('[data-pjsave]')){
+    var el = $('#pjName'), nm2 = (el && el.value.trim()) || '名称未設定のプロジェクト';
+    var keys = Object.keys(PJ.keys).filter(function(x){ return PJ.keys[x]; });
+    var list = loadPJ();
+    if (PJ.id) list.forEach(function(x){ if (x.id === PJ.id){ x.name = nm2; x.keys = keys; } });
+    else { PJ.id = 'p' + Date.now(); list.push({ id:PJ.id, name:nm2, keys:keys }); }
+    if (!savePJ(list)) toast('この開き方では保存できません');
+    PJ.mode = 'detail'; PJ.del = false; renderProject(); window.scrollTo(0,0); return;
+  }
+  if (e.target.closest('[data-pjedit]')){
+    var c2 = loadPJ().filter(function(x){ return x.id === PJ.id; })[0];
+    PJ.mode = 'edit'; PJ.name = c2 ? c2.name : ''; PJ.keys = {};
+    (c2 ? c2.keys : []).forEach(function(k){ PJ.keys[k] = true; });
+    renderProject(); window.scrollTo(0,0); return;
+  }
+  if (e.target.closest('[data-pjcancel]') || e.target.closest('[data-pjback]')){
+    PJ.mode = 'list'; PJ.del = false; renderProject(); window.scrollTo(0,0); return;
+  }
+  if (e.target.closest('[data-pjdelok]')){
+    savePJ(loadPJ().filter(function(x){ return x.id !== PJ.id; }));
+    PJ.mode = 'list'; PJ.id = null; PJ.del = false; renderProject(); toast('削除しました'); return;
+  }
+  if (e.target.closest('[data-pjdelno]')){ PJ.del = false; renderProject(); return; }
+  if (e.target.closest('[data-pjdel]')){ PJ.del = !PJ.del; renderProject(); return; }
+  if (e.target.closest('[data-pjcopy]')){
+    var txt = pjText();
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(function(){ toast('書き出しました'); },
+        function(){ toast('コピーできませんでした'); });
+    } else toast('コピーできませんでした');
+    return;
+  }
+});
+
+$('#impFile').addEventListener('change', function(){
+  var f = this.files && this.files[0];
+  if (!f) return;
+  var fr = new FileReader();
+  fr.onload = function(){ importRecs(String(fr.result)); };
+  fr.onerror = function(){ toast('ファイルを読めませんでした'); };
+  fr.readAsText(f, 'utf-8');
+  this.value = '';
+});
+
+/* ============ ホーム画面に追加できるようにする ============ */
+function setupManifest(){
+  try {
+    var icon = document.querySelector('link[rel="apple-touch-icon"]').getAttribute('href');
+    var mf = {
+      name: 'PCM ' + D.me.name, short_name: 'PCM',
+      start_url: location.href, scope: './',
+      display: 'standalone', background_color: '#EEF1F4', theme_color: '#33455E',
+      icons: [{ src: icon, sizes: '512x512', type: 'image/png', purpose: 'any' }]
+    };
+    var url = URL.createObjectURL(new Blob([JSON.stringify(mf)], { type:'application/manifest+json' }));
+    var l = document.createElement('link');
+    l.rel = 'manifest'; l.href = url;
+    document.head.appendChild(l);
+  } catch(e){}
+}
+
+/* サーバーに置いたときだけ、オフライン用の仕組みを登録する */
+function setupOffline(){
+  if (location.protocol !== 'https:' || !navigator.serviceWorker) return;
+  navigator.serviceWorker.register('sw.js').catch(function(){});
+}
+
+/* ============ 有効期限 ============ */
+function expiryInfo(){
+  var built = D.built, days = D.expireDays || 60;
+  var forced = /[?&]expired=1/.test(location.search);
+  if (!built) return { expired: forced, left: null, days: days };
+  var b = new Date(built + 'T00:00:00');
+  if (isNaN(b.getTime())) return { expired: forced, left: null, days: days };
+  var end = new Date(b.getTime() + days * 86400000);
+  var left = Math.ceil((end - new Date()) / 86400000);
+  return { expired: forced || left < 0, left: left, days: days, end: end, built: b };
+}
+function ymd(d){ return d.getFullYear() + '/' + (d.getMonth() + 1) + '/' + d.getDate(); }
+
+function showExpired(info){
+  $('#tabs').hidden = true;
+  ['self','list','person','org','project','recs'].forEach(function(id){ $('#page-' + id).hidden = true; });
+  var when = info.end ? ymd(info.end) : '';
+  $('#ovin').innerHTML =
+    '<h2>更新してください</h2>' +
+    '<p class="s">このファイルの利用期間が終わりました' + (when ? '（' + when + '）' : '') + '。</p>' +
+    '<p>新しい版を受け取って、開き直してください。' +
+    '組織やプロファイルの変更を反映するため、定期的に配り直しています。</p>' +
+    '<p>いま入っている記録とプロジェクトは、下のボタンでファイルに保存できます。' +
+    '新しい版の「記録」タブで読み込めば、そのまま引き継げます。</p>' +
+    '<p style="margin-top:18px"><button class="btn" data-recsave="1">記録をファイルに保存</button></p>';
+  $('#ov').hidden = false;
+}
+
+/* ============ 起動 ============ */
+$('#who').textContent = D.me.name + '　' + (D.me.title || '');
+buildMgrTeams();
+buildMgrFlags();
+buildMgrOf();
+buildPeople();
+loadRecs();
+
+setupManifest();
+setupOffline();
+
+var EXP = expiryInfo();
+if (EXP.expired){ showExpired(EXP); return; }
+
+(function(){
+  var h = '<h2>このアプリで大切にしていること</h2>';
+  (M.intro.lines || []).forEach(function(l){
+    h += '<p' + (l.strong ? ' class="s"' : '') + '>' + esc(l.text) + '</p>';
+  });
+  $('#ovin').innerHTML = h + '<p style="margin-top:18px"><button class="btn" id="introGo"></button></p>';
+})();
+
+var seen = false;
+try { seen = localStorage.getItem('pcm.introSeen') === '1'; } catch(e){}
+$('#introGo').textContent = seen ? '閉じる' : M.intro.button;
+go('self');
+
+if (!seen){
+  $('#ov').hidden = false;
+  try { localStorage.setItem('pcm.introSeen','1'); } catch(e){}
+} else if ((M.micro || []).length){
+  var pool = [];
+  try { pool = JSON.parse(localStorage.getItem('pcm.microPool') || '[]'); } catch(e){}
+  if (!pool.length){
+    pool = M.micro.map(function(_, i){ return i; });
+    for (var i = pool.length - 1; i > 0; i--){
+      var j = Math.floor(Math.random() * (i + 1)), tmp = pool[i]; pool[i] = pool[j]; pool[j] = tmp;
+    }
+  }
+  var idx = pool.shift();
+  try { localStorage.setItem('pcm.microPool', JSON.stringify(pool)); } catch(e){}
+  var mel = document.createElement('p');
+  mel.className = 'micro'; mel.textContent = M.micro[idx];
+  $('#page-self').insertBefore(mel, $('#page-self').firstChild);
+}
+})();
+</script>
+</body>
+</html>
