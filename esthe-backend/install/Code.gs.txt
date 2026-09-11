@@ -533,8 +533,28 @@ function list_(ss,name) {
  if(ids.some(id=>!id)||new Set(ids).size!==ids.length)throw new Error('Noが空欄または重複しています。元のリストで確認してください。');
  return {sh,heads,items};
 }
+
+function hpLink_(display, rich, formula) {
+ const valid=v=>/^https?:\/\//i.test(String(v||'').trim())?String(v).trim():'';
+ if(rich){
+  const whole=valid(rich.getLinkUrl());if(whole)return whole;
+  const links=[...new Set(rich.getRuns().map(run=>valid(run.getLinkUrl())).filter(Boolean))];
+  if(links.length===1)return links[0];
+ }
+ // Literal HYPERLINK URL fallback; never evaluate a formula or cell reference.
+ const m=String(formula||'').match(/^=\s*HYPERLINK\s*\(\s*"((?:[^"]|"")*)"\s*[,;]/i);
+ return (m&&valid(m[1].replace(/""/g,'"')))||String(display||'');
+}
+function addHomepageLinks_(list){
+ const col=list.heads.indexOf('HP');if(col<0||!list.items.length)return;
+ const count=Math.max(...list.items.map(x=>x.row))-1;
+ const range=list.sh.getRange(2,col+1,count,1),rich=range.getRichTextValues(),formulas=range.getFormulas();
+ list.items.forEach(item=>{const i=item.row-2;item.record.HP=hpLink_(item.record.HP,rich[i][0],formulas[i][0]);});
+}
+
 function getData(options) {
  const ss=book_(), sheetName=options&&options.listSheet||'リスト_山梨', list=list_(ss,sheetName);
+ addHomepageLinks_(list);
  const listSheets=ss.getSheets().map(s=>s.getName()).filter(n=>n==='リスト'||/^リスト_.+/.test(n));
  const scriptSets={};ss.getSheets().filter(s=>s.getName()==='スクリプト'||/^スクリプト_.+/.test(s.getName())).forEach(s=>{scriptSets[s.getName()]=s.getRange(1,1,Math.max(s.getLastRow(),1),Math.max(2,Math.min(s.getLastColumn(),4))).getDisplayValues();});
  if(!Object.keys(scriptSets).length)throw new Error('スクリプトのシートがありません。');
