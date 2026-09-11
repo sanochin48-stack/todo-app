@@ -50,7 +50,7 @@ function validate_(p){
  keys.push(...EVAL_KEYS);keys.forEach(k=>{if(p[k]!=null&&(typeof p[k]!=='string'||p[k].length>10000))throw new Error('入力内容が長すぎるか、形式が正しくありません。');});
  if(!/^[a-zA-Z0-9-]{16,80}$/.test(p.requestId||''))throw new Error('保存IDが不正です。');
  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.date||'')||!isFinite(new Date(p.date+':00+09:00').getTime()))throw new Error('電話日時を入力してください。');
- if(!['アポ獲得','再電話','不在','資料送付','見送り','連絡不要','訪問済'].includes(p.status))throw new Error('結果を選択してください。');
+ if(!['アポ獲得','再電話','不在','資料送付','後日突撃','見送り','連絡不要','訪問済'].includes(p.status))throw new Error('結果を選択してください。');
  if(p.status==='アポ獲得'&&!p.appointment)throw new Error('訪問予定日時を入力してください。');
  if(p.appointment&&!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.appointment))throw new Error('訪問予定日時の形式が正しくありません。');
  if(p.next&&!/^\d{4}-\d{2}-\d{2}$/.test(p.next))throw new Error('次回連絡日の形式が正しくありません。');
