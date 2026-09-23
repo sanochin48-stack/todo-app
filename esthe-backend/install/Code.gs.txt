@@ -519,7 +519,7 @@ function verifyUser_(token,nonce){
 }
 
 const LOG_HEADERS = ['記録ID','No','店舗','電話日時','進捗','訪問予定日時','次回連絡日','最初の反応','美容商品の意見への反応','プラチナジュエリーへの反応','マイクロスコープへの反応','価格を聞かれたか','断られた理由','相手が使った言葉','反応が良かった言葉','反応が悪かった言葉','メモ','分岐履歴','スクリプト版','保存日時','処理状態','県別リスト','使用スクリプト','担当者','検証記録JSON'];
-const EVAL_KEYS=['authSubject','authEmail','opinionReaction','opinionWords','soilReaction','soilWords','scopeReaction','scopeWords','hookWhere','hookWords','guardWhere','guardWords','refusalWords'];
+const EVAL_KEYS=['recordType','visitDetails','authSubject','authEmail','opinionReaction','opinionWords','soilReaction','soilWords','scopeReaction','scopeWords','hookWhere','hookWords','guardWhere','guardWords','refusalWords'];
 function evalRead_(v){try{const p=JSON.parse(v||'{}');return Object.fromEntries(EVAL_KEYS.map(k=>[k,typeof p[k]==='string'?p[k]:'']));}catch(e){return {};}}
 function book_() { return SpreadsheetApp.openById(settings_().sheetId); }
 function list_(ss,name) {
@@ -568,9 +568,10 @@ function validate_(p){
  if(!p||typeof p!=='object')throw new Error('記録内容がありません。');
  const keys=['id','name','date','status','appointment','next','first','beauty','jewelry','scope','price','reason','words','good','bad','note','path','version','requestId','expectedDate','expectedStatus','listSheet','scriptSheet','operator'];
  keys.push(...EVAL_KEYS);keys.forEach(k=>{if(p[k]!=null&&(typeof p[k]!=='string'||p[k].length>10000))throw new Error('入力内容が長すぎるか、形式が正しくありません。');});
+ if(p.recordType&&!['電話','訪問'].includes(p.recordType))throw new Error('記録の種類が正しくありません。');
  if(!/^[a-zA-Z0-9-]{16,80}$/.test(p.requestId||''))throw new Error('保存IDが不正です。');
  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.date||'')||!isFinite(new Date(p.date+':00+09:00').getTime()))throw new Error('電話日時を入力してください。');
- if(!['アポ獲得','再電話','不在','資料送付','後日突撃','見送り','連絡不要','訪問済'].includes(p.status))throw new Error('結果を選択してください。');
+ if(!['アポ獲得','再電話','不在','資料送付','後日突撃','継続フォロー','保留・時期待ち','対応完了','見送り','連絡不要','訪問済'].includes(p.status))throw new Error('結果を選択してください。');
  if(p.status==='アポ獲得'&&!p.appointment)throw new Error('訪問予定日時を入力してください。');
  if(p.appointment&&!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.appointment))throw new Error('訪問予定日時の形式が正しくありません。');
  if(p.next&&!/^\d{4}-\d{2}-\d{2}$/.test(p.next))throw new Error('次回連絡日の形式が正しくありません。');
@@ -582,7 +583,7 @@ function saveRecord(p) {
  if(!p.scriptSheet||(p.scriptSheet!=='スクリプト'&&!/^スクリプト_.+/.test(p.scriptSheet))||!ss.getSheetByName(p.scriptSheet))throw new Error('使用スクリプトが見つかりません。');
  if(!target||target.record['店名']!==p.name)throw new Error('店舗情報が変わっています。リストを更新して再度選択してください。');
  let log=ss.getSheetByName('架電記録'),oldRow=0,existing=null;
- if(log){checkLog_(log);if(log.getLastRow()>1){const rows=log.getRange(2,1,log.getLastRow()-1,LOG_HEADERS.length).getDisplayValues();const pos=rows.findIndex(r=>r[0]===p.requestId);if(pos>=0){oldRow=pos+2;existing=rows[pos];if(existing[1]!==p.id||existing[2]!==p.name||existing[21]!==p.listSheet)throw new Error('記録IDが一致しません。');if(existing[20]==='完了')return {date:existing[3],status:existing[4]};}}}
+ if(log){checkLog_(log);if(log.getLastRow()>1){const rows=log.getRange(2,1,log.getLastRow()-1,LOG_HEADERS.length).getDisplayValues();const pos=rows.findIndex(r=>r[0]===p.requestId);if(pos>=0){oldRow=pos+2;existing=rows[pos];if(existing[1]!==p.id||existing[2]!==p.name||existing[21]!==p.listSheet)throw new Error('記録IDが一致しません。');if(existing[20]==='完了')return {date:evalRead_(existing[24]).recordType==='訪問'?(target.record['TEL日']||''):existing[3],status:existing[4]};}}}
  const displayDate=p.date.replace('T',' '),nowDate=target.record['TEL日']||'',nowStatus=target.record['進捗']||'';
  const dateMatches=nowDate===(p.expectedDate||'')||(existing&&nowDate===displayDate);
  const statusMatches=nowStatus===(p.expectedStatus||'')||(existing&&nowStatus===p.status);
@@ -590,10 +591,10 @@ function saveRecord(p) {
  if(!log){log=ss.insertSheet('架電記録');log.getRange(1,1,1,LOG_HEADERS.length).setValues([LOG_HEADERS]);log.setFrozenRows(1);log.getRange(1,1,1,LOG_HEADERS.length).setBackground('#112c4b').setFontColor('#ffffff').setFontWeight('bold');}
  checkLog_(log,true);
  if(!oldRow){oldRow=log.getLastRow()+1;const values=[p.requestId,p.id,p.name,displayDate,p.status,p.appointment||'',p.next||'',p.first||'',p.beauty||'',p.jewelry||'',p.scope||'',p.price||'',p.reason||'',p.words||'',p.good||'',p.bad||'',p.note||'',p.path||'',p.version||'',Utilities.formatDate(new Date(),'Asia/Tokyo','yyyy-MM-dd HH:mm:ss'),'処理中',p.listSheet,p.scriptSheet,p.operator||'',JSON.stringify(Object.fromEntries(EVAL_KEYS.map(k=>[k,p[k]||''])))];log.getRange(oldRow,1,1,values.length).setNumberFormat('@').setValues([values.map(safe_)]);SpreadsheetApp.flush();}
- list.sh.getRange(target.row,list.heads.indexOf('TEL日')+1).setNumberFormat('@').setValue(displayDate);
+ if(p.recordType!=='訪問')list.sh.getRange(target.row,list.heads.indexOf('TEL日')+1).setNumberFormat('@').setValue(displayDate);
  list.sh.getRange(target.row,list.heads.indexOf('進捗')+1).setValue(p.status);
  SpreadsheetApp.flush();log.getRange(oldRow,21).setValue('完了');SpreadsheetApp.flush();
- return {date:displayDate,status:p.status};
+ return {date:p.recordType==='訪問'?nowDate:displayDate,status:p.status};
  } finally {lock.releaseLock();}
 }
 
