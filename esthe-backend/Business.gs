@@ -76,3 +76,23 @@ function saveRecord(p) {
  return {date:displayDate,status:p.status};
  } finally {lock.releaseLock();}
 }
+
+function saveCustomerMemo(p) {
+ if(!p||typeof p!=='object'||['id','name','listSheet','memo','expectedMemo'].some(k=>typeof p[k]!=='string')||p.memo.length>10000||p.expectedMemo.length>10000)throw apiError_('BAD_REQUEST','備忘録は10,000文字以内で入力してください。');
+ const lock=LockService.getScriptLock();lock.waitLock(30000);
+ try{
+  const list=list_(book_(),p.listSheet),target=list.items.find(x=>x.record.No===p.id);
+  if(!target||target.record['店名']!==p.name)throw apiError_('CONFLICT','店舗情報が変わっています。リストを更新してください。');
+  const current=target.record['備忘録']||'';
+  if(current!==p.expectedMemo&&current!==p.memo)throw apiError_('CONFLICT','別の端末で備忘録が変更されています。入力を控えてからリストを更新し、内容を確認してください。');
+  let col=list.heads.indexOf('備忘録')+1;
+  if(!col){
+   col=list.sh.getLastColumn()+1;
+   if(col>list.sh.getMaxColumns())list.sh.insertColumnsAfter(list.sh.getMaxColumns(),1);
+   list.sh.getRange(1,col).setValue('備忘録');
+  }
+  list.sh.getRange(target.row,col).setNumberFormat('@').setValue(safe_(p.memo));
+  SpreadsheetApp.flush();
+  return {memo:p.memo};
+ }finally{lock.releaseLock();}
+}
