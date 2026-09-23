@@ -17,7 +17,7 @@ function doPost(e) {
    result=p.action==='saveCustomerMemo'?saveCustomerMemo(p.data):saveRecord(p.data);
   }
   return json_({success:true,data:result});
- }catch(e){return json_({success:false,error:e.apiCode?e.message:'処理できませんでした。入力を残したまま再試行してください。保存時は店舗の更新競合・シートの列構成も確認してください。',code:e.apiCode||'OPERATION_FAILED'});}
+ }catch(e){const code=e.apiCode||'OPERATION_FAILED',message=e&&e.message?String(e.message):'原因不明のエラーです。';console.error(code+': '+message);return json_({success:false,error:message,code:code});}
 }
 function json_(data){return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);}
 function apiError_(code,message){const e=new Error(message);e.apiCode=code;return e;}
