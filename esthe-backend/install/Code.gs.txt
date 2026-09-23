@@ -466,7 +466,7 @@ function doPost(e) {
   if(!e || !e.postData || e.postData.contents.length>150000)throw apiError_('BAD_REQUEST','リクエストを確認してください。');
   let p;try{p=JSON.parse(e.postData.contents);}catch(_){throw apiError_('BAD_REQUEST','JSON形式が不正です。');}
   if(!p || typeof p!=='object' || Array.isArray(p))throw apiError_('BAD_REQUEST','リクエストを確認してください。');
-  if(!['getData','saveRecord','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
+  if(!['getData','saveRecord','saveCustomerMemo','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
   const user=verifyUser_(p.credential,p.nonce);
   let result;
   if(p.action==='getIdentity')result={sub:user.sub,email:user.email};
@@ -475,7 +475,7 @@ function doPost(e) {
    if(!p.data||typeof p.data!=='object'||Array.isArray(p.data))throw apiError_('BAD_REQUEST','記録内容がありません。');
    // Verified identity supplements the manually entered operator (shared account use).
    p.data.authSubject=user.sub;p.data.authEmail=user.email;
-   result=saveRecord(p.data);
+   result=p.action==='saveCustomerMemo'?saveCustomerMemo(p.data):saveRecord(p.data);
   }
   return json_({success:true,data:result});
  }catch(e){return json_({success:false,error:e.apiCode?e.message:'処理できませんでした。入力を残したまま再試行してください。保存時は店舗の更新競合・シートの列構成も確認してください。',code:e.apiCode||'OPERATION_FAILED'});}
@@ -595,4 +595,24 @@ function saveRecord(p) {
  SpreadsheetApp.flush();log.getRange(oldRow,21).setValue('完了');SpreadsheetApp.flush();
  return {date:displayDate,status:p.status};
  } finally {lock.releaseLock();}
+}
+
+function saveCustomerMemo(p) {
+ if(!p||typeof p!=='object'||['id','name','listSheet','memo','expectedMemo'].some(k=>typeof p[k]!=='string')||p.memo.length>10000||p.expectedMemo.length>10000)throw apiError_('BAD_REQUEST','備忘録は10,000文字以内で入力してください。');
+ const lock=LockService.getScriptLock();lock.waitLock(30000);
+ try{
+  const list=list_(book_(),p.listSheet),target=list.items.find(x=>x.record.No===p.id);
+  if(!target||target.record['店名']!==p.name)throw apiError_('CONFLICT','店舗情報が変わっています。リストを更新してください。');
+  const current=target.record['備忘録']||'';
+  if(current!==p.expectedMemo&&current!==p.memo)throw apiError_('CONFLICT','別の端末で備忘録が変更されています。入力を控えてからリストを更新し、内容を確認してください。');
+  let col=list.heads.indexOf('備忘録')+1;
+  if(!col){
+   col=list.sh.getLastColumn()+1;
+   if(col>list.sh.getMaxColumns())list.sh.insertColumnsAfter(list.sh.getMaxColumns(),1);
+   list.sh.getRange(1,col).setValue('備忘録');
+  }
+  list.sh.getRange(target.row,col).setNumberFormat('@').setValue(safe_(p.memo));
+  SpreadsheetApp.flush();
+  return {memo:p.memo};
+ }finally{lock.releaseLock();}
 }
