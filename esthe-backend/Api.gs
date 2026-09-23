@@ -5,7 +5,7 @@ function doPost(e) {
   if(!e || !e.postData || e.postData.contents.length>150000)throw apiError_('BAD_REQUEST','リクエストを確認してください。');
   let p;try{p=JSON.parse(e.postData.contents);}catch(_){throw apiError_('BAD_REQUEST','JSON形式が不正です。');}
   if(!p || typeof p!=='object' || Array.isArray(p))throw apiError_('BAD_REQUEST','リクエストを確認してください。');
-  if(!['getData','saveRecord','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
+  if(!['getData','saveRecord','saveCustomerMemo','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
   const user=verifyUser_(p.credential,p.nonce);
   let result;
   if(p.action==='getIdentity')result={sub:user.sub,email:user.email};
@@ -14,7 +14,7 @@ function doPost(e) {
    if(!p.data||typeof p.data!=='object'||Array.isArray(p.data))throw apiError_('BAD_REQUEST','記録内容がありません。');
    // Verified identity supplements the manually entered operator (shared account use).
    p.data.authSubject=user.sub;p.data.authEmail=user.email;
-   result=saveRecord(p.data);
+   result=p.action==='saveCustomerMemo'?saveCustomerMemo(p.data):saveRecord(p.data);
   }
   return json_({success:true,data:result});
  }catch(e){return json_({success:false,error:e.apiCode?e.message:'処理できませんでした。入力を残したまま再試行してください。保存時は店舗の更新競合・シートの列構成も確認してください。',code:e.apiCode||'OPERATION_FAILED'});}
