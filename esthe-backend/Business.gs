@@ -132,6 +132,20 @@ function saveBusinessCard(p) {
  SpreadsheetApp.flush();
  return {...meta,dataUrl:'data:'+p.mimeType+';base64,'+p.base64};
 }
+
+function deleteBusinessCard(p) {
+ const x=cardTarget_(p);
+ if(typeof p.fileId!=='string'||!/^[A-Za-z0-9_-]{10,200}$/.test(p.fileId))throw apiError_('BAD_REQUEST','削除する名刺を確認してください。');
+ const items=cardMeta_(x.target.record['名刺画像']),index=items.findIndex(m=>m.fileId===p.fileId);
+ if(index<0)throw apiError_('CONFLICT','この店舗の名刺が見つかりません。画面を更新してください。');
+ try{DriveApp.getFileById(p.fileId).setTrashed(true);}catch(e){throw apiError_('OPERATION_FAILED','Googleドライブの名刺画像を削除できませんでした。');}
+ items.splice(index,1);
+ const col=x.list.heads.indexOf('名刺画像')+1;
+ if(col)x.list.sh.getRange(x.target.row,col).setNumberFormat('@').setValue(JSON.stringify(items));
+ SpreadsheetApp.flush();
+ return {fileId:p.fileId};
+}
+
 function authorizeApp() {
  UrlFetchApp.fetch('https://www.googleapis.com/oauth2/v3/certs');
  SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')).getName();
