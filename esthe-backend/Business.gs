@@ -78,6 +78,66 @@ function saveRecord(p) {
  } finally {lock.releaseLock();}
 }
 
+
+function cardTarget_(p) {
+ if(!p||typeof p!=='object'||['id','name','listSheet'].some(k=>typeof p[k]!=='string'))throw apiError_('BAD_REQUEST','店舗情報を確認してください。');
+ const list=list_(book_(),p.listSheet),target=list.items.find(x=>x.record.No===p.id);
+ if(!target||target.record['店名']!==p.name)throw apiError_('CONFLICT','店舗情報が変わっています。リストを更新してください。');
+ return {list,target};
+}
+function cardMeta_(value) {
+ try{
+  const a=JSON.parse(value||'[]');
+  return Array.isArray(a)?a.filter(x=>x&&typeof x.fileId==='string').slice(0,8):[];
+ }catch(_){return [];}
+}
+function cardFolder_() {
+ const props=PropertiesService.getScriptProperties(),id=props.getProperty('BUSINESS_CARD_FOLDER_ID');
+ if(id){try{return DriveApp.getFolderById(id);}catch(_){}}
+ const folder=DriveApp.createFolder('エステ営業_名刺画像');
+ props.setProperty('BUSINESS_CARD_FOLDER_ID',folder.getId());
+ return folder;
+}
+function getBusinessCards(p) {
+ const x=cardTarget_(p),items=cardMeta_(x.target.record['名刺画像']);
+ const cards=[];
+ items.forEach(m=>{
+  try{
+   const blob=DriveApp.getFileById(m.fileId).getBlob(),mime=blob.getContentType();
+   if(!/^image\/(jpeg|png|webp)$/i.test(mime))return;
+   cards.push({fileId:m.fileId,name:m.name||'名刺',mimeType:mime,uploadedAt:m.uploadedAt||'',dataUrl:'data:'+mime+';base64,'+Utilities.base64Encode(blob.getBytes())});
+  }catch(_){}
+ });
+ return {cards};
+}
+function saveBusinessCard(p) {
+ const x=cardTarget_(p);
+ if(typeof p.fileName!=='string'||p.fileName.length>180||typeof p.mimeType!=='string'||!/^image\/(jpeg|png|webp)$/i.test(p.mimeType)||typeof p.base64!=='string'||p.base64.length>2800000||!/^[A-Za-z0-9+/=\r\n]+$/.test(p.base64))throw apiError_('BAD_REQUEST','名刺画像はJPEG・PNG・WebP形式、2MB以内で選択してください。');
+ let bytes;try{bytes=Utilities.base64Decode(p.base64);}catch(_){throw apiError_('BAD_REQUEST','画像データを読み取れませんでした。');}
+ if(!bytes.length||bytes.length>2100000)throw apiError_('BAD_REQUEST','名刺画像は2MB以内にしてください。');
+ const items=cardMeta_(x.target.record['名刺画像']);
+ if(items.length>=8)throw apiError_('BAD_REQUEST','名刺画像は1店舗8枚までです。');
+ const ext=/png/i.test(p.mimeType)?'png':/webp/i.test(p.mimeType)?'webp':'jpg';
+ const safeName=(p.fileName.replace(/\.[^.]+$/,'').replace(/[^\w\-\u3000-\u9fffぁ-んァ-ヶー]/g,'_').slice(0,60)||'名刺')+'.'+ext;
+ const file=cardFolder_().createFile(Utilities.newBlob(bytes,p.mimeType,p.listSheet+'_'+p.id+'_'+Date.now()+'_'+safeName));
+ const meta={fileId:file.getId(),name:safeName,mimeType:p.mimeType,uploadedAt:Utilities.formatDate(new Date(),'Asia/Tokyo','yyyy-MM-dd HH:mm:ss')};
+ items.push(meta);
+ let col=x.list.heads.indexOf('名刺画像')+1;
+ if(!col){
+  col=x.list.sh.getLastColumn()+1;
+  if(col>x.list.sh.getMaxColumns())x.list.sh.insertColumnsAfter(x.list.sh.getMaxColumns(),1);
+  x.list.sh.getRange(1,col).setValue('名刺画像');
+ }
+ x.list.sh.getRange(x.target.row,col).setNumberFormat('@').setValue(JSON.stringify(items));
+ SpreadsheetApp.flush();
+ return {...meta,dataUrl:'data:'+p.mimeType+';base64,'+p.base64};
+}
+function authorizeApp() {
+ UrlFetchApp.fetch('https://www.googleapis.com/oauth2/v3/certs');
+ SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')).getName();
+ DriveApp.getRootFolder().getName();
+}
+
 function saveCustomerMemo(p) {
  if(!p||typeof p!=='object'||['id','name','listSheet','memo','expectedMemo'].some(k=>typeof p[k]!=='string')||p.memo.length>10000||p.expectedMemo.length>10000)throw apiError_('BAD_REQUEST','備忘録は10,000文字以内で入力してください。');
  const lock=LockService.getScriptLock();lock.waitLock(30000);
