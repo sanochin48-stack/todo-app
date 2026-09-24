@@ -40,7 +40,7 @@ function toast(t){$('#toast').textContent=t;$('#toast').classList.remove('hidden
 function rpc(name,arg){return EstheAPI.call(name,arg)}
 function parseList(rows){const head=rows[0];return rows.slice(1).filter(r=>r[head.indexOf('店名')]).map(r=>Object.fromEntries(head.map((h,i)=>[h,String(r[i]??'')])))}
 function setScriptModel(rows){
- const lines=rows.map(r=>String(r[1]??'').trim());
+ const lines=rows.map(r=>String(r[1]??'').replace(/\*\*/g,'').trim());
  const found=sectionDefs.map(def=>{let start=-1;for(const a of def.aliases){start=lines.indexOf(a);if(start>=0)break}return {...def,start}}).filter(x=>x.required||x.start>=0);
  titles=found.map(x=>x.title);
  scriptChunks=found.map(x=>{if(x.start<0)return ['この見出しがスプシ内に見つかりません。元のスクリプトをご確認ください。'];const ends=found.map(y=>y.start).filter(n=>n>x.start);const review=lines.indexOf('最初の5件で見るポイント',x.start+1);const legacy=lines.indexOf('最初の5件で記録すること',x.start+1);if(review>x.start)ends.push(review);if(legacy>x.start)ends.push(legacy);return lines.slice(x.start+1,ends.length?Math.min(...ends):lines.length).filter(Boolean)});
