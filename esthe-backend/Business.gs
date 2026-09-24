@@ -53,7 +53,7 @@ function validate_(p){
  if(p.recordType&&!['電話','訪問'].includes(p.recordType))throw new Error('記録の種類が正しくありません。');
  if(!/^[a-zA-Z0-9-]{16,80}$/.test(p.requestId||''))throw new Error('保存IDが不正です。');
  if(!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.date||'')||!isFinite(new Date(p.date+':00+09:00').getTime()))throw new Error('電話日時を入力してください。');
- const allowedStatus=p.recordType==='訪問'?['再訪問予定','継続フォロー','導入・成約','対応完了']:['アポ獲得','再電話','不在','資料送付','後日突撃','完了'];
+ const allowedStatus=p.recordType==='訪問'?['再訪問予定','継続フォロー','導入・成約','対応完了']:['アポ獲得','再電話','不在','留守電','資料送付','後日突撃','完了'];
  if(!allowedStatus.includes(p.status))throw new Error('記録の種類に合った結果を選択してください。');
  if(['アポ獲得','再訪問予定'].includes(p.status)&&!p.appointment)throw new Error('訪問予定日時を入力してください。');
  if(p.appointment&&!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(p.appointment))throw new Error('訪問予定日時の形式が正しくありません。');
