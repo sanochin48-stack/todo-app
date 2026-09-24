@@ -5,7 +5,7 @@ function doPost(e) {
   if(!e || !e.postData || e.postData.contents.length>4500000)throw apiError_('BAD_REQUEST','リクエストを確認してください。');
   let p;try{p=JSON.parse(e.postData.contents);}catch(_){throw apiError_('BAD_REQUEST','JSON形式が不正です。');}
   if(!p || typeof p!=='object' || Array.isArray(p))throw apiError_('BAD_REQUEST','リクエストを確認してください。');
-  if(!['getData','saveRecord','saveCustomerMemo','getBusinessCards','saveBusinessCard','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
+  if(!['getData','saveRecord','saveCustomerMemo','getBusinessCards','saveBusinessCard','deleteBusinessCard','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
   const user=verifyUser_(p.credential,p.nonce);
   let result;
   if(p.action==='getIdentity')result={sub:user.sub,email:user.email};
@@ -17,6 +17,7 @@ function doPost(e) {
    if(p.action==='saveCustomerMemo')result=saveCustomerMemo(p.data);
    else if(p.action==='getBusinessCards')result=getBusinessCards(p.data);
    else if(p.action==='saveBusinessCard')result=saveBusinessCard(p.data);
+   else if(p.action==='deleteBusinessCard')result=deleteBusinessCard(p.data);
    else result=saveRecord(p.data);
   }
   return json_({success:true,data:result});
