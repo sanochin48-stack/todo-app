@@ -3,7 +3,7 @@
 .store-kana{display:block;font-size:13px;font-weight:400;color:var(--muted);margin-bottom:5px;line-height:1.6}.homepage-button{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:white;padding:8px 14px;margin-top:12px;font-size:14px}.homepage-button:hover{background:var(--soft);border-color:var(--blue)}
 .contact>div:first-child{min-width:280px;flex:1}.business-cards{width:440px;max-width:100%;flex-shrink:0;padding:16px}.business-card-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.business-card-head h3{margin:0}.card-upload{display:inline-block;background:var(--blue);color:white;border-radius:7px;padding:8px 12px;cursor:pointer;font-size:14px}.card-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}.card-item{min-width:0}.card-thumb{padding:0;overflow:hidden;aspect-ratio:1.58/1;background:#eef2f7;border-radius:8px;width:100%}.card-delete{width:100%;margin-top:6px;padding:5px 8px;font-size:12px;color:#9b2c2c;border-color:#e7c5c5}.card-thumb img{width:100%;height:100%;object-fit:contain;display:block}.card-modal{border:0;border-radius:12px;padding:14px;max-width:min(94vw,1100px);box-shadow:0 20px 80px #0006}.card-modal::backdrop{background:#071626b8}.card-modal img{display:block;max-width:100%;max-height:82vh;margin:auto}.card-modal button{margin-top:10px}.contact-side{width:390px;max-width:100%;flex-shrink:0}.contact-side .phone{text-align:right;display:block}.customer-memo{margin-top:16px;padding:16px}.customer-memo textarea{width:100%;min-height:115px}.customer-memo .buttonrow{margin-top:10px;align-items:center}.customer-memo p{margin:8px 0 0}@media(max-width:1100px){.contact{flex-wrap:wrap}.business-cards{order:3;width:100%}.contact-side{width:390px}}@media(max-width:900px){.contact-side{width:100%;margin-top:16px}.contact-side .phone{text-align:left}.card-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style></head><body><header><div class="brand"><span class="mark">G</span><div><b>エステ営業 <span style="font-weight:400">営業ノート</span></b><small>RDB-001 · Girion</small></div></div><div class="buttonrow"><button id="setupBtn">ログアウト</button></div></header><div id="banner" class="banner"></div><section id="authPanel" class="wrap" hidden></section><main id="app" class="wrap"></main><div id="toast" class="toast hidden" role="status"></div>
-<script src="./config.js?v=20260925-1"></script><script src="./api.js?v=20260924-7"></script><script src="https://accounts.google.com/gsi/client" async onload="window.dispatchEvent(new Event('gis-ready'))"></script><script>
+<script src="./config.js?v=20260925-2"></script><script src="./api.js?v=20260924-7"></script><script src="https://accounts.google.com/gsi/client" async onload="window.dispatchEvent(new Event('gis-ready'))"></script><script>
 const SEED=null;
 const LIVE=true;
 const $=s=>document.querySelector(s),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -55,7 +55,7 @@ function badge(s){return '<span class="badge '+(s==='アポ獲得'||s==='導入�
 
 const listTabs=[
  ['すべて',null],['未架電',['未架電']],['再連絡',['再電話','不在','資料送付']],
- ['訪問予定',['アポ獲得','後日突撃','再訪問予定']],['継続フォロー',['継続フォロー','保留・時期待ち']],
+ ['訪問予定',['アポ獲得','再訪問予定']],['後日突撃',['後日突撃']],['継続フォロー',['継続フォロー','保留・時期待ち']],
  ['導入・成約',['導入・成約']],['対応終了',['完了','対応完了','訪問済','見送り','連絡不要']]
 ];
 let activeListTab='すべて';
