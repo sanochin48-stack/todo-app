@@ -556,11 +556,13 @@ function addHomepageLinks_(list){
  list.items.forEach(item=>{const i=item.row-2;item.record.HP=hpLink_(item.record.HP,rich[i][0],formulas[i][0]);});
 }
 
+function isScriptSheet_(name) { return name==='スクリプト'||/^スクリプト(?:V\d.*|[_ -].+)$/.test(name); }
+
 function getData(options) {
  const ss=book_(), sheetName=options&&options.listSheet||'リスト_山梨', list=list_(ss,sheetName);
  addHomepageLinks_(list);
  const listSheets=ss.getSheets().map(s=>s.getName()).filter(n=>n==='リスト'||/^リスト_.+/.test(n));
- const scriptSets={};ss.getSheets().filter(s=>s.getName()==='スクリプト'||/^スクリプト_.+/.test(s.getName())).forEach(s=>{scriptSets[s.getName()]=s.getRange(1,1,Math.max(s.getLastRow(),1),Math.max(2,Math.min(s.getLastColumn(),4))).getDisplayValues();});
+ const scriptSets={};ss.getSheets().filter(s=>isScriptSheet_(s.getName())).forEach(s=>{scriptSets[s.getName()]=s.getRange(1,1,Math.max(s.getLastRow(),1),Math.max(2,Math.min(s.getLastColumn(),4))).getDisplayValues();});
  if(!Object.keys(scriptSets).length)throw new Error('スクリプトのシートがありません。');
  const log=ss.getSheetByName('架電記録');let history=[];
  if(log&&log.getLastRow()>1){checkLog_(log);history=log.getRange(2,1,log.getLastRow()-1,LOG_HEADERS.length).getDisplayValues().filter(r=>r[20]==='完了'&&(r[21]===sheetName||(sheetName==='リスト_山梨'&&!ss.getSheetByName('リスト')&&r[21]==='リスト'))).map(r=>({requestId:r[0],id:r[1],name:r[2],date:r[3],status:r[4],appointment:r[5],next:r[6],first:r[7],beauty:r[8],jewelry:r[9],scope:r[10],price:r[11],reason:r[12],words:r[13],good:r[14],bad:r[15],note:r[16],path:r[17],version:r[18],listSheet:r[21],scriptSheet:r[22],operator:r[23],...evalRead_(r[24])}));}
@@ -584,7 +586,7 @@ function saveRecord(p) {
  validate_(p);const lock=LockService.getScriptLock();lock.waitLock(30000);
  try {
  const ss=book_(), list=list_(ss,p.listSheet), target=list.items.find(x=>x.record.No===p.id);
- if(!p.scriptSheet||(p.scriptSheet!=='スクリプト'&&!/^スクリプト_.+/.test(p.scriptSheet))||!ss.getSheetByName(p.scriptSheet))throw new Error('使用スクリプトが見つかりません。');
+ if(!p.scriptSheet||!isScriptSheet_(p.scriptSheet)||!ss.getSheetByName(p.scriptSheet))throw new Error('使用スクリプトが見つかりません。');
  if(!target||target.record['店名']!==p.name)throw new Error('店舗情報が変わっています。リストを更新して再度選択してください。');
  let log=ss.getSheetByName('架電記録'),oldRow=0,existing=null;
  if(log){checkLog_(log);if(log.getLastRow()>1){const rows=log.getRange(2,1,log.getLastRow()-1,LOG_HEADERS.length).getDisplayValues();const pos=rows.findIndex(r=>r[0]===p.requestId);if(pos>=0){oldRow=pos+2;existing=rows[pos];if(existing[1]!==p.id||existing[2]!==p.name||existing[21]!==p.listSheet)throw new Error('記録IDが一致しません。');if(existing[20]==='完了')return {date:evalRead_(existing[24]).recordType==='訪問'?(target.record['TEL日']||''):existing[3],status:existing[4]};}}}
