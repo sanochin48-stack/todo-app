@@ -466,7 +466,7 @@ function doPost(e) {
   if(!e || !e.postData || e.postData.contents.length>4500000)throw apiError_('BAD_REQUEST','リクエストを確認してください。');
   let p;try{p=JSON.parse(e.postData.contents);}catch(_){throw apiError_('BAD_REQUEST','JSON形式が不正です。');}
   if(!p || typeof p!=='object' || Array.isArray(p))throw apiError_('BAD_REQUEST','リクエストを確認してください。');
-  if(!['getData','saveRecord','saveCustomerMemo','getBusinessCards','saveBusinessCard','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
+  if(!['getData','saveRecord','saveCustomerMemo','getBusinessCards','saveBusinessCard','deleteBusinessCard','getIdentity'].includes(p.action))throw apiError_('BAD_ACTION','対応していない操作です。');
   const user=verifyUser_(p.credential,p.nonce);
   let result;
   if(p.action==='getIdentity')result={sub:user.sub,email:user.email};
@@ -478,6 +478,7 @@ function doPost(e) {
    if(p.action==='saveCustomerMemo')result=saveCustomerMemo(p.data);
    else if(p.action==='getBusinessCards')result=getBusinessCards(p.data);
    else if(p.action==='saveBusinessCard')result=saveBusinessCard(p.data);
+   else if(p.action==='deleteBusinessCard')result=deleteBusinessCard(p.data);
    else result=saveRecord(p.data);
   }
   return json_({success:true,data:result});
@@ -655,6 +656,20 @@ function saveBusinessCard(p) {
  SpreadsheetApp.flush();
  return {...meta,dataUrl:'data:'+p.mimeType+';base64,'+p.base64};
 }
+
+function deleteBusinessCard(p) {
+ const x=cardTarget_(p);
+ if(typeof p.fileId!=='string'||!/^[A-Za-z0-9_-]{10,200}$/.test(p.fileId))throw apiError_('BAD_REQUEST','削除する名刺を確認してください。');
+ const items=cardMeta_(x.target.record['名刺画像']),index=items.findIndex(m=>m.fileId===p.fileId);
+ if(index<0)throw apiError_('CONFLICT','この店舗の名刺が見つかりません。画面を更新してください。');
+ try{DriveApp.getFileById(p.fileId).setTrashed(true);}catch(e){throw apiError_('OPERATION_FAILED','Googleドライブの名刺画像を削除できませんでした。');}
+ items.splice(index,1);
+ const col=x.list.heads.indexOf('名刺画像')+1;
+ if(col)x.list.sh.getRange(x.target.row,col).setNumberFormat('@').setValue(JSON.stringify(items));
+ SpreadsheetApp.flush();
+ return {fileId:p.fileId};
+}
+
 function authorizeApp() {
  UrlFetchApp.fetch('https://www.googleapis.com/oauth2/v3/certs');
  SpreadsheetApp.openById(PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID')).getName();
